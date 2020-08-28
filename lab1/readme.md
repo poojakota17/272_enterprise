@@ -1,6 +1,6 @@
 1. Create a session on cisco.dcloud
 2. Enable VPN (CiscoAnyConnect)
-3. Connect to Ubuntu server (ssh cisco@198.18.134.28)
+3. Connect to Ubuntu server (`ssh cisco@198.18.134.28`)
 4. Install ansible
   * install the necessary repository `sudo apt-add-repository ppa:ansible/ansible`;
   * update apt with the command `sudo apt-get update`;
@@ -10,8 +10,11 @@
 7. Repeat step 6 for Centos2
 8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
 
-in progress
-9. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`
+> in progress
+> 9. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`
+
+10. Create simple playbook apache.yml (the name of the hosts name) `sudo nano /etc/ansible/apache.yml`
+11. Run the playbook `ansible-playbook apache.yml`
 
 
 
@@ -22,6 +25,15 @@ hosts file:
 198.18.134.50 ansible_ssh_user=root
 ```
 
+playbook  yml file:
+```
+---
+- hosts: apache
+  tasks:
+    - name: run echo command
+      command: /bin/echo hello k!
+```
+
 variable file:\
 ---\
 centos1: 198.18.134.49\
@@ -30,3 +42,4 @@ centos2: 198.18.134.50
 
 ### Sources:
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)
+[Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)

@@ -6,7 +6,7 @@
   * update apt with the command `sudo apt-get update`;
   * install Ansible with the command `sudo apt-get install ansible -y`.
 5. Generate public key: `ssh-keygen` and copy it(`cat ~/.ssh/id_rsa.pub`);
-6. Log into Centos1 and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
+6. Log into Centos1 [ssh root@198.18.134.49] and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
 7. Repeat step 6 for Centos2
 8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
 
@@ -41,5 +41,6 @@ centos2: 198.18.134.50
 
 
 ### Sources:
-[Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)
-[Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)
+[Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
+[Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\
+[Install Apache on Centos](https://www.vultr.com/docs/how-to-install-apache-on-centos-7/?gclid=Cj0KCQjw1qL6BRCmARIsADV9JtYvUn_K0HSbl7wtMxWJQUtZct7il6qXKgVEWapXC6VZrvgXqBEdmR8aAjCXEALw_wcB)

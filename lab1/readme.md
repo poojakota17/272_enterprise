@@ -6,7 +6,9 @@
   * update apt with the command `sudo apt-get update`;
   * install Ansible with the command `sudo apt-get install ansible -y`.
 5. Generate public key: `ssh-keygen` and copy it(`cat ~/.ssh/id_rsa.pub`);
-6. Log into Centos1 (`ssh root@198.18.134.49`) and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
+6. Add ssh-key to remote host. Choose one of the following: 
+  * Log into Centos1 (`ssh root@198.18.134.49`) and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
+  * Or from ansible server run this command: `ssh-copy-id root@198.18.134.49`
 7. Repeat step 6 for Centos2
 8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
 9. Check Ansible connection with ping `ansible apache -m ping`

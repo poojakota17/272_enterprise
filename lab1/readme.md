@@ -15,7 +15,7 @@ in progress
 
 
 
-hosts file:\
+hosts file:
 ```
 [apache]
 198.18.134.49 ansible_ssh_user=root

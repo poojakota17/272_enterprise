@@ -2,9 +2,9 @@
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (ssh cisco@198.18.134.28)
 4. Install ansible
-  - install the necessary repository `sudo apt-add-repository ppa:ansible/ansible`;
-  - update apt with the command `sudo apt-get update`;
-  - install Ansible with the command `sudo apt-get install ansible -y`.
+  1. install the necessary repository `sudo apt-add-repository ppa:ansible/ansible`;
+  1. update apt with the command `sudo apt-get update`;
+  1. install Ansible with the command `sudo apt-get install ansible -y`.
 5. Generate public key: `ssh-keygen` and copy it(`cat ~/.ssh/id_rsa.pub`);
 6. Log into Centos1 and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
 7. Repeat step 6 for Centos2
@@ -16,8 +16,8 @@ in progress
 
 
 hosts file:\
-`[apache]
-198.18.134.49 ansible_ssh_user=root
+`[apache]\
+198.18.134.49 ansible_ssh_user=root\
 198.18.134.50 ansible_ssh_user=root`
 
 variable file:\

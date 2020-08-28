@@ -10,9 +10,9 @@
 7. Repeat step 6 for Centos2
 8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
 
-==== in progress
+in progress
 9. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`
-====
+
 
 
 hosts file:\

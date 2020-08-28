@@ -8,12 +8,12 @@
 ...
 
 
-hosts file:
-[apache]
-centos1 ansible_ssh_user=root
-centos2 ansible_ssh_user=root
+hosts file:\
+[apache]\
+centos1 ansible_ssh_user=root\
+centos2 ansible_ssh_user=root\
 
-variable file:
----
-centos1: 198.18.134.49
-centos2: 198.18.134.50
+variable file:\
+/---
+centos1: 198.18.134.49\
+centos2: 198.18.134.50\

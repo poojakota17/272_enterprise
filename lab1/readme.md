@@ -11,7 +11,7 @@
   * Or from ansible server run this command: `ssh-copy-id root@198.18.134.49`
 7. Repeat step 6 for Centos2
 8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
-9. Check Ansible connection with ping `ansible apache -m ping`/ ' ansible -m ping 'webservers'/ ' ansible all -m ping -u root'
+9. Check Ansible connection with ping `ansible apache -m ping`/ `ansible all -m ping -u root`
 
 > in progress
 > 10. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`

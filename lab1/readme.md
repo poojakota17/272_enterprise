@@ -17,7 +17,7 @@
 > 10. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`
 
 11. Create simple playbook apache.yml (the name of the hosts name) `sudo nano /etc/ansible/apache.yml`
-12. Run the playbook `ansible-playbook apache.yml`
+12. Run the playbook `ansible-playbook /etc/ansible/apache.yml`
 
 
 

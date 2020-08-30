@@ -1,0 +1,12 @@
+---
+- name: Installation of Apache  webserver
+  hosts: apache
+  tasks:
+  - name: Install apache packages
+    yum:
+      name: httpd
+      state: present
+  - name: ensure httpd is running
+    service:
+      name: httpd
+      state: started

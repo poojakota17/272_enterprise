@@ -1,10 +1,9 @@
 1. Create a session on cisco.dcloud
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (`ssh cisco@198.18.134.28`)
-4. Install ansible if it wasn't installed (check with `ansible -v`)
-  * install the necessary repository `sudo apt-add-repository ppa:ansible/ansible`;
-  * update apt with the command `sudo apt-get update`;
-  * install Ansible with the command `sudo apt-get install ansible -y`.
+4. Install ansible on Server machine if it wasn't installed (check with `ansible -v`)
+  * `sudo apt-get install python-yaml python-jinja2 python-paramiko python- crypto python-keyczar ansible`
+  > install on Client machines `sudo apt-get install python-crypto python-keyczar` ?
 5. Generate public key: `ssh-keygen` and copy it(`cat ~/.ssh/id_rsa.pub`);
 6. Add ssh-key to remote host. Choose one of the following: 
   * Log into Centos1 (`ssh root@198.18.134.49`) and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)

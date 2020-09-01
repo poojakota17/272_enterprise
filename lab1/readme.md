@@ -1,7 +1,7 @@
 1. Create a session on cisco.dcloud
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (`ssh cisco@198.18.134.28`)
-4. Install ansible on Server machine if it wasn't installed (check with `ansible --version`)
+4. Install ansible on Server machine if it wasn't installed (check with `ansible --version` or `ansible localhost -m ping`)
   * `sudo apt-get install python-yaml python-jinja2 python-paramiko python-crypto python-keyczar ansible`
   > install on Client machines `sudo apt-get install python-crypto python-keyczar` ?
 5. Generate public key: `ssh-keygen` and copy it(`cat ~/.ssh/id_rsa.pub`);

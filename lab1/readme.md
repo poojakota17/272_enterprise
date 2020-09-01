@@ -67,6 +67,6 @@ Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
 ### Sources:
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\
-[Install Apache on Centos](https://www.vultr.com/docs/how-to-install-apache-on-centos-7/?gclid=Cj0KCQjw1qL6BRCmARIsADV9JtYvUn_K0HSbl7wtMxWJQUtZct7il6qXKgVEWapXC6VZrvgXqBEdmR8aAjCXEALw_wcB)\
+[Install Apache on Centos](https://codingbee.net/ansible/ansible-a-playbook-for-setting-up-an-apache-webserver)\
 [Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)
 [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)

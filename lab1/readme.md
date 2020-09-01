@@ -66,6 +66,11 @@ Centos2 ansible_host=198.18.134.50
       service: 
        name: firewalld 
        state: restarted
+ handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
 ```
 
 

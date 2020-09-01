@@ -33,8 +33,8 @@ hostfile = hosts
 **hosts** file:
 ```
 [apache]
-Centos1 ansible_host=198.18.134.49 ansible_ssh_user=root
-Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
+Centos1 ansible_host=198.18.134.49
+Centos2 ansible_host=198.18.134.50
 ```
 
 **apache.yml** file:
@@ -43,6 +43,7 @@ Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
 - name: Setup httpd webserver
   hosts: apache
   sudo: yes
+  remote_user: root
   tasks:
     - name: Install apache packages 
       yum:

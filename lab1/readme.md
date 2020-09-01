@@ -22,9 +22,9 @@
    [defaults]
     hostfile = hosts
     ```
-9. Check Ansible connection with ping `ansible apache -m ping`/ `ansible all -m ping -u root`
+10. Check Ansible connection with ping `ansible apache -m ping`/ `ansible all -m ping -u root`
 
-> in progress
+> optional (as of now varialbes are set in the inventory)
 > 10. Create file for storing variables with the name of the group: `sudo nano /etc/ansible/group_vars/apache`
 
 11. Create simple playbook apache.yml (the name of the hosts name) `sudo nano /etc/ansible/apache.yml`
@@ -48,13 +48,10 @@ playbook  yml file:
       command: /bin/echo hello k!
 ```
 
-variable file:\
----\
-centos1: 198.18.134.49\
-centos2: 198.18.134.50
-
 
 ### Sources:
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\
-[Install Apache on Centos](https://www.vultr.com/docs/how-to-install-apache-on-centos-7/?gclid=Cj0KCQjw1qL6BRCmARIsADV9JtYvUn_K0HSbl7wtMxWJQUtZct7il6qXKgVEWapXC6VZrvgXqBEdmR8aAjCXEALw_wcB)
+[Install Apache on Centos](https://www.vultr.com/docs/how-to-install-apache-on-centos-7/?gclid=Cj0KCQjw1qL6BRCmARIsADV9JtYvUn_K0HSbl7wtMxWJQUtZct7il6qXKgVEWapXC6VZrvgXqBEdmR8aAjCXEALw_wcB)\
+[Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)
+[Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)

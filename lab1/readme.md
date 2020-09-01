@@ -40,10 +40,14 @@ Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
 **apache.yml** file:
 ```
 ---
-- hosts: apache
+- name: Setup httpd webserver
+  hosts: apache
+  sudo: yes
   tasks:
-    - name: run echo command
-      command: /bin/echo hello k!
+    - name: install apache package
+      yum:
+        name: httpd
+        state: present
 ```
 
 

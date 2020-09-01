@@ -10,14 +10,14 @@
   * Or from ansible server run this command: `ssh-copy-id root@198.18.134.49`
 7. Repeat step 6 for Centos2
 8. On Server machine (Ubunty in our case) check path to the hosts file in **ansible.cfg** `sudo nano /etc/ansible/ansible.cfg`\
-  Should have this line:\
-  ```
-  [defaults]
-  hostfile = /etc/ansible/hosts
-  ```
+  Should have this line:
+   ```
+   [defaults]
+   hostfile = /etc/ansible/hosts
+   ```
 9. Update **hosts** file `sudo nano /etc/ansible/hosts`\
    By default hosts and config files are in home directory /etc/ansible but could be changed to any other working directory.\
-   In this case in the working directory 2 files should be created: **hosts** and **ansible.cfg** with: \
+   In this case in the working directory 2 files should be created: **hosts** and **ansible.cfg** with: 
     ```
    [defaults]
     hostfile = hosts

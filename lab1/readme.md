@@ -45,20 +45,24 @@ Centos2 ansible_host=198.18.134.50
   sudo: yes
   remote_user: root
   tasks:
-    - name: Install apache packages 
+    - name: install apache packages 
       yum:
        name: httpd
        state: present
+    - name: ensure apache is at the latest version
+      yum:
+      name: httpd
+      state: latest
     - name: ensure httpd is running
       service:
        name: httpd 
        state: started
-    - name: Open port 80 for http access
+    - name: open port 80 for http access
       firewalld:
        service: http
        permanent: true
        state: enabled
-    - name: Restart the firewalld service to load in the firewall changes
+    - name: restart the firewalld service to load in the firewall changes
       service: 
        name: firewalld 
        state: restarted

@@ -35,8 +35,8 @@
 hosts file:
 ```
 [apache]
-198.18.134.49 ansible_ssh_user=root
-198.18.134.50 ansible_ssh_user=root
+Centos1 ansible_host=198.18.134.49 ansible_ssh_user=root
+Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
 ```
 
 playbook  yml file:

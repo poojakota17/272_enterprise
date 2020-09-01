@@ -66,14 +66,16 @@ Centos2 ansible_host=198.18.134.50
       service: 
        name: firewalld 
        state: restarted
+    - name: Create index.html
+      copy:
+        dest: "/var/www/html/index.html"
+        content: Hello World print from {{ inventory_hostname }}
  handlers:
     - name: restart apache
       service:
         name: httpd
         state: restarted
 ```
-
-
 ### Sources:
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\

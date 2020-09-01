@@ -44,10 +44,23 @@ Centos2 ansible_host=198.18.134.50 ansible_ssh_user=root
   hosts: apache
   sudo: yes
   tasks:
-    - name: install apache package
+    - name: Install apache packages 
       yum:
-        name: httpd
-        state: present
+       name: httpd
+       state: present
+    - name: ensure httpd is running
+      service:
+       name: httpd 
+       state: started
+    - name: Open port 80 for http access
+      firewalld:
+       service: http
+       permanent: true
+       state: enabled
+    - name: Restart the firewalld service to load in the firewall changes
+      service: 
+       name: firewalld 
+       state: restarted
 ```
 
 

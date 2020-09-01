@@ -4,7 +4,7 @@
   sudo: yes
   remote_user: root
   vars:
-    homepage: '<html><h1>Hello World print from {{ inventory_hostname }}</h1></html>'
+    homepage: 'Hello World from {{ inventory_hostname }}'
   tasks:
     - name: install apache packages
       yum:
@@ -27,11 +27,11 @@
       service:
        name: firewalld
        state: restarted
-    - name: Create index.html
+    - name: create index.html
       copy:
         dest: "/var/www/html/index.html"
         content: '{{ homepage }}'
- handlers:
+  handlers:
     - name: restart apache
       service:
         name: httpd

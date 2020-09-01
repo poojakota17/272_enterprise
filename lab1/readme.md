@@ -22,7 +22,7 @@
 > optional (as of now varialbes are set in the inventory)
 > 10. Create file for storing variables with the name of the group: `$ sudo nano /etc/ansible/group_vars/apache`
 11. Create simple playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml` (see below)
-12. Run the playbook `$ ansible-playbook /etc/ansible/apache.yml`
+12. Run the playbook `$ ansible-playbook apache.yml`
 
 **ansible.cfg** file:
 ```

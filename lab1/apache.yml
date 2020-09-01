@@ -5,6 +5,8 @@
   remote_user: root
   vars:
     homepage: 'Hello World from {{ inventory_hostname }}'
+    old_port: 80
+    new_port: 8080
   tasks:
     - name: install apache packages
       yum:
@@ -31,6 +33,20 @@
       copy:
         dest: "/var/www/html/index.html"
         content: '{{ homepage }}'
+    - name: update port
+      lineinfile:
+        path: '/etc/httpd/conf/http.conf'
+        regexp: '^Listen {{ old_port }}'
+        line: 'Listen {{ new_port }}'
+        notify:
+         - restart apache
+    - name: stop server
+      yum:
+       name: httpd
+       state: removed
+       tags:
+         - undeploy
+
   handlers:
     - name: restart apache
       service:

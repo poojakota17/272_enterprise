@@ -26,8 +26,9 @@
 > optional (as of now varialbes are set in the inventory)
 > 10. Create file for storing variables with the name of the group: `$ sudo nano /etc/ansible/group_vars/apache`
 11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml` (see below)
-12. Run the playbook `$ ansible-playbook apache.yml`
+12. To deploy servers run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
 13. Check result with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
+14. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
 
 **ansible.cfg** file:
 ```
@@ -75,8 +76,15 @@ centos2 ansible_host=198.18.134.50
        state: restarted
     - name: create index.html
       copy:
-        dest: "/var/www/html/index.html"
-        content: '{{ homepage }}'
+       dest: "/var/www/html/index.html"
+       content: '{{ homepage }}'
+    - name: stop server
+      yum:
+       name: httpd
+       state: removed
+      tags:
+       - undeploy
+
   handlers:
     - name: restart apache
       service:
@@ -89,3 +97,4 @@ centos2 ansible_host=198.18.134.50
 [Install Apache on Centos](https://codingbee.net/ansible/ansible-a-playbook-for-setting-up-an-apache-webserver)\
 [Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)
 [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)
+[How to Create Ansible Plays and Playbooks](https://www.tecmint.com/create-ansible-plays-and-playbooks/)

@@ -1,0 +1,10 @@
+---
+- name: stop service httpd
+  hosts: apache
+  sudo: yes
+  remote_user: root
+  tasks:
+    - name: stop server
+      yum:
+       name: httpd
+       state: removed

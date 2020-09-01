@@ -9,7 +9,19 @@
   * Log into Centos1 (`ssh root@198.18.134.49`) and add key to authorized_keys file `sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
   * Or from ansible server run this command: `ssh-copy-id root@198.18.134.49`
 7. Repeat step 6 for Centos2
-8. Reconnect to ubuntu server and update hosts file `sudo nano /etc/ansible/hosts`
+8. On Server machine (Ubunty in our case) check path to the hosts file in **ansible.cfg** `sudo nano /etc/ansible/ansible.cfg`\
+  Should have this line:\
+  ```
+  [defaults]
+  hostfile = /etc/ansible/hosts
+  ```
+9. Update **hosts** file `sudo nano /etc/ansible/hosts`\
+   By default hosts and config files are in home directory /etc/ansible but could be changed to any other working directory.\
+   In this case in the working directory 2 files should be created: **hosts** and **ansible.cfg** with: \
+    ```
+   [defaults]
+    hostfile = hosts
+    ```
 9. Check Ansible connection with ping `ansible apache -m ping`/ `ansible all -m ping -u root`
 
 > in progress

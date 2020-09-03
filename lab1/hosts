@@ -1,3 +1,3 @@
 [apache]
-centos1 ansible_host=198.18.134.49
-centos2 ansible_host=198.18.134.50
+Centos1 ansible_host=198.18.134.49
+Centos2 ansible_host=198.18.134.50

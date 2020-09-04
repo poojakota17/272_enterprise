@@ -24,7 +24,6 @@
       copy:
         dest: "/var/www/html/index.html"
         content: '{{ homepage }}'
-        content: '{{ homepage }}'
     - name: Open port 80 for http access
       firewalld:
        service: http

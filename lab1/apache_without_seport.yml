@@ -1,0 +1,66 @@
+---
+- name: Setup httpd webserver
+  hosts: apache
+  sudo: yes
+  remote_user: root
+  vars:
+    homepage: 'Hello World from {{ inventory_hostname }}'
+    old_port: 80
+    new_port: 8080
+  tasks:
+    - name: install apache packages
+      yum:
+       name: httpd
+       state: present
+    - name: ensure apache is at the latest version
+      yum:
+       name: httpd
+       state: latest
+    - name: ensure httpd is running
+      service:
+       name: httpd
+       state: started
+    - name: create index.html
+      copy:
+        dest: "/var/www/html/index.html"
+        content: '{{ homepage }}'
+    - name: update port
+      lineinfile:
+       path: '/etc/httpd/conf/httpd.conf'
+       regexp: '^Listen {{ old_port }}'
+       line: 'Listen {{ new_port }}'
+    - name: adding port to selinux
+      shell: '/usr/sbin/semanage port -m -t http_port_t -p tcp {{ new_port }}'
+      notify:
+       - restart apache
+    - name: open port {{ new_port }} for http access
+      firewalld:
+       port: '{{ new_port }}/tcp'
+       permanent: yes
+       state: enabled
+      notify:
+      - restart firewall
+    - name: stop server
+      yum:
+       name: httpd
+       state: removed
+      tags:
+        - undeploy
+    - name: block port {{ new_port }} in firewall
+      firewalld:
+        port: '{{ new_port }}/tcp'
+        permanent: yes
+        state: disabled
+      notify:
+      - restart firewall
+      tags:
+      - undeploy
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+    - name: restart firewall
+      service:
+       name: firewalld
+       state: restarted

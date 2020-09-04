@@ -96,5 +96,6 @@ centos2 ansible_host=198.18.134.50
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\
 [Install Apache on Centos](https://codingbee.net/ansible/ansible-a-playbook-for-setting-up-an-apache-webserver)\
 [Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)
-[Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)
-[How to Create Ansible Plays and Playbooks](https://www.tecmint.com/create-ansible-plays-and-playbooks/)
+[Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)\
+[How to Create Ansible Plays and Playbooks](https://www.tecmint.com/create-ansible-plays-and-playbooks/)\
+[Change port in Centos without seport](https://people.centos.org/arrfab/Events/Loadays-2014/managing%20selinux%20with%20your%20cfgmgmt%20solution.pdf)

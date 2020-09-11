@@ -1,4 +1,11 @@
-# 272_enterprise
+# 272_Enterprise Software Platforms
+
+Team: **Modular Monolith**
+Members: 
+* Manjiri Kadam (https://github.com/Manjiri1101)
+* Pooja Prasannan (https://github.com/poojakota17)
+* Allen (https://github.com/bmwv12lmr)
+* Anastasia Zimina (https://github.com/anastaszi)
 
 ## LAB1:
 In the DevNet Express Data Center v2 lab, 

@@ -5,7 +5,7 @@ Name: **Modular Monolith**\
 Members: 
 * Manjiri Kadam (https://github.com/Manjiri1101)
 * Pooja Prasannan (https://github.com/poojakota17)
-* Allen (https://github.com/bmwv12lmr)
+* Allen Wu(https://github.com/bmwv12lmr)
 * Anastasia Zimina (https://github.com/anastaszi)
 
 

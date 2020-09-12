@@ -30,7 +30,7 @@
     There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache_without_seport.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
 12. To deploy servers:
   - Using apache.yml file
-    - on port 8080, run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"
+    - on port 8080, run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
   - Using apache_without_seport.yml file
     - on port 80 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port80"`
     - on port 8080 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port8080"`

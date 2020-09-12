@@ -1,5 +1,5 @@
 1. Create a session at [cisco.dcloud](https://dcloud2-sjc.cisco.com/)
-
+![](https://github.com/anastaszi/272_enterprise/blob/master/lab1/img/1_session_details-min.png)
 2. Enable VPN \
 For this lab we used AnyConnect from Cisco \
 Add session details as credentials <img src="https://github.com/anastaszi/272_enterprise/blob/master/lab1/img/2_any_connect-min.png" width="50%" height="auto">

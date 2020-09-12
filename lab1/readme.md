@@ -1,4 +1,5 @@
-1. Create a session on cisco.dcloud
+[click here to check steps with screenshots]()
+1. Create a session on [cisco.dcloud](https://dcloud2-sjc.cisco.com/)
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (`$ ssh cisco@198.18.134.28`)
 4. Install ansible on Server machine if it wasn't installed (check with `$ ansible --version` or `$ ansible localhost -m ping`)

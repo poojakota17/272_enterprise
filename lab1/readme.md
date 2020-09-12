@@ -1,4 +1,5 @@
-[Detailed steps with screenshots](https://docs.google.com/document/d/1sVT_eeQqi7TSR4eoMM_t_cQia1GJryIAMI_kvNu8SQ8/edit?usp=sharing)
+[Detailed steps with screenshots: Windows](https://docs.google.com/document/d/1gzLFF5CQZE_CN7a013COxdLcFpPhaNbapD5fobQW1oo/edit?ts=5f4ae8d2)
+[Detailed steps with screenshots: Mac](https://docs.google.com/document/d/1sVT_eeQqi7TSR4eoMM_t_cQia1GJryIAMI_kvNu8SQ8/edit?usp=sharing)
 1. Create a session at [cisco.dcloud](https://dcloud2-sjc.cisco.com/)
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (`$ ssh cisco@198.18.134.28`)
@@ -17,18 +18,23 @@
 8. On Server machine (Ubunty in our case) create a new working directory `ansible`
   ```
   $ mkdir ansible
-  $ cd ansible_host
+  $ cd ansible
   ```
 9. Create **ansible.cfg** and **hosts** files(see below) \
-   By default hosts and config files are in the home directory `/etc/ansible` so **ansible.cfg** and **hosts** could be updated there.
+   By default hosts and config files are in the home directory `/etc/ansible` so [**ansible.cfg**](https://github.com/anastaszi/272_enterprise/blob/master/lab1/ansible.cfg) and [**hosts**](https://github.com/anastaszi/272_enterprise/blob/master/lab1/hosts) could be updated there.
 10. Check Ansible connection with ping `$ ansible apache -m ping -u root`\
     or run a simple command `$ ansible apache -m command -a "/bin/echo hello"`
 > optional (as of now varialbes are set in the inventory)
 > 10. Create file for storing variables with the name of the group: `$ sudo nano /etc/ansible/group_vars/apache`
-11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml` (see below)
-12. To deploy servers run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
-13. Check result with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
-14. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
+11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml`\
+    There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
+12. To deploy servers:
+    * on port 80 run the playbook `$ ansible-playbook apache.yml -tags "deploy,port80"`
+    * on port 8080 run the playbook `$ ansible-playbook apache.yml -tags "deploy,port8080"`
+14. Check result
+    * on port80 with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
+    * on port8080 with `$ curl 198.18.134.49:8080` and  `$ curl 198.18.134.50:8080`
+15. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
 
 **ansible.cfg** file:
 ```
@@ -43,54 +49,6 @@ centos1 ansible_host=198.18.134.49
 centos2 ansible_host=198.18.134.50
 ```
 
-**apache.yml** file:
-```
----
-- name: Setup httpd webserver
-  hosts: apache
-  sudo: yes
-  remote_user: root
-  vars:
-    homepage: 'Hello World from {{ inventory_hostname }}'
-  tasks:
-    - name: install apache packages
-      yum:
-       name: httpd
-       state: present
-    - name: ensure apache is at the latest version
-      yum:
-      name: httpd
-      state: latest
-    - name: ensure httpd is running
-      service:
-       name: httpd
-       state: started
-    - name: open port 80 for http access
-      firewalld:
-       service: http
-       permanent: true
-       state: enabled
-    - name: restart the firewalld service to load in the firewall changes
-      service:
-       name: firewalld
-       state: restarted
-    - name: create index.html
-      copy:
-       dest: "/var/www/html/index.html"
-       content: '{{ homepage }}'
-    - name: stop server
-      yum:
-       name: httpd
-       state: removed
-      tags:
-       - undeploy
-
-  handlers:
-    - name: restart apache
-      service:
-        name: httpd
-        state: restarted
-```
 ### Sources:
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\

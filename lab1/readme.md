@@ -1,4 +1,4 @@
-[Detailed steps with screenshots](https://github.com/anastaszi/272_enterprise/blob/master/lab1/steps.md)
+[Detailed steps with screenshots](https://docs.google.com/document/d/1sVT_eeQqi7TSR4eoMM_t_cQia1GJryIAMI_kvNu8SQ8/edit?usp=sharing)
 1. Create a session at [cisco.dcloud](https://dcloud2-sjc.cisco.com/)
 2. Enable VPN (CiscoAnyConnect)
 3. Connect to Ubuntu server (`$ ssh cisco@198.18.134.28`)
@@ -9,7 +9,6 @@
      $ sudo apt-get update
      $ sudo apt-get install ansible
   ```
-  > install on Client machines `$ sudo apt-get install python-crypto python-keyczar` ?
 5. Generate public key: `$ ssh-keygen` and copy it(`$ cat ~/.ssh/id_rsa.pub`);
 6. Add ssh-key to remote host. Choose one of the following:
   * From ansible server run this command: `$ ssh-copy-id root@198.18.134.49`

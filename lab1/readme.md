@@ -52,7 +52,9 @@ centos2 ansible_host=198.18.134.50
 [Install Ansible on Ubuntu](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)\
 [Install Apache Server](https://www.bogotobogo.com/DevOps/Ansible/Ansible_SettingUp_Webservers_Apache.php)\
 [Install Apache on Centos](https://codingbee.net/ansible/ansible-a-playbook-for-setting-up-an-apache-webserver)\
-[Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)
+[Install Apache on Ansible](https://www.scaleway.com/en/docs/how-to-install-apache-on-ansible/)\
 [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)\
 [How to Create Ansible Plays and Playbooks](https://www.tecmint.com/create-ansible-plays-and-playbooks/)\
-[Change port in Centos without seport](https://people.centos.org/arrfab/Events/Loadays-2014/managing%20selinux%20with%20your%20cfgmgmt%20solution.pdf)
+[Change port in Centos without seport](https://people.centos.org/arrfab/Events/Loadays-2014/managing%20selinux%20with%20your%20cfgmgmt%20solution.pdf)\
+[AnyConnect](https://software.cisco.com/download/home/286281283/type/282364313/release/4.9.02028)\	
+[Cisco Documentation Getting Started](https://dcloud-cms.cisco.com/help/get_started_steps)\

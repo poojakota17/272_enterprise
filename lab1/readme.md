@@ -24,17 +24,15 @@
    By default hosts and config files are in the home directory `/etc/ansible` so [**ansible.cfg**](https://github.com/anastaszi/272_enterprise/blob/master/lab1/ansible.cfg) and [**hosts**](https://github.com/anastaszi/272_enterprise/blob/master/lab1/hosts) could be updated there.
 10. Check Ansible connection with ping `$ ansible apache -m ping -u root`\
     or run a simple command `$ ansible apache -m command -a "/bin/echo hello"`
-> optional (as of now varialbes are set in the inventory)
-> 10. Create file for storing variables with the name of the group: `$ sudo nano /etc/ansible/group_vars/apache`
 11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml`\
     There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
 12. To deploy servers:
-    * on port 80 run the playbook `$ ansible-playbook apache.yml -tags "deploy,port80"`
-    * on port 8080 run the playbook `$ ansible-playbook apache.yml -tags "deploy,port8080"`
-14. Check result
+    * on port 80 run the playbook `$ ansible-playbook apache.yml -tags "deploy,on_port80"`
+    * on port 8080 run the playbook `$ ansible-playbook apache.yml -tags "deploy,on_port8080"`
+13. Check result
     * on port80 with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
     * on port8080 with `$ curl 198.18.134.49:8080` and  `$ curl 198.18.134.50:8080`
-15. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
+14. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
 
 **ansible.cfg** file:
 ```

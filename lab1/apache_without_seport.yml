@@ -14,53 +14,47 @@
        name: httpd
        state: present
       tags:
-       - deploy
+      - deploy
     - name: ensure apache is at the latest version
       yum:
        name: httpd
        state: latest
       tags:
-       - deploy
+      - deploy
     - name: ensure httpd is running
       service:
        name: httpd
        state: started
       tags:
-       - deploy
+      - deploy
     - name: create index.html
       copy:
-        dest: {{ html_path }}
+        dest: '{{ html_path }}'
         content: '{{ homepage }}'
       tags:
-       - deploy
+      - deploy
     - name: Open port 80 for http access
       firewalld:
        service: http
        permanent: true
        state: enabled
       notify:
-       - restart firewall
+      - restart firewall
       tags:
-       - on_port80
-    - name: restart firewall service
-      service:
-        name: firewalld
-        state: restarted
-      tags:
-        - on_port80
+      - on_port80
     - name: update port
       lineinfile:
        path: '/etc/httpd/conf/httpd.conf'
        regexp: '^Listen {{ old_port }}'
        line: 'Listen {{ new_port }}'
       tags:
-       - on_port8080
+      - on_port8080
     - name: adding port to selinux
       shell: '/usr/sbin/semanage port -m -t http_port_t -p tcp {{ new_port }}'
       notify:
-       - restart apache
+      - restart apache
       tags:
-       - on_port8080
+      - on_port8080
     - name: open port {{ new_port }} for http access
       firewalld:
        port: '{{ new_port }}/tcp'
@@ -75,13 +69,13 @@
        name: httpd
        state: removed
       tags:
-        - undeploy
-    - name: delete file example html
+      - undeploy
+    - name: delete html
       file:
-        path: {{ html_path }}
+        path: '{{ html_path }}'
         state: absent
       tags:
-        - undeploy
+      - undeploy
     - name: block port {{ new_port }} in firewall
       firewalld:
         port: '{{ new_port }}/tcp'

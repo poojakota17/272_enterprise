@@ -27,11 +27,8 @@
 11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml`\
     There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache_without_seport.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
 12. To deploy servers:
-  - Using apache.yml file
-    - on port 8080, run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
-  - Using apache_without_seport.yml file
-    - on port 80 run the playbook `$ ansible-playbook apache.yml --tags "deploy,on_port80"`
-    - on port 8080 run the playbook `$ ansible-playbook apache.yml --tags "deploy,on_port8080"`
+    - on port 80 run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy,on_8080"`
+    - on port 8080 run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
 14. Check result
     * on port80 with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
     * on port8080 with `$ curl 198.18.134.49:8080` and  `$ curl 198.18.134.50:8080`

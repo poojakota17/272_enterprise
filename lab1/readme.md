@@ -1,4 +1,4 @@
-[Detailed steps with screenshots: Windows](https://docs.google.com/document/d/1gzLFF5CQZE_CN7a013COxdLcFpPhaNbapD5fobQW1oo/edit?ts=5f4ae8d2)
+[Detailed steps with screenshots: Windows](https://docs.google.com/document/d/1gzLFF5CQZE_CN7a013COxdLcFpPhaNbapD5fobQW1oo/edit?ts=5f4ae8d2)\
 [Detailed steps with screenshots: Mac](https://docs.google.com/document/d/1sVT_eeQqi7TSR4eoMM_t_cQia1GJryIAMI_kvNu8SQ8/edit?usp=sharing)
 1. Create a session at [cisco.dcloud](https://dcloud2-sjc.cisco.com/)
 2. Enable VPN (CiscoAnyConnect)
@@ -30,13 +30,12 @@
   - Using apache.yml file
     - on port 8080, run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
   - Using apache_without_seport.yml file
-    - on port 80 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port80"`
-    - on port 8080 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port8080"`
+    - on port 80 run the playbook `$ ansible-playbook apache.yml --tags "deploy,on_port80"`
+    - on port 8080 run the playbook `$ ansible-playbook apache.yml --tags "deploy,on_port8080"`
 14. Check result
     * on port80 with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
     * on port8080 with `$ curl 198.18.134.49:8080` and  `$ curl 198.18.134.50:8080`
 15. To undeploy servers:
-  - Using apache.yml file
     - run `$ ansible-playbook apache.yml --tags "undeploy"`
 
 **ansible.cfg** file:

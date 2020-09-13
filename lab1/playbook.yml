@@ -1,0 +1,95 @@
+---
+- name: Setup httpd webserver
+  hosts: apache
+  sudo: yes
+  remote_user: root
+  vars:
+    text: 'Hello World from {{ inventory_hostname }}'
+    old_port: 80
+    new_port: 8080
+  tasks:
+    - name: install apache packages
+      yum:
+       name: httpd
+       state: present
+    - name: ensure apache is at the latest version
+      yum:
+       name: httpd
+       state: latest
+    - name: ensure httpd is running
+      service:
+       name: httpd
+       state: started
+    - name: create index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: '{{ text }}'
+    - name: Open port 80 for http access
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+    - name: Restart the firewalld service to load in the firewall changes
+      service:
+        name: firewalld
+        state: restarted
+    - name: Update port in config file
+      lineinfile:
+        dest: '/etc/httpd/conf/httpd.conf'
+        regexp: '^Listen {{ old_port }}'
+        line: 'Listen {{ new_port }}'
+      notify:
+        - restart apache
+      tags:
+      - on_8080
+    - name: Allow apache to listen to new tcp port 8080
+      seport:
+        ports: '{{ new_port }}'
+        proto: tcp
+        setype: http_port_t
+        state: present
+        reload: yes
+      tags:
+      - on_8080
+    - name: Opening new port 8080 for tcp in firewall
+      firewalld:
+        port: '{{ new_port }}/tcp'
+        permanent: yes
+        state: enabled
+      notify:
+      - restart firewalld
+      tags:
+      - on_8080
+    - name: Disable Apache to listen on tcp port 8080
+      seport:
+        ports: '{{ new_port }}'
+        proto: tcp
+        setype: http_port_t
+        state: absent
+        reload: yes
+      tags:
+      - undeploy
+    - name: Block 8080 in firewall
+      firewalld:
+        port: '{{ new_port }}/tcp'
+        permanent: yes
+        state: disabled
+      notify:
+      - restart firewalld
+      tags:
+      - undeploy
+    - name: undeploy server
+      yum:
+        name: httpd
+        state: removed
+      tags:
+      - undeploy
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+    - name: restart firewalld
+      service:
+        name: firewalld
+        state: restarted

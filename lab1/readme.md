@@ -12,8 +12,8 @@
   ```
 5. Generate public key: `$ ssh-keygen` and copy it(`$ cat ~/.ssh/id_rsa.pub`);
 6. Add ssh-key to remote host. Choose one of the following:
-  * From ansible server run this command: `$ ssh-copy-id root@198.18.134.49`
-  * Or log into Centos1 (`$ ssh root@198.18.134.49`) and add key to authorized_keys file `$ sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
+  - From ansible server run this command: `$ ssh-copy-id root@198.18.134.49`
+  - Or log into Centos1 (`$ ssh root@198.18.134.49`) and add key to authorized_keys file `$ sudo nano ~/.ssh/authorized_keys` (to save in nano use ctrl + X, then Y and Enter)
 7. Repeat step 6 for Centos2
 8. On Server machine (Ubunty in our case) create a new working directory `ansible`
   ```
@@ -25,14 +25,19 @@
 10. Check Ansible connection with ping `$ ansible apache -m ping -u root`\
     or run a simple command `$ ansible apache -m command -a "/bin/echo hello"`
 11. Create playbook **apache.yml** (the name of the hosts group) `$ sudo nano apache.yml`\
-    There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
+    There are 2 versions: with the use of seport module [apache.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache.yml) and without it [apache_without_seport.yml](https://github.com/anastaszi/272_enterprise/blob/master/lab1/apache_without_seport.yml)
 12. To deploy servers:
-    * on port 80 run the playbook `$ ansible-playbook apache.yml -tags "deploy,on_port80"`
-    * on port 8080 run the playbook `$ ansible-playbook apache.yml -tags "deploy,on_port8080"`
-13. Check result
+  - Using apache.yml file
+    - on port 8080, run the playbook `$ ansible-playbook apache.yml --skip-tags "undeploy"`
+  - Using apache_without_seport.yml file
+    - on port 80 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port80"`
+    - on port 8080 run the playbook `$ ansible-playbook apache.yml --tags "deploy,port8080"`
+14. Check result
     * on port80 with `$ curl 198.18.134.49` and  `$ curl 198.18.134.50`
     * on port8080 with `$ curl 198.18.134.49:8080` and  `$ curl 198.18.134.50:8080`
-14. To undeploy servers run `$ ansible-playbook apache.yml --tags "undeploy"`
+15. To undeploy servers:
+  - Using apache.yml file
+    - run `$ ansible-playbook apache.yml --tags "undeploy"`
 
 **ansible.cfg** file:
 ```

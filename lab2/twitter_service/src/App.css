@@ -1,3 +1,16 @@
+#main {
+  text-align: center;
+  height: 95vh;
+  border-radius: 6px;
+}
+
+
+
+/*
+
+
+
+
 .App {
   text-align: center;
 }
@@ -36,3 +49,4 @@
     transform: rotate(360deg);
   }
 }
+*/

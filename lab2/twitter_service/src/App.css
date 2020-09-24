@@ -1,10 +1,41 @@
-#main {
-  text-align: center;
-  height: 95vh;
-  border-radius: 6px;
+:root {
+  --app-dark-blue: rgb(43, 57, 71);
+  --app-white: rgb(223,223,223);
+  --app-brown: rgb(117,108,110);
 }
 
+#main {
+  height: 100%;
+  border-radius: 6px;
+  color: var(--app-white);
+}
 
+#root {
+  height: 100vh;
+}
+
+.mm-logo {
+  height: 40vmin;
+}
+
+#twitter-logo {
+  height: 1rem;
+  color: var(--app-white);
+}
+
+#campaign > h1, h2 {
+  color: var(--app-dark-blue);
+  font-family: 'Bree Serif', serif;
+  font-weight: bold;
+}
+
+.single_tweet {
+  background-color: var(--app-dark-blue);
+}
+
+#sender {
+  background-color: var(--app-brown);
+}
 
 /*
 

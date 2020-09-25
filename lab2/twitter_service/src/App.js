@@ -9,18 +9,56 @@ import logo from './mm_logo.svg';
 import twitter_logo from './twitter_logo.svg';
 import './App.css';
 
+
 class SendTweet extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {text:''};
+    this.callAPI = this.callAPI.bind(this);
+  }
+
+  callAPI = (text) => {
+              // instantiate a headers object
+              var myHeaders = new Headers();
+              // add content type header to object
+              myHeaders.append("Content-Type", "application/json");
+              // using built in JSON utility package turn object to string and store in a variable
+              var raw = JSON.stringify({"text": text});
+              // create a JSON object with parameters for API call and store in a variable
+              var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+              };
+              // make API call with parameters and use promises to get response
+              fetch("https://hdzz4r72df.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+              .then(response => response.text())
+              .then(result => alert(JSON.parse(result).body))
+              .catch(error => console.log('error', error));
+          }
+
+  mySubmitHandler = (event) => {
+   event.preventDefault();
+   this.callAPI(this.state.text);
+   console.log("You are submitting " + this.state.text);
+ }
+
+  myChangeHandler = (event) => {
+   this.setState({text: event.target.value});
+ }
+
   render() {
     return (
-      <Card id="sender" style={{ width: '80%' }}>
+      <Card id="sender" style={{ width: '60%' }}>
         <Card.Body>
-          <Card.Title>Create new Tweet</Card.Title>
-          <Form>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
+          <Card.Title>Create a new Tweet</Card.Title>
+          <Form onSubmit={this.mySubmitHandler} role="form">
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Control as="textarea" rows={2} type="text" onChange={this.myChangeHandler} />
+            </Form.Group>
+            <Button type="submit" variant="light" className="mt-auto">Send</Button>
           </Form>
-          <Button variant="light" className="mt-auto">Send</Button>
         </Card.Body>
       </Card>
     );

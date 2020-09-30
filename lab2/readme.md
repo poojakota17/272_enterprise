@@ -15,9 +15,9 @@
 7. Create AWS gateway
 
 
-in .env file define urls for twitter:
+in .env file define urls for twitter:\
 `
-REACT_APP_TWITTER_POST_URL=post_twitter
+REACT_APP_TWITTER_POST_URL=post_twitter\
 REACT_APP_TWITTER_GET_URL=get_twitters
 `
 

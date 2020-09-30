@@ -41,7 +41,7 @@ class SendTweet extends React.Component {
   mySubmitHandler = (event) => {
    event.preventDefault();
    var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', "https://hdzz4r72df.execute-api.us-west-2.amazonaws.com/dev");
+   this.callAPI(params, 'POST', process.env.REACT_APP_TWITTER_POST_URL);
  }
 
   myChangeHandler = (event) => {
@@ -71,7 +71,7 @@ class Tweet extends React.Component {
     return (
       <Card className="single_tweet">
         <Card.Body>
-          <img src={twitter_logo} id="twitter-logo"/>
+          <img alt="twitter_logo" src={twitter_logo} id="twitter-logo"/>
           <Card.Text>{this.props.value}</Card.Text>
         </Card.Body>
       </Card>
@@ -100,7 +100,7 @@ class DisplayTweets extends React.Component {
         headers: myHeaders
     };
     // make API call with parameters and use promises to get response
-    fetch('https://qmo78vqpwi.execute-api.us-west-2.amazonaws.com/dev', requestOptions)
+    fetch(process.env.REACT_APP_TWITTER_GET_URL, requestOptions)
     .then(response => response.text())
     .then(result => this.setState({"tweets": JSON.parse(JSON.parse(result).body)}))
     .catch(error => console.log('error', error));
@@ -115,7 +115,7 @@ class DisplayTweets extends React.Component {
   }
 }
 
-class Twitter_Campaign extends React.Component {
+class TwitterCampaign extends React.Component {
   render() {
     return (
         <div className="justify-content-center" id="campaign">
@@ -132,8 +132,8 @@ function App() {
   return (
     <Container fluid="true" id="main">
       <Row className="h-100 px-5 py-5">
-        <Col bsPrefix="col-auto" className="align-self-center"><img src={logo} className="mm-logo"/></Col>
-        <Col bsPrefix="col"><Twitter_Campaign /></Col>
+        <Col bsPrefix="col-auto" className="align-self-center"><img alt="mm_logo"  src={logo} className="mm-logo"/></Col>
+        <Col bsPrefix="col"><TwitterCampaign /></Col>
       </Row>
     </Container>
   );

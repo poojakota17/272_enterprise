@@ -13,35 +13,35 @@ import './App.css';
 class SendTweet extends React.Component {
   constructor(props){
     super(props);
-    this.state = {text:''};
+    this.state = {text:'', result: ''};
     this.callAPI = this.callAPI.bind(this);
   }
 
-  callAPI = (text) => {
+  callAPI = (params, method, url) => {
               // instantiate a headers object
               var myHeaders = new Headers();
               // add content type header to object
               myHeaders.append("Content-Type", "application/json");
               // using built in JSON utility package turn object to string and store in a variable
-              var raw = JSON.stringify({"text": text});
+              var raw = JSON.stringify(params);
               // create a JSON object with parameters for API call and store in a variable
               var requestOptions = {
-                  method: 'POST',
+                  method: method,
                   headers: myHeaders,
                   body: raw,
                   redirect: 'follow'
               };
               // make API call with parameters and use promises to get response
-              fetch("https://hdzz4r72df.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+              fetch(url, requestOptions)
               .then(response => response.text())
-              .then(result => alert(JSON.parse(result).body))
+              .then(result => this.setState({"result": JSON.parse(result).body}))
               .catch(error => console.log('error', error));
           }
 
   mySubmitHandler = (event) => {
    event.preventDefault();
-   this.callAPI(this.state.text);
-   console.log("You are submitting " + this.state.text);
+   var params = {"text": this.state.text};
+   this.callAPI(params, 'POST', "https://hdzz4r72df.execute-api.us-west-2.amazonaws.com/dev");
  }
 
   myChangeHandler = (event) => {
@@ -60,6 +60,7 @@ class SendTweet extends React.Component {
             <Button type="submit" variant="light" className="mt-auto">Send</Button>
           </Form>
         </Card.Body>
+        <Card.Title>{this.state.result}</Card.Title>
       </Card>
     );
   }
@@ -79,14 +80,36 @@ class Tweet extends React.Component {
 }
 
 class DisplayTweets extends React.Component {
-  renderTweet(i) {
-    return <Tweet value={i} />;
+  constructor(props){
+    super(props);
+    this.state = {tweets: []};
   }
+  renderTweet(id, text) {
+    return <Col key={id} className="col-3"><Tweet value={text} /></Col>;
+  }
+
+  componentDidMount() {
+    // instantiate a headers object
+    var myHeaders = new Headers();
+    // add content type header to object
+    myHeaders.append("Content-Type", "application/json");
+    // using built in JSON utility package turn object to string and store in a variable
+    // create a JSON object with parameters for API call and store in a variable
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders
+    };
+    // make API call with parameters and use promises to get response
+    fetch('https://qmo78vqpwi.execute-api.us-west-2.amazonaws.com/dev', requestOptions)
+    .then(response => response.text())
+    .then(result => this.setState({"tweets": JSON.parse(JSON.parse(result).body)}))
+    .catch(error => console.log('error', error));
+  }
+
   render() {
     return (
       <Row>
-        <Col className="col-3">{this.renderTweet("Hello")}</Col>
-        <Col className="col-3">{this.renderTweet("It is smth new")}</Col>
+      {this.state.tweets.map((element, index) => this.renderTweet(index, element))}
       </Row>
     );
   }

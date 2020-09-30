@@ -12,6 +12,31 @@
 5c. deploy to AWS Amplify
 
 6. Create Lambda function
+  simple get_post_function looks like:
+  ```
+  exports.handler = async (event) => {
+    // TODO implement
+    let name = JSON.stringify( ["One", "Two", "Tree"]);
+    const response = {
+        statusCode: 200,
+        body: name,
+    };
+    return response;
+};
+  ```
+
+  simple post_new_post function looks like:
+  ```
+  exports.handler = async (event) => {
+    // TODO implement
+    let name = JSON.stringify(`This message brought to you by Lambda: ${event.text}`);
+    const response = {
+        statusCode: 200,
+        body: name,
+    };
+    return response;
+};
+  ```
 7. Create AWS gateway
 
 

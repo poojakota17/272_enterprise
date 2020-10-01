@@ -8,6 +8,7 @@ import React from 'react';
 import logo from './mm_logo.svg';
 import twitter_logo from './twitter_logo.svg';
 import './App.css';
+import Tweet from './singleTweet.js'
 
 
 class SendTweet extends React.Component {
@@ -66,19 +67,6 @@ class SendTweet extends React.Component {
   }
 }
 
-class Tweet extends React.Component {
-  render() {
-    return (
-      <Card className="single_tweet">
-        <Card.Body>
-          <img alt="twitter_logo" src={twitter_logo} id="twitter-logo"/>
-          <Card.Text>{this.props.value}</Card.Text>
-        </Card.Body>
-      </Card>
-    );
-  }
-}
-
 class DisplayTweets extends React.Component {
   constructor(props){
     super(props);
@@ -119,7 +107,8 @@ class TwitterCampaign extends React.Component {
   render() {
     return (
         <div className="justify-content-center" id="campaign">
-          <h1 className="pb-5">Twitter Ad Campaign Management</h1>
+          <h1>Custom Twitter Page</h1>
+          <p className="pb-5"><small>No more sponsored tweets!</small></p>
           <SendTweet />
           <h2 className="py-5">Current Tweets:</h2>
           <DisplayTweets />

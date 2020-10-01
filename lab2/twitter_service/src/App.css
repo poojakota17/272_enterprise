@@ -18,7 +18,7 @@
   height: 40vmin;
 }
 
-#twitter-logo {
+.twitter_logo, .bin_logo {
   height: 1rem;
   color: var(--app-white);
 }

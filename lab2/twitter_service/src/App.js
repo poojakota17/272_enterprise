@@ -73,7 +73,7 @@ class DisplayTweets extends React.Component {
     this.state = {tweets: []};
   }
   renderTweet(id, text) {
-    return <Col key={id} className="col-3"><Tweet value={text} /></Col>;
+    return <Tweet key={id} value={text} />;
   }
 
   componentDidMount() {
@@ -96,7 +96,7 @@ class DisplayTweets extends React.Component {
 
   render() {
     return (
-      <Row>
+      <Row xs={1} sm={2} md={3}>
       {this.state.tweets.map((element, index) => this.renderTweet(index, element))}
       </Row>
     );
@@ -119,10 +119,10 @@ class TwitterCampaign extends React.Component {
 
 function App() {
   return (
-    <Container fluid="true" id="main">
+    <Container fluid id="main">
       <Row className="h-100 px-5 py-5">
-        <Col bsPrefix="col-auto" className="align-self-center"><img alt="mm_logo"  src={logo} className="mm-logo"/></Col>
-        <Col bsPrefix="col"><TwitterCampaign /></Col>
+        <Col sm="auto" className="align-self-center"><img alt="mm_logo"  src={logo} className="mm-logo"/></Col>
+        <Col ><TwitterCampaign /></Col>
       </Row>
     </Container>
   );

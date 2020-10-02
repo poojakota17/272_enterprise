@@ -43,6 +43,7 @@ class SendTweet extends React.Component {
    event.preventDefault();
    var params = {"text": this.state.text};
    this.callAPI(params, 'POST', "https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev/post");
+   console.log("hello world") 
  }
 
   myChangeHandler = (event) => {

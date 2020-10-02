@@ -8,6 +8,8 @@ applications:
         build:
           commands:
             - yarn run build
+            - echo "REACT_APP_TWITTER_POST_URL=$REACT_APP_TWITTER_POST_URL" >> backend/.env
+            - echo "REACT_APP_TWITTER_GET_URL=$REACT_APP_TWITTER_GET_URL" >> backend/.env
       artifacts:
         baseDirectory: build
         files:

@@ -95,7 +95,7 @@ class DisplayTweets extends React.Component {
 
   render() {
     return (
-      <Row xs={1} sm={2} md={3}>
+      <Row xs={1} md={3}>
       {this.state.tweets.map((element, index) => this.renderTweet(index, element))}
       </Row>
     );
@@ -107,7 +107,7 @@ class TwitterCampaign extends React.Component {
     return (
         <div className="justify-content-center" id="campaign">
           <h1>Custom Twitter Page</h1>
-          <p className="pb-5"><small>No more sponsored tweets!</small></p>
+          <p className="pb-5">No more sponsored tweets!</p>
           <SendTweet />
           <h2 className="py-5">Current Tweets:</h2>
           <DisplayTweets />

@@ -18,9 +18,8 @@
   height: 40vmin;
 }
 
-.twitter_logo, .bin_logo {
-  height: 1rem;
-  color: var(--app-white);
+.bin:hover {
+  fill: var(--app-brown);
 }
 
 #campaign > h1, h2 {

@@ -2,10 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import twitter_logo from './twitter_logo.svg';
 import { ReactComponent as TwitterLogo } from './twitter_logo.svg';
 import { ReactComponent as Bin } from './bin.svg';
-import bin_svg from './bin.svg';
 
 export default class Tweet extends React.Component {
   render() {

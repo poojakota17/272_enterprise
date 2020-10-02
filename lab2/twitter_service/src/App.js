@@ -5,8 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import React from 'react';
-import logo from './mm_logo.svg';
-import twitter_logo from './twitter_logo.svg';
+import { ReactComponent as Logo } from './mm_logo.svg';
 import './App.css';
 import Tweet from './singleTweet.js'
 
@@ -121,7 +120,7 @@ function App() {
   return (
     <Container fluid id="main">
       <Row className="h-100 px-5 py-5">
-        <Col sm="auto" className="align-self-center"><img alt="mm_logo"  src={logo} className="mm-logo"/></Col>
+        <Col sm="auto" className="align-self-center"><Logo className="mm-logo" /></Col>
         <Col ><TwitterCampaign /></Col>
       </Row>
     </Container>

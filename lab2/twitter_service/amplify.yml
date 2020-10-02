@@ -7,7 +7,7 @@ applications:
             - yarn install
         build:
           commands:
-            - yarn run build
+            - yarn run build:$BUILD_ENV
             - echo "REACT_APP_TWITTER_POST_URL=$REACT_APP_TWITTER_POST_URL" >> backend/.env
             - echo "REACT_APP_TWITTER_GET_URL=$REACT_APP_TWITTER_GET_URL" >> backend/.env
       artifacts:

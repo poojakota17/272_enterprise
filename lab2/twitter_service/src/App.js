@@ -41,7 +41,7 @@ class SendTweet extends React.Component {
   mySubmitHandler = (event) => {
    event.preventDefault();
    var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', process.env.REACT_APP_TWITTER_POST_URL);
+   this.callAPI(params, 'POST', "https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev");
  }
 
   myChangeHandler = (event) => {
@@ -88,7 +88,7 @@ class DisplayTweets extends React.Component {
         headers: myHeaders
     };
     // make API call with parameters and use promises to get response
-    fetch(process.env.REACT_APP_TWITTER_GET_URL, requestOptions)
+    fetch("https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
     .then(response => response.text())
     .then((result) => {this.setState({"tweets": JSON.parse(JSON.parse(result).body)})
 }  )

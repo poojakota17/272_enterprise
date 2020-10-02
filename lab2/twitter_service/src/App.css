@@ -20,6 +20,7 @@
 
 .bin:hover {
   fill: var(--app-brown);
+  cursor: pointer;
 }
 
 #campaign > h1, h2 {

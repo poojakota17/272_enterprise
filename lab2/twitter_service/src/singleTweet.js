@@ -11,15 +11,17 @@ export default class Tweet extends React.Component {
     alert("hello");
   }
   render() {
+    console.log(this.props.value)
     return (
       <Col key={this.props.id} className="p-2">
         <Card className="single_tweet">
           <Card.Body>
             <Row>
-              <Col xs="auto"className="mr-auto"><TwitterLogo /></Col>
+              <Col xs="auto"><TwitterLogo /></Col>
+              <Col xs="auto"className="mr-auto">{this.props.value.created_at}</Col>
               <Col xs="auto"><Bin onClick={this.handleClick} className="bin"/></Col>
             </Row>
-            <Card.Text>{this.props.value}</Card.Text>
+            <Card.Text>{this.props.value.text}</Card.Text>
           </Card.Body>
         </Card>
       </Col>

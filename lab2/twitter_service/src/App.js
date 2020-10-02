@@ -85,7 +85,6 @@ class DisplayTweets extends React.Component {
     var raw = JSON.stringify({"user": "twitterapi"});
     var requestOptions = {
         method: 'GET',
-        body: raw,
         headers: myHeaders
     };
     // make API call with parameters and use promises to get response

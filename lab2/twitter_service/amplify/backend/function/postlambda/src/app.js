@@ -46,7 +46,6 @@ app.get('/post', function(req, res) {
 
 app.get('/post/*', function(req, res) {
   // Add your code here
-  console.log('/post/*/GET', req)
   res.json({success: 'get call succeed!', url: req.url});
 });
 
@@ -61,7 +60,7 @@ app.post('/post', function(req, res) {
   //     console.log(tweet);
   //   }
   // });
-  console.log('/post/POST', req)
+  console.log('/post/POST', req.body)
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 

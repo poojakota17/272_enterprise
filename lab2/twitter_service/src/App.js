@@ -8,7 +8,10 @@ import React from 'react';
 import { ReactComponent as Logo } from './mm_logo.svg';
 import './App.css';
 import Tweet from './singleTweet.js'
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
 
+Amplify.configure(awsconfig);
 
 class SendTweet extends React.Component {
   constructor(props){
@@ -43,8 +46,7 @@ class SendTweet extends React.Component {
   mySubmitHandler = (event) => {
    event.preventDefault();
    var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', "https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev/post");
-   console.log("hello world") 
+   this.callAPI(params, 'POST', awsconfig.aws_cloud_logic_custom[0].endpoint);
  }
 
   myChangeHandler = (event) => {
@@ -91,7 +93,7 @@ class DisplayTweets extends React.Component {
         headers: myHeaders
     };
     // make API call with parameters and use promises to get response
-    fetch("https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev/post", requestOptions)
+    fetch(awsconfig.aws_cloud_logic_custom[0].endpoint, requestOptions)
     .then(response => response.text())
     .then(response => alert(response))
     .then(result => alert(JSON.parse(result).body))

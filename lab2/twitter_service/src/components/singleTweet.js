@@ -23,8 +23,10 @@ export default class Tweet extends React.Component {
         <Card className="single_tweet">
           <Card.Body>
             <Row>
-              <Col xs="auto"><TwitterLogo /></Col>
-              <Col xs="auto"className="mr-auto">{this.props.value.created_at}</Col>
+              <Col xs="auto" className="pr-0"><TwitterLogo/></Col>
+              <Col xs="auto" className="px-1">@{this.props.value.user_screen_name}</Col>
+              <Col xs="auto" className="px-1"><span>·</span></Col>
+              <Col xs="auto"className="pl-0 mr-auto">{this.props.value.created_at}</Col>
               {bin}
             </Row>
             <Card.Text>{this.props.value.text}</Card.Text>

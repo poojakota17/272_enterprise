@@ -9,7 +9,9 @@ export default class DisplayTweets extends React.Component {
     this.state = {
       tweets: [],
       deletable: this.props.deletable,
-      user: this.props.user
+      user: this.props.user,
+      count: this.props.count,
+      error: null
     };
   }
 
@@ -18,14 +20,23 @@ export default class DisplayTweets extends React.Component {
   }
 
   componentDidMount() {
-    callAPI({"user": this.state.user},'POST', process.env.REACT_APP_TWITTER_GET_TWEETS)
-    .then(result => this.setState({"tweets": JSON.parse(JSON.parse(result).body)}))
+    callAPI({"user": this.state.user, "count": this.state.count},'POST', process.env.REACT_APP_TWITTER_GET_TWEETS)
+    .then(result => this.setState({
+      tweets: JSON.parse(JSON.parse(result).body),
+      error: null
+    }))
+    .catch(er => this.setState({error: "Smth went wrong"}))
   }
 
   render() {
+    var result;
+    if (this.state.error != null)
+      result = this.state.error
+    else
+      result = this.state.tweets.map((element, index) => this.renderTweet(index, element, this.state.deletable))
     return (
       <Row xs={1} md={3}>
-      {this.state.tweets.map((element, index) => this.renderTweet(index, element, this.state.deletable))}
+      {result}
       </Row>
     );
   }

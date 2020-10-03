@@ -15,7 +15,7 @@ class TwitterCampaign extends React.Component {
           <p className="pb-5">No more sponsored tweets!</p>
           <SendTweet />
           <h2 className="py-5">Current Tweets:</h2>
-          <DisplayTweets deletable={true} user={"BillGates"}/>
+          <DisplayTweets deletable={true} user={"BillGates"} count={6}/>
         </div>
     );
   }

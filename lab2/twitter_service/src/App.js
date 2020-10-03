@@ -13,7 +13,7 @@ import awsconfig from './aws-exports';
 
 Amplify.configure(awsconfig);
 
-var API_GATEWAY_ENDPOINT = awsconfig.aws_cloud_logic_custom[0].endpoint+"/post"
+var API_GATEWAY_ENDPOINT = ''.concat(awsconfig.aws_cloud_logic_custom[0].endpoint, '/post');
 
 class SendTweet extends React.Component {
   constructor(props){

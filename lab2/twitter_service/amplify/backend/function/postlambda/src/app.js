@@ -30,28 +30,50 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
- var Twitter = require('twitter');
- var client = new Twitter({
-     consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
-     consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
-     access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
-     access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
-   });
+var Twitter = require('twitter-lite');
+const client = new Twitter({
+  consumer_key: '<REPLACE_THIS>',
+  consumer_secret: '<REPLACE_THIS>',
+  access_token_key: '<REPLACE_THIS>',
+  access_token_secret:'<REPLACE_THIS>'
+});
+var twitterhandle = '<REPLACE_THIS>'
+
+async function postTweet(text) {
+  const tweet = await client.post("statuses/update", {
+    status: text
+  });
+  return tweet
+}
+async function getTimeline(twitterhandle) {
+  const timeline = await client.get('statuses/user_timeline', {
+    screen_name: twitterhandle,
+    count: 5
+  });
+  let tweetarr = []
+  timeline.forEach(tweet => {
+    tweetarr.push({
+      key: tweet.id_str,
+      value: tweet.text
+    })
+  });
+  return tweetarr;
+}
 
 app.get('/post', function(req, res) {
   // Add your code here
-  var temp;
-  var params = {screen_name: 'PoojaPrasannan6'};
-  client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    temp = response;
-    console.log(tweets);
-    console.log(response);
-    if (!error) {
-      console.log(tweets);
-  }
-});
-  console.log('/post/GET', req)
-  res.json({success: 'get call succeed!', url: req.url, response: temp});
+
+  let date_ob = new Date();
+  console.log('START GETTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+  return getTimeline(twitterhandle).then(
+    result => {
+      console.log('API reponse', result)
+      res.json({ success: 'get call succeed!', url: req.url, tweets: result });
+      date_ob = new Date();
+      console.log('END GETTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+    }
+  )
+  .catch(error => console.log(error))
 });
 
 app.get('/post/*', function(req, res) {
@@ -63,24 +85,27 @@ app.get('/post/*', function(req, res) {
 * Example post method *
 ****************************/
 
-app.post('/post', function(req, res) {
+app.post('/post', function (req, res) {
   // Add your code here
-  var temp;
-  client.post('statuses/update', {status: req.body.text}, function(error, tweet, response) {
-    console.log(tweet);
-    temp=response;
-    console.log(response);
-    if (!error) {
-      console.log(tweet);
-    }
-   });
-  console.log('/post/POST', req.body)
-  res.json({success: 'post call succeed!', url: req.url, body: req.body.text, response: temp})
+  
+  let date_ob = new Date();
+  console.log('POSTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+  console.log('/post/POST', req.body);
+  return postTweet(req.body.text)
+    .then(
+      result => {
+        console.log('API reponse', result)
+        res.json({ success: 'post call succeed!', url: req.url, body: req.body.text, tweet_id: result.id_str });
+        date_ob = new Date();
+        console.log('END POSTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+      }
+    )
+    .catch(error => console.log(error));
 });
 
 app.post('/post/*', function(req, res) {
   // Add your code here
-  console.log('/post/*/POST', req)
+  console.log('/post/*/POST', req);
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 

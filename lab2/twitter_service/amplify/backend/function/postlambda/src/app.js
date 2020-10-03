@@ -32,12 +32,12 @@ app.use(function(req, res, next) {
 
 var Twitter = require('twitter-lite');
 const client = new Twitter({
-  consumer_key: '<REPLACE_THIS>',
-  consumer_secret: '<REPLACE_THIS>',
-  access_token_key: '<REPLACE_THIS>',
-  access_token_secret:'<REPLACE_THIS>'
+  consumer_key: 'S4aGZnYI0KbimIBcisJjqAoWV'
+  consumer_secret: 'A62BZxL6H4wqaj8pj95zWAC87Mp7O7engTfmlM10tmaqRxhuWm',
+  access_token_key: '1308479835178594305-imws4jf9AU7iYNmXXn6dNdYHvpZnp3',
+  access_token_secret:'07PGodzVHTnx5iXAk91pzvUDjz9QazeBIrprtt9tTRhNJ'
 });
-var twitterhandle = '<REPLACE_THIS>'
+var twitterhandle = 'manjirikadam12'
 
 async function postTweet(text) {
   const tweet = await client.post("statuses/update", {

@@ -8,10 +8,10 @@ import React from 'react';
 import { ReactComponent as Logo } from './mm_logo.svg';
 import './App.css';
 import Tweet from './singleTweet.js'
-import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
+#import Amplify from 'aws-amplify';
+#import awsconfig from './aws-exports';
 
-Amplify.configure(awsconfig);
+#Amplify.configure(awsconfig);
 
 var API_GATEWAY_ENDPOINT = ''.concat(awsconfig.aws_cloud_logic_custom[0].endpoint, '/post');
 

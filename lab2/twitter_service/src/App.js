@@ -40,8 +40,8 @@ class SendTweet extends React.Component {
               fetch(url, requestOptions)
               .then(response => response.text())
               .then(response => alert(response))
-              .then(result => alert(JSON.parse(result).body))
-              //.then(result => this.setState({ "result": JSON.parse(result).body }))
+              // .then(result => alert(JSON.parse(result).body))
+              .then(result => this.setState({ "result": JSON.parse(result).body }))
               .catch(error => console.log('error', error));
           }
 

@@ -30,18 +30,28 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-// var Twitter = require('twitter');
-// var client = new Twitter({
-//     consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
-//     consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
-//     access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
-//     access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
-//   });
+ var Twitter = require('twitter');
+ var client = new Twitter({
+     consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
+     consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
+     access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
+     access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
+   });
 
 app.get('/post', function(req, res) {
   // Add your code here
+  var temp;
+  var params = {screen_name: 'PoojaPrasannan6'};
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    temp = response;
+    console.log(tweets);
+    console.log(response);
+    if (!error) {
+      console.log(tweets);
+  }
+});
   console.log('/post/GET', req)
-  res.json({success: 'get call succeed!', url: req.url});
+  res.json({success: 'get call succeed!', url: req.url, response: temp});
 });
 
 app.get('/post/*', function(req, res) {
@@ -55,13 +65,17 @@ app.get('/post/*', function(req, res) {
 
 app.post('/post', function(req, res) {
   // Add your code here
-  // client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, response) {
-  //   if (!error) {
-  //     console.log(tweet);
-  //   }
-  // });
+  var temp;
+  client.post('statuses/update', {status: req.body.text}, function(error, tweet, response) {
+    console.log(tweet);
+    temp=response;
+    console.log(response);
+    if (!error) {
+      console.log(tweet);
+    }
+   });
   console.log('/post/POST', req.body)
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  res.json({success: 'post call succeed!', url: req.url, body: req.body.text, response: temp})
 });
 
 app.post('/post/*', function(req, res) {

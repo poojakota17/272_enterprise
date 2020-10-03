@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-twitter-dev-204624-deployment",
-          "S3Key": "amplify-builds/postlambda-576d38486834694b5750-build.zip"
+          "S3Key": "amplify-builds/postlambda-304c703875794a6b724d-build.zip"
         }
       }
     },

@@ -11,6 +11,12 @@ export default class Tweet extends React.Component {
     alert("hello");
   }
   render() {
+    const deletable = this.props.deletable;
+    let bin = '';
+    if (deletable) {
+     bin = <Col xs="auto"><Bin onClick={this.handleClick} className="bin"/></Col>;
+    }
+
     console.log(this.props.value)
     return (
       <Col key={this.props.id} className="p-2">
@@ -19,7 +25,7 @@ export default class Tweet extends React.Component {
             <Row>
               <Col xs="auto"><TwitterLogo /></Col>
               <Col xs="auto"className="mr-auto">{this.props.value.created_at}</Col>
-              <Col xs="auto"><Bin onClick={this.handleClick} className="bin"/></Col>
+              {bin}
             </Row>
             <Card.Text>{this.props.value.text}</Card.Text>
           </Card.Body>

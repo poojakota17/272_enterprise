@@ -1,108 +1,11 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import React from 'react';
-import { ReactComponent as Logo } from './mm_logo.svg';
 import './App.css';
-import Tweet from './singleTweet.js'
-
-
-class SendTweet extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {text:'', result: ''};
-    this.callAPI = this.callAPI.bind(this);
-  }
-
-  callAPI = (params, method, url) => {
-              // instantiate a headers object
-              var myHeaders = new Headers();
-              // add content type header to object
-              myHeaders.append("Content-Type", "application/json");
-              // using built in JSON utility package turn object to string and store in a variable
-              var raw = JSON.stringify(params);
-              // create a JSON object with parameters for API call and store in a variable
-              var requestOptions = {
-                  method: method,
-                  headers: myHeaders,
-                  body: raw,
-                  redirect: 'follow'
-              };
-              // make API call with parameters and use promises to get response
-              fetch(url, requestOptions)
-              .then(response => response.text())
-              .then(result => this.setState({"result": JSON.parse(result).body}))
-              .catch(error => console.log('error', error));
-          }
-
-  mySubmitHandler = (event) => {
-   event.preventDefault();
-   var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', process.env.REACT_APP_TWITTER_POST_URL);
- }
-
-  myChangeHandler = (event) => {
-   this.setState({text: event.target.value});
- }
-
-  render() {
-    return (
-      <Card id="sender" style={{ width: '60%' }}>
-        <Card.Body>
-          <Card.Title>Create a new Tweet</Card.Title>
-          <Form onSubmit={this.mySubmitHandler} role="form">
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Control as="textarea" rows={2} type="text" onChange={this.myChangeHandler} />
-            </Form.Group>
-            <Button type="submit" variant="light" className="mt-auto">Send</Button>
-          </Form>
-        </Card.Body>
-        <Card.Title>{this.state.result}</Card.Title>
-      </Card>
-    );
-  }
-}
-
-class DisplayTweets extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {tweets: []};
-  }
-  renderTweet(id, text) {
-    return <Tweet key={id} value={text} />;
-  }
-
-  componentDidMount() {
-    // instantiate a headers object
-    var myHeaders = new Headers();
-    // add content type header to object
-    myHeaders.append("Content-Type", "application/json");
-    // using built in JSON utility package turn object to string and store in a variable
-    // create a JSON object with parameters for API call and store in a variable
-    var raw = JSON.stringify({"user": "twitterapi"});
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders
-    };
-    // make API call with parameters and use promises to get response
-    fetch(process.env.REACT_APP_TWITTER_GET_URL, requestOptions)
-    .then(response => response.text())
-    .then((result) => {this.setState({"tweets": JSON.parse(JSON.parse(result).body)})
-}  )
-    .catch(error => console.log('error', error));
-  }
-
-  render() {
-    return (
-      <Row xs={1} md={3}>
-      {this.state.tweets.map((element, index) => this.renderTweet(index, element))}
-      </Row>
-    );
-  }
-}
+import DisplayTweets from './components/displayTweets.js';
+import SendTweet from './components/sendTweet.js';
+import { ReactComponent as Logo } from './mm_logo.svg';
 
 class TwitterCampaign extends React.Component {
   render() {
@@ -112,7 +15,7 @@ class TwitterCampaign extends React.Component {
           <p className="pb-5">No more sponsored tweets!</p>
           <SendTweet />
           <h2 className="py-5">Current Tweets:</h2>
-          <DisplayTweets />
+          <DisplayTweets deletable={true} user={"BillGates"}/>
         </div>
     );
   }

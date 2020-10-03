@@ -30,21 +30,23 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-var Twitter = require('twitter');
+// var Twitter = require('twitter');
+// var client = new Twitter({
+//     consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
+//     consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
+//     access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
+//     access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
+//   });
 
-var client = new Twitter({
-  consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
-  consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
-  access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
-  access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
-});
 app.get('/post', function(req, res) {
   // Add your code here
+  console.log('/post/GET', req)
   res.json({success: 'get call succeed!', url: req.url});
 });
 
 app.get('/post/*', function(req, res) {
   // Add your code here
+  console.log('/post/*/GET', req)
   res.json({success: 'get call succeed!', url: req.url});
 });
 
@@ -54,16 +56,18 @@ app.get('/post/*', function(req, res) {
 
 app.post('/post', function(req, res) {
   // Add your code here
-  client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, response) {
-    if (!error) {
-      console.log(tweet);
-    }
-  });
+  // client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, response) {
+  //   if (!error) {
+  //     console.log(tweet);
+  //   }
+  // });
+  console.log('/post/POST', req)
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 
 app.post('/post/*', function(req, res) {
   // Add your code here
+  console.log('/post/*/POST', req)
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 

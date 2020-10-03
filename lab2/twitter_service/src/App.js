@@ -34,7 +34,8 @@ class SendTweet extends React.Component {
               // make API call with parameters and use promises to get response
               fetch(url, requestOptions)
               .then(response => response.text())
-              .then(result => this.setState({"result": JSON.parse(result).body}))
+              .then(console.log(response, result))
+              .then(result => this.setState({ "result": JSON.parse(result).body }))
               .catch(error => console.log('error', error));
           }
 
@@ -91,8 +92,8 @@ class DisplayTweets extends React.Component {
     // make API call with parameters and use promises to get response
     fetch("https://ptr4ebxlci.execute-api.us-east-1.amazonaws.com/dev/post", requestOptions)
     .then(response => response.text())
-    .then((result) => {this.setState({"tweets": JSON.parse(JSON.parse(result).body)})
-}  )
+    .then(console.log(response, result))
+    .then((result) => {this.setState({"tweets": JSON.parse(JSON.parse(result).body)})})
     .catch(error => console.log('error', error));
   }
 

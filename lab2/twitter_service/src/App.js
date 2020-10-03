@@ -22,7 +22,6 @@ class SendTweet extends React.Component {
               var myHeaders = new Headers();
               // add content type header to object
               myHeaders.append("Content-Type", "application/json");
-              myHeaders.append("Access-Control-Allow-Origin", "*");
               // using built in JSON utility package turn object to string and store in a variable
               var raw = JSON.stringify(params);
               // create a JSON object with parameters for API call and store in a variable
@@ -82,7 +81,6 @@ class DisplayTweets extends React.Component {
     var myHeaders = new Headers();
     // add content type header to object
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Access-Control-Allow-Origin", "*");
     // using built in JSON utility package turn object to string and store in a variable
     // create a JSON object with parameters for API call and store in a variable
     var raw = JSON.stringify({"user": "twitterapi"});

@@ -13,6 +13,8 @@ import awsconfig from './aws-exports';
 
 Amplify.configure(awsconfig);
 
+var API_GATEWAY_ENDPOINT = awsconfig.aws_cloud_logic_custom[0].endpoint+"/post"
+
 class SendTweet extends React.Component {
   constructor(props){
     super(props);
@@ -46,7 +48,7 @@ class SendTweet extends React.Component {
   mySubmitHandler = (event) => {
    event.preventDefault();
    var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', awsconfig.aws_cloud_logic_custom[0].endpoint);
+   this.callAPI(params, 'POST', API_GATEWAY_ENDPOINT);
  }
 
   myChangeHandler = (event) => {
@@ -93,7 +95,7 @@ class DisplayTweets extends React.Component {
         headers: myHeaders
     };
     // make API call with parameters and use promises to get response
-    fetch(awsconfig.aws_cloud_logic_custom[0].endpoint, requestOptions)
+    fetch(API_GATEWAY_ENDPOINT, requestOptions)
     .then(response => response.text())
     .then(response => alert(response))
     .then(result => alert(JSON.parse(result).body))

@@ -5,10 +5,13 @@ import Col from 'react-bootstrap/Col';
 import { ReactComponent as TwitterLogo } from './twitter_logo.svg';
 import { ReactComponent as Bin } from './bin.svg';
 import Button from 'react-bootstrap/Button';
+import {callAPI} from './utils.js'
 
 export default class Tweet extends React.Component {
   handleClick(id) {
-    alert(id);
+    var params = {"tweet_id": id};
+    callAPI(params, 'POST', process.env.REACT_APP_TWITTER_DELETE_TWEET)
+    .then(result => alert(result));
   }
   render() {
     const deletable = this.props.deletable;

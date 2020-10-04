@@ -23,7 +23,7 @@ export default class SendTweet extends React.Component {
 
   render() {
     return (
-      <Card id="sender" style={{ width: '60%' }}>
+      <Card id="sender">
         <Card.Body>
           <Card.Title>Create a new Tweet</Card.Title>
           <Form onSubmit={this.mySubmitHandler} role="form">

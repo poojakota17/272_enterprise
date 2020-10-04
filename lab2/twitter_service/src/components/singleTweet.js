@@ -7,14 +7,14 @@ import { ReactComponent as Bin } from './bin.svg';
 import Button from 'react-bootstrap/Button';
 
 export default class Tweet extends React.Component {
-  handleClick() {
-    alert("hello");
+  handleClick(id) {
+    alert(id);
   }
   render() {
     const deletable = this.props.deletable;
     let bin = '';
     if (deletable) {
-     bin = <Col xs="auto"><Bin onClick={this.handleClick} className="bin"/></Col>;
+     bin = <Col xs="auto"><Bin onClick={() => this.handleClick(this.props.value.id_str)} className="bin"/></Col>;
     }
 
     console.log(this.props.value)

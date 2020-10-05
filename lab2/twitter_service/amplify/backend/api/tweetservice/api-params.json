@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/post",
+            "lambdaFunction": "postlambda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/post"
+        }
+    ],
+    "resourceName": "tweetservice",
+    "apiName": "tweetservice",
+    "functionArns": [
+        {
+            "lambdaFunction": "postlambda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-twitter-dev-204624-authRole",
+        "unAuthRoleName": "amplify-twitter-dev-204624-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "postlambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

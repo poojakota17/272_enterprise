@@ -11,15 +11,20 @@ export default class DisplayTweets extends React.Component {
       deletable: this.props.deletable,
       user: this.props.user,
       count: this.props.count,
-      error: null
+      error: null,
+      last_update: this.props.update
     };
   }
 
   renderTweet(id, text, deletable) {
-    return <Tweet key={id} value={text} deletable={deletable} />;
+    return <Tweet key={id} value={text} deletable={deletable} updateDisplay={this.updateDisplay}/>;
   }
 
-  componentDidMount() {
+  updateDisplay = () => {
+    this.getTweets()
+  }
+
+  getTweets () {
     callAPI({"user": this.state.user, "count": this.state.count},'POST', process.env.REACT_APP_TWITTER_GET_TWEETS)
     .then(result => this.setState({
       tweets: JSON.parse(JSON.parse(result).body),
@@ -28,7 +33,12 @@ export default class DisplayTweets extends React.Component {
     .catch(er => this.setState({error: "Smth went wrong"}))
   }
 
+  componentDidMount() {
+    this.getTweets()
+  }
+
   render() {
+    console.log(this.state.last_update)
     var result;
     if (this.state.error != null)
       result = this.state.error

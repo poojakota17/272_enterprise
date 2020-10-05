@@ -14,7 +14,10 @@ export default class SendTweet extends React.Component {
    event.preventDefault();
    var params = {"text": this.state.text};
    callAPI(params, 'POST', process.env.REACT_APP_TWITTER_POST_URL)
-   .then(result => this.setState({"result": JSON.parse(result).body}));
+   .then((result) => {
+     this.setState({"result": JSON.parse(result).body});
+     this.props.updateDisplay()
+   });
  }
 
   myChangeHandler = (event) => {

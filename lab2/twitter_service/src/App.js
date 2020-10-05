@@ -8,14 +8,27 @@ import SendTweet from './components/sendTweet.js';
 import { ReactComponent as Logo } from './mm_logo.svg';
 
 class TwitterCampaign extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      last_update: Date.now(),
+      user: "anazi_sjsu",
+      deletable: true
+    };
+  }
+
+  updateDisplay = () => {
+    this.setState({last_update: Date.now()})
+  }
   render() {
+    console.log(this.state.last_update)
     return (
         <div className="justify-content-center" id="campaign">
           <h1>Custom Twitter Page</h1>
           <p className="pb-5">No more sponsored tweets!</p>
-          <SendTweet />
+          <SendTweet updateDisplay={this.updateDisplay} />
           <h2 className="py-5">Current Tweets:</h2>
-          <DisplayTweets deletable={true} user={"anazi_sjsu"} count={6}/>
+          <DisplayTweets deletable={this.state.deletable} user={this.state.user} count={6} key={this.state.last_update} update={this.state.last_update}/>
         </div>
     );
   }

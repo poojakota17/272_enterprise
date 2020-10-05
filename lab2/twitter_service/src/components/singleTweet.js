@@ -4,14 +4,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ReactComponent as TwitterLogo } from './twitter_logo.svg';
 import { ReactComponent as Bin } from './bin.svg';
-import Button from 'react-bootstrap/Button';
 import {callAPI} from './utils.js'
 
 export default class Tweet extends React.Component {
   handleClick(id) {
     var params = {"tweet_id": id};
     callAPI(params, 'POST', process.env.REACT_APP_TWITTER_DELETE_TWEET)
-    .then(result => alert(result));
+    .then((result) => {
+      console.log(result);
+      this.props.updateDisplay();
+    });
   }
   render() {
     const deletable = this.props.deletable;
@@ -20,7 +22,6 @@ export default class Tweet extends React.Component {
      bin = <Col xs="auto"><Bin onClick={() => this.handleClick(this.props.value.id_str)} className="bin"/></Col>;
     }
 
-    console.log(this.props.value)
     return (
       <Col key={this.props.id} className="p-2">
         <Card className="single_tweet">

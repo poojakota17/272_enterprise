@@ -1,126 +1,79 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import React from 'react';
-import { ReactComponent as Logo } from './mm_logo.svg';
 import './App.css';
-import Tweet from './singleTweet.js'
-//import Amplify from 'aws-amplify';
-//import awsconfig from './aws-exports';
-
-//Amplify.configure(awsconfig);
-
-var API_GATEWAY_ENDPOINT = ''.concat(awsconfig.aws_cloud_logic_custom[0].endpoint, '/post');
-
-class SendTweet extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {text:'', result: ''};
-    this.callAPI = this.callAPI.bind(this);
-  }
-
-  callAPI = (params, method, url) => {
-              // instantiate a headers object
-              var myHeaders = new Headers();
-              // add content type header to object
-              myHeaders.append("Content-Type", "application/json");
-              // using built in JSON utility package turn object to string and store in a variable
-              var raw = JSON.stringify(params);
-              // create a JSON object with parameters for API call and store in a variable
-              var requestOptions = {
-                  method: method,
-                  headers: myHeaders,
-                  body: raw,
-                  redirect: 'follow'
-              };
-              // make API call with parameters and use promises to get response
-              fetch(url, requestOptions)
-              .then(response => response.text())
-              .then(response => alert(response))
-              // .then(result => alert(JSON.parse(result).body))
-              .then(result => this.setState({ "result": JSON.parse(result).body }))
-              .catch(error => console.log('error', error));
-          }
-
-  mySubmitHandler = (event) => {
-   event.preventDefault();
-   var params = {"text": this.state.text};
-   this.callAPI(params, 'POST', API_GATEWAY_ENDPOINT);
- }
-
-  myChangeHandler = (event) => {
-   this.setState({text: event.target.value});
- }
-
-  render() {
-    return (
-      <Card id="sender" style={{ width: '60%' }}>
-        <Card.Body>
-          <Card.Title>Create a new Tweet</Card.Title>
-          <Form onSubmit={this.mySubmitHandler} role="form">
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Control as="textarea" rows={2} type="text" onChange={this.myChangeHandler} />
-            </Form.Group>
-            <Button type="submit" variant="light" className="mt-auto">Send</Button>
-          </Form>
-        </Card.Body>
-        <Card.Title>{this.state.result}</Card.Title>
-      </Card>
-    );
-  }
-}
-
-class DisplayTweets extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {tweets: []};
-  }
-  renderTweet(id, text) {
-    return <Tweet key={id} value={text} />;
-  }
-
-  componentDidMount() {
-    // instantiate a headers object
-    var myHeaders = new Headers();
-    // add content type header to object
-    myHeaders.append("Content-Type", "application/json");
-    // using built in JSON utility package turn object to string and store in a variable
-    // create a JSON object with parameters for API call and store in a variable
-    var raw = JSON.stringify({"user": "twitterapi"});
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders
-    };
-    // make API call with parameters and use promises to get response
-    fetch(API_GATEWAY_ENDPOINT, requestOptions)
-    .then(response => response.text())
-    .then(response => alert(response))
-    .then(result => alert(JSON.parse(result).body))
-    .then((result) => {this.setState({"tweets": JSON.parse(JSON.parse(result).body)})})
-    .catch(error => console.log('error', error));
-  }
-
-  render() {
-    return (
-      <Row xs={1} md={3}>
-      {this.state.tweets.map((element, index) => this.renderTweet(index, element))}
-      </Row>
-    );
-  }
-}
+import DisplayTweets from './components/displayTweets.js';
+import SendTweet from './components/sendTweet.js';
+import SearchUser from './components/searchUser.js';
+import { ReactComponent as Logo } from './mm_logo.svg';
 
 class TwitterCampaign extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      last_update: Date.now(),
+      user: "PoojaPrasannan6",
+      authorized_user: "PoojaPrasannan6",
+      twitter_link: "https://twitter.com/PoojaPrasannan6",
+      deletable: true,
+      count: 6,
+      user_updated: false
+    };
+  }
+
+  updateAfterSend = () => {
+    if (this.state.user === this.state.authorized_user)
+      this.setState({ last_update: Date.now(), user_updated: false})
+    else {
+      this.setState({
+        user: this.state.authorized_user,
+        deletable: true,
+        user_updated: true
+      })
+    }
+  }
+
+  updateAfterUserChange = (user) => {
+    var deletable = (user === this.state.authorized_user)
+    this.setState({
+      user: user,
+      deletable: deletable,
+      user_updated: true
+    })
+  }
+
   render() {
+    var tweets;
+    if (this.state.user_updated === true) {
+      tweets = <DisplayTweets deletable={this.state.deletable}
+        user={this.state.user}
+        count={this.state.count}
+        key={this.state.user}
+        update={this.state.last_update}/>
+    }
+    else {
+      tweets = <DisplayTweets deletable={this.state.deletable}
+        user={this.state.user}
+        count={this.state.count}
+        key={this.state.last_update}
+        update={this.state.last_update}/>
+    }
     return (
         <div className="justify-content-center" id="campaign">
           <h1>Custom Twitter Page</h1>
-          <p className="pb-5">No more sponsored tweets!</p>
-          <SendTweet />
-          <h2 className="py-5">Current Tweets:</h2>
-          <DisplayTweets />
+          <p>No more sponsored tweets!</p>
+          <div className="alert alert-warning" role="alert">
+            This is a students project. Be mindful in posting tweets on our behalf.<br />
+            Go to <a href={this.state.twitter_link} target="_blank" className="alert-link">Twitter</a> to check that it really works;)
+          </div>
+          < Row>
+            <Col xs={12} md={6}><SendTweet updateDisplay={this.updateAfterSend} /></Col>
+            <Col xs="auto" className="px-1"><h2> or </h2></Col>
+            <Col xs={12} md="auto"><SearchUser updateDisplay={(e) => this.updateAfterUserChange(e)}/></Col>
+          </Row>
+          <h2 className="py-3">Current Tweets:</h2>
+          {tweets}
         </div>
     );
   }
@@ -130,7 +83,7 @@ function App() {
   return (
     <Container fluid id="main">
       <Row className="h-100 px-5 py-5">
-        <Col sm="auto" className="align-self-center"><Logo className="mm-logo" /></Col>
+        <Col sm="auto" className="sticky-top"><Logo className="mm-logo" /></Col>
         <Col ><TwitterCampaign /></Col>
       </Row>
     </Container>

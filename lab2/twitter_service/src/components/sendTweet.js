@@ -16,8 +16,11 @@ export default class SendTweet extends React.Component {
    callAPI(params, 'POST', process.env.REACT_APP_TWITTER_POST_URL)
    .then((result) => {
      this.setState({"result": JSON.parse(result).body});
-     this.props.updateDisplay()
-   });
+     if (this.state.result === "Denied")
+        alert('Oh, something went wrong. Try again! And try to change the text:)')
+      else
+        this.props.updateDisplay()
+   }).catch(er => console.log(er));
  }
 
   myChangeHandler = (event) => {
@@ -36,7 +39,6 @@ export default class SendTweet extends React.Component {
             <Button type="submit" variant="light" className="mt-auto">Send</Button>
           </Form>
         </Card.Body>
-        <Card.Title>{this.state.result}</Card.Title>
       </Card>
     );
   }

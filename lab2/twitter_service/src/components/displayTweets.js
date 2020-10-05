@@ -38,7 +38,6 @@ export default class DisplayTweets extends React.Component {
   }
 
   render() {
-    console.log(this.state.last_update)
     var result;
     if (this.state.error != null)
       result = this.state.error

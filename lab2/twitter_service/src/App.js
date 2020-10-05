@@ -15,26 +15,57 @@ class TwitterCampaign extends React.Component {
       last_update: Date.now(),
       user: "PoojaPrasannan6",
       authorized_user: "PoojaPrasannan6",
-      deletable: true
+      twitter_link: "https://twitter.com/PoojaPrasannan6",
+      deletable: true,
+      count: 6,
+      user_updated: false
     };
   }
 
-  updateDisplay = () => {
-    this.setState(
-      {last_update: Date.now(),
-        deletable: (this.state.user == this.state.authorized_user)
-      }
-    )
+  updateAfterSend = () => {
+    this.setState({ last_update: Date.now(), user_updated: false})
   }
+
+  updateAfterUserChange = (user) => {
+    var deletable = (user === this.state.authorized_user)
+    this.setState({
+      user: user,
+      deletable: deletable,
+      user_updated: true
+    })
+  }
+
   render() {
-    console.log(this.state.last_update)
+    var tweets;
+    if (this.state.user_updated === true) {
+      tweets = <DisplayTweets deletable={this.state.deletable}
+        user={this.state.user}
+        count={this.state.count}
+        key={this.state.user}
+        update={this.state.last_update}/>
+    }
+    else {
+      tweets = <DisplayTweets deletable={this.state.deletable}
+        user={this.state.user}
+        count={this.state.count}
+        key={this.state.last_update}
+        update={this.state.last_update}/>
+    }
     return (
         <div className="justify-content-center" id="campaign">
           <h1>Custom Twitter Page</h1>
-          <p className="pb-5">No more sponsored tweets!</p>
-          <SendTweet updateDisplay={this.updateDisplay} />
-          <h2 className="py-5">Current Tweets:</h2>
-          <DisplayTweets deletable={this.state.deletable} user={this.state.user} count={6} key={this.state.last_update} update={this.state.last_update}/>
+          <p>No more sponsored tweets!</p>
+          <div class="alert alert-warning" role="alert">
+            This is a students project. Be mindful in posting tweets on our behalf.<br />
+            Go to <a href={this.state.twitter_link} target="_blank" class="alert-link">Twitter</a> to check that it really works;)
+          </div>
+          < Row>
+            <Col xs={12} md={6}><SendTweet updateDisplay={this.updateAfterSend} /></Col>
+            <Col xs="auto" className="px-1"><h2> or </h2></Col>
+            <Col xs={12} md="auto"><SearchUser updateDisplay={(e) => this.updateAfterUserChange(e)}/></Col>
+          </Row>
+          <h2 className="py-3">Current Tweets:</h2>
+          {tweets}
         </div>
     );
   }
@@ -44,7 +75,7 @@ function App() {
   return (
     <Container fluid id="main">
       <Row className="h-100 px-5 py-5">
-        <Col sm="auto" className="align-self-center"><Logo className="mm-logo" /></Col>
+        <Col sm="auto" className="sticky-top"><Logo className="mm-logo" /></Col>
         <Col ><TwitterCampaign /></Col>
       </Row>
     </Container>

@@ -1,3 +1,7 @@
+Solutions:
+* [React + Nodejs](https://nastya.d371pgyhkbridp.amplifyapp.com/)
+* [Plain HTML + Python](https://dev.d2kvd967hupabs.amplifyapp.com/)
+
 1. Apply for Tweeter API access
 2. Create an account on AWS
 3. Create git repository for Amplify to access the code

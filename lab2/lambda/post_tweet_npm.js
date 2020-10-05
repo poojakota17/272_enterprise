@@ -1,6 +1,6 @@
 const Twitter = require ('twitter-lite');
 
-exports.handler = async function(event) {
+handler = async function(event) {
   const promise = new Promise(function(resolve, reject) {
     var client = new Twitter({
       consumer_key: process.env.TWITTER_API_KEY,
@@ -11,7 +11,7 @@ exports.handler = async function(event) {
 
      client
       .post('statuses/update', {
-          status: event.text,
+          status: "hello",
         })
       .then(results => {
         const response = {
@@ -30,3 +30,4 @@ exports.handler = async function(event) {
 })
   return promise
 }
+handler()

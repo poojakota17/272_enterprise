@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+https://nastya.d371pgyhkbridp.amplifyapp.com/
+
 ## Components of this Applications:
 
 * < App >: creates basic view of the Page

@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import './App.css';
 import DisplayTweets from './components/displayTweets.js';
 import SendTweet from './components/sendTweet.js';
+import SearchUser from './components/searchUser.js';
 import { ReactComponent as Logo } from './mm_logo.svg';
 
 class TwitterCampaign extends React.Component {
@@ -12,13 +13,18 @@ class TwitterCampaign extends React.Component {
     super(props);
     this.state = {
       last_update: Date.now(),
-      user: "anazi_sjsu",
+      user: "PoojaPrasannan6",
+      authorized_user: "PoojaPrasannan6",
       deletable: true
     };
   }
 
   updateDisplay = () => {
-    this.setState({last_update: Date.now()})
+    this.setState(
+      {last_update: Date.now(),
+        deletable: (this.state.user == this.state.authorized_user)
+      }
+    )
   }
   render() {
     console.log(this.state.last_update)

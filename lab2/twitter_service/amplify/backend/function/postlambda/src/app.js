@@ -32,12 +32,13 @@ app.use(function(req, res, next) {
 
 var Twitter = require('twitter-lite');
 const client = new Twitter({
-  consumer_key: '<REPLACE_THIS>',
-  consumer_secret: '<REPLACE_THIS>',
-  access_token_key: '<REPLACE_THIS>',
-  access_token_secret:'<REPLACE_THIS>'
+  consumer_key: 'xTfQCKX6vtwDgLvFXUzGNDkNo',
+  consumer_secret: '9t83NmjFcQKJz8ZiIJjQTNQa6cM9HTR0xktl5aXXeE5wXawqNw',
+  access_token_key: '1306322901788811264-zIo9mNB0YJALZjNtwqdaG4Ki1GuJ0I',
+  access_token_secret:'xqsMHwpXxpCoa0a1T6YukmWlt2QYprpKyuMRVvZjkb6bA'
 });
-var twitterhandle = '<REPLACE_THIS>'
+var twitterhandle = 'PoojaPrasannan6'
+
 
 async function postTweet(text) {
   const tweet = await client.post("statuses/update", {
@@ -60,6 +61,12 @@ async function getTimeline(twitterhandle) {
   return tweetarr;
 }
 
+async function delete_tweet(tweetid){
+  const tweetdelete = await client.post('statuses/destroy', {
+    id: tweetid,
+  });
+  return tweetdelete;
+}
 app.get('/post', function(req, res) {
   // Add your code here
 
@@ -67,10 +74,10 @@ app.get('/post', function(req, res) {
   console.log('START GETTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
   return getTimeline(twitterhandle).then(
     result => {
-      console.log('API reponse', result)
-      res.json({ success: 'get call succeed!', url: req.url, tweets: result });
+      //console.log('API reponse', result)
       date_ob = new Date();
       console.log('END GETTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+      res.json({ success: 'get call succeed!', tweets: result });
     }
   )
   .catch(error => console.log(error))
@@ -89,24 +96,42 @@ app.post('/post', function (req, res) {
   // Add your code here
   
   let date_ob = new Date();
-  console.log('POSTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
-  console.log('/post/POST', req.body);
+  console.log('START POSTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds(), req.body);
   return postTweet(req.body.text)
     .then(
       result => {
-        console.log('API reponse', result)
-        res.json({ success: 'post call succeed!', url: req.url, body: req.body.text, tweet_id: result.id_str });
+        //console.log('API reponse', result)
         date_ob = new Date();
         console.log('END POSTING tweet', date_ob.getHours(), ":", date_ob.getMinutes(), ":", date_ob.getSeconds());
+        res.json({ 
+          body: 'Success',
+          tweet_id: result.id_str 
+        });
       }
     )
-    .catch(error => console.log(error));
+    .catch(error => {
+      //console.log(error)
+      res.json({body: 'Denied'})
+    });
 });
 
-app.post('/post/*', function(req, res) {
+app.post('/post/delete_post', function(req, res) {
   // Add your code here
-  console.log('/post/*/POST', req);
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  return delete_tweet(req.body.tweet_id)
+  .then(
+    result => {
+      //console.log('API respone', result)
+      res.json({
+        body: 'Successfully deleted tweet'
+      });
+    }
+  )
+  .catch(error => {
+    console.log(error)
+    res.json({body:  'Delete failed'})
+  });
+  //console.log('/post/*/POST', req);
+  //res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 
 /****************************

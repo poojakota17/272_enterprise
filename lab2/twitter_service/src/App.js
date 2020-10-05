@@ -23,7 +23,15 @@ class TwitterCampaign extends React.Component {
   }
 
   updateAfterSend = () => {
-    this.setState({ last_update: Date.now(), user_updated: false})
+    if (this.state.user === this.state.authorized_user)
+      this.setState({ last_update: Date.now(), user_updated: false})
+    else {
+      this.setState({
+        user: this.state.authorized_user,
+        deletable: true,
+        user_updated: true
+      })
+    }
   }
 
   updateAfterUserChange = (user) => {
@@ -55,9 +63,9 @@ class TwitterCampaign extends React.Component {
         <div className="justify-content-center" id="campaign">
           <h1>Custom Twitter Page</h1>
           <p>No more sponsored tweets!</p>
-          <div class="alert alert-warning" role="alert">
+          <div className="alert alert-warning" role="alert">
             This is a students project. Be mindful in posting tweets on our behalf.<br />
-            Go to <a href={this.state.twitter_link} target="_blank" class="alert-link">Twitter</a> to check that it really works;)
+            Go to <a href={this.state.twitter_link} target="_blank" className="alert-link">Twitter</a> to check that it really works;)
           </div>
           < Row>
             <Col xs={12} md={6}><SendTweet updateDisplay={this.updateAfterSend} /></Col>

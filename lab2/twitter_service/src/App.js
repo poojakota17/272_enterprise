@@ -23,7 +23,7 @@ class TwitterCampaign extends React.Component {
   }
 
   updateAfterSend = () => {
-    if (this.state.user === this.state.authorized_user)
+    if (this.state.user.toLowerCase() === this.state.authorized_user.toLowerCase())
       this.setState({ last_update: Date.now(), user_updated: false})
     else {
       this.setState({
@@ -35,7 +35,7 @@ class TwitterCampaign extends React.Component {
   }
 
   updateAfterUserChange = (user) => {
-    var deletable = (user === this.state.authorized_user)
+    var deletable = (user.toLowerCase() === this.state.authorized_user.toLowerCase())
     this.setState({
       user: user,
       deletable: deletable,

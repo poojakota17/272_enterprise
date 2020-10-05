@@ -23,7 +23,7 @@ export default class SearchUser extends React.Component {
  }
 
   myChangeHandler = (event) => {
-   this.setState({user_name: event.target.value});
+   this.setState({user_name: event.target.value.replace(/\s+/g, '')});
  }
 
   render() {

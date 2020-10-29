@@ -1,52 +1,49 @@
+Solutions:
+* [React + Nodejs](https://nastya.d371pgyhkbridp.amplifyapp.com/)
+* [Plain HTML + Python](https://dev.d2kvd967hupabs.amplifyapp.com/)
+
 1. Apply for Tweeter API access
-2. Create account on AWS
-3. Set permissions for the group access
-4. Create git repository
-
-
-5. Web:
-5a. check if npm is installed
+2. Create an account on AWS
+3. Create git repository for Amplify to access the code
+4. Web:
+  * Check if npm is installed
 `npm -v`
-5b. create react app locally
+  * Create react app locally
 `npx create-react-app twitter_service`
-5c. deploy to AWS Amplify
+  *  Push it to git
+  *  Deploy new AWS Amplify app and connect it to the git repository from step 5c
 
-6. Create Lambda function
-  simple get_post_function looks like:
-  ```
-  exports.handler = async (event) => {
-    // TODO implement
-    let name = JSON.stringify( ["One", "Two", "Tree"]);
-    const response = {
-        statusCode: 200,
-        body: name,
-    };
-    return response;
-};
-  ```
-
-  simple post_new_post function looks like:
-  ```
-  exports.handler = async (event) => {
-    // TODO implement
-    let name = JSON.stringify(`This message brought to you by Lambda: ${event.text}`);
-    const response = {
-        statusCode: 200,
-        body: name,
-    };
-    return response;
-};
-  ```
-7. Create AWS gateway
-
-
-in .env file define urls for twitter:
+5. Backend
+  *  Create Lambda functions per each operation (post tweet/delete tweet/display tweet/search user)
+  *  Per each Lambda function add layers (if extra libraries are used)
+    Node.js Lambda functions = 'twitter', 'moment' \
+    Python Lambda functions = 'twitter', 'json'
+  * Set env.variables with api tokens/secrets for TwitterAPI
 ```
-REACT_APP_TWITTER_POST_URL=post_twitter
-REACT_APP_TWITTER_GET_URL=get_twitters
+TWITTER_ACCESS_SECRET=some_secret
+TWITTER_ACCESS_TOKEN=some_token
+...
+```
+  * Create AWS Gateway APIs endpoints for each functions
+
+6. Add Gateway endpoints in AWS Amplify console as env.variables (for updated/newly added env variables to be accessible the app should be redeployed)
+```
+REACT_APP_TWITTER_DELETE_TWEET=https://some_url.amazonaws.com/
+REACT_APP_TWITTER_GET_TWEETS=https://some_url.amazonaws.com/
+...
 ```
 
+Now you can:
+ * create Tweet on behalf of authorized_user
+ * delete authorized_user's Tweet
+ * search for Tweets of other users by providing their screen_name
 
-Source
-[Build React App on AWS](https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-one/?e=gs2020&p=build-a-react-app-intro)
-[Create Lambda function](https://aws.amazon.com/getting-started/hands-on/build-web-app-s3-lambda-api-gateway-dynamodb/module-two/)
+Sources: \
+[Build React App on AWS](https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-one/?e=gs2020&p=build-a-react-app-intro) \
+[Create Lambda function](https://aws.amazon.com/getting-started/hands-on/build-web-app-s3-lambda-api-gateway-dynamodb/module-two/) \
+[Get Twitter API keys](https://developer.twitter.com/en/docs/twitter-ads-api/getting-started) \
+[NPM for Node js](https://www.npmjs.com/)  \
+[Mocha framefork for unit tests](https://mochajs.org/) \
+[React JS](https://reactjs.org/tutorial/tutorial.html) \
+[Add Layer to Lambda](https://medium.com/appgambit/part-1-getting-started-with-aws-lambda-layers-1677a6b006) \
+[Bootstrap](https://getbootstrap.com/)

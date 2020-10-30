@@ -1,0 +1,10 @@
+{
+  "function": {
+    "memef22b93ee": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    }
+  }
+}

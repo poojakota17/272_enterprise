@@ -1,0 +1,10 @@
+{
+  "function": {
+    "meme02d0970b": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    }
+  }
+}

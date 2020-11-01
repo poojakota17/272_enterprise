@@ -1,3 +1,15 @@
+:root {
+  --main-bg-color: #EFF2F1;
+  --meme-purple: #9C7F9B;
+  --meme-yellow: #EC9B45;
+  --meme-dark: #21152B;
+  --meme-blue: #808BA6;
+  --meme-pink: #9B575F;
+}
+
+body {
+  background-color: var(--main-bg-color);
+}
 .App {
   text-align: center;
 }
@@ -28,11 +40,57 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#meme-header {
+  animation-name: text_color;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes text_color {
+  0%   {color:#9C7F9B;}
+  25%  {color:#EC9B45;}
+  50%  {color:#808BA6;}
+  75% {color:#21152B;}
+  100%  {color:#9B575F;}
+}
+
+.form-check-input {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  box-shadow: 0 0 4px 4px var(--meme-yellow);
+}
+
+.preview {
+  position: relative;
+}
+
+.preview-text-top {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.preview-text-bottom {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.preview-text-top {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.preview-pics {
+  height: 40vh;
+  weight: auto;
+}
+
+.pics {
+  height: 20vh;
+  weight: auto;
 }

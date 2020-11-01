@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-meme-dev-14927-authRole",
+      "UnauthRoleArn": "arn:aws:iam::096360437466:role/amplify-meme-dev-14927-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::096360437466:role/amplify-meme-dev-14927-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-meme-dev-14927-deployment",
+      "UnauthRoleName": "amplify-meme-dev-14927-unauthRole",
+      "StackName": "amplify-meme-dev-14927",
+      "StackId": "arn:aws:cloudformation:us-west-2:096360437466:stack/amplify-meme-dev-14927/d2dfd480-1a8c-11eb-a0e4-0a8a148431ae",
+      "AmplifyAppId": "d14x37wuqs478u"
+    }
+  }
+}

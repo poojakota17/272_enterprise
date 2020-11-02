@@ -1,5 +1,5 @@
 :root {
-  --main-bg-color: #EFF2F1;
+  --main-bg-color: #F9F7F7;
   --meme-purple: #9C7F9B;
   --meme-yellow: #EC9B45;
   --meme-dark: #21152B;
@@ -60,7 +60,7 @@ body {
 }
 
 input[type=radio]:checked + label>img {
-  box-shadow: 0 0 4px 4px var(--meme-yellow);
+  box-shadow: 0 0 1px 5px var(--meme-yellow);
 }
 
 .preview {
@@ -93,4 +93,5 @@ input[type=radio]:checked + label>img {
 .pics {
   height: 20vh;
   weight: auto;
+  box-shadow: 0 8px 6px -6px var(--meme-dark);
 }

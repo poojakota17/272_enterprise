@@ -9,7 +9,8 @@ import MemePreview from './memePreview';
 
 
 export default function MemeForm(props) {
-  const [memeData, setMemeData] = useState({position: 'top'});
+  const initialState = {position: 'bottom', color: '#F9F7F7', fontSize: '1'};
+  const [memeData, setMemeData] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef(null);
@@ -31,7 +32,7 @@ export default function MemeForm(props) {
   }
 
   const resetForm = () => {
-    setMemeData({});
+    setMemeData(initialState);
     setIsSubmitting(false);
     setFormErrors({});
     formRef.current.reset();
@@ -82,21 +83,32 @@ export default function MemeForm(props) {
       </Form.Group>
 
       <Form.Group controlId="selectControl" onChange={handleChange}>
-        <Form.Label>Example position</Form.Label>
+        <Form.Label>Choose position</Form.Label>
         <Form.Control as="select" name="position">
           <option value="top">Top</option>
           <option value="bottom">Bottom</option>
         </Form.Control>
       </Form.Group>
+      <Form.Group controlId="colorControl" className="m-0">
+        <Form.Label>Choose the color</Form.Label>
+          <Form.Control type="color" name="color" value={memeData.color} onChange={handleChange}/>
+      </Form.Group>
 
-      <Form.Group controlId="exampleForm.ControlTextarea1" className="m-0">
+      <Form.Group controlId="fontSizeControl">
+       <Form.Label>Chose Font Size</Form.Label>
+       <Form.Control type="range" min="1" max="12" name="fontSize" value={memeData.fontSize} onChange={handleChange}  custom/>
+     </Form.Group>
+
+      <Form.Group controlId="textControl" className="m-0">
+          <Form.Label>Add text</Form.Label>
           <Form.Control as="textarea" rows={1} placeholder="Add text" name="text" onChange={handleChange} />
       </Form.Group>
+
     <Button variant="secondary" type="submit">
        Submit
     </Button>
     </Form>
-    {memeData.pic ? < MemePreview pic={memeData.pic} text={memeData.text} position={memeData.position}/> : 'Select your pic'}
+    {memeData.pic ? < MemePreview {...memeData}/> : 'Select your pic'}
     </>
   );
 }

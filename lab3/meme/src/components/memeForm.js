@@ -73,7 +73,7 @@ export default function MemeForm(props) {
             <Form.Check type="radio" id={`check-api-${name}`}>
                 <Form.Check.Input type="radio" name="pic" value={name}/>
                 <Form.Check.Label>
-                  <Image src='https://memepics-201101-dev.s3-us-west-2.amazonaws.com/dog.jpeg'
+                  <Image src='https://d3pxhns8yrguf5.cloudfront.net/dog.jpeg'
   className="pics" rounded />
                 </Form.Check.Label>
             </Form.Check>

@@ -1,4 +1,10 @@
 {
+  "storage":{
+    "pics": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "function": {
     "meme02d0970b": {
       "build": true,

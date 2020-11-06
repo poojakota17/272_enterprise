@@ -3,6 +3,10 @@
     "pics": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
+    },
+    "memes": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
     }
   },
   "function": {

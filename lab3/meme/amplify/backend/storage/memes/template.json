@@ -1,0 +1,168 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "(Cloudfront-as-default-00) MemePics CloudFront distribution with an S3 origin",
+    "Parameters": {
+  		"bucketName": {
+  			"Type": "String"
+  		},
+      "env": {
+      			"Type": "String"
+      		}
+    },
+    "Resources": {
+        "S3Bucket": {
+            "DeletionPolicy": "Delete",
+            "Metadata": {
+                "Comment": "Bucket to store meme users data"
+            },
+            "Properties": {
+                "AccessControl": "Private",
+                "BucketName": {
+                  "Fn::Join": [
+                      "",
+                      [
+                          {
+                              "Ref": "bucketName"
+                          },
+                          "-",
+                          {
+                              "Ref": "env"
+                          }
+                      ]
+                  ]
+                }
+            },
+            "Type": "AWS::S3::Bucket"
+        },
+        "S3BucketPolicy": {
+            "Metadata": {
+                "Comment": "Bucket policy to allow cloudfront to access the meme users data"
+            },
+            "Properties": {
+                "Bucket": {
+                    "Ref": "S3Bucket"
+                },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "s3:GetObject"
+                            ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "CanonicalUser": {
+                                    "Fn::GetAtt": [
+                                        "CfOriginAccessIdentity",
+                                        "S3CanonicalUserId"
+                                    ]
+                                }
+                            },
+                            "Resource": [
+                                {
+                                    "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "Type": "AWS::S3::BucketPolicy"
+        },
+        "CfDistribution": {
+            "Metadata": {
+                "Comment": "MemePics CloudFront distribution with an S3 origin"
+            },
+            "Properties": {
+                "DistributionConfig": {
+                    "Comment": "MemePics CF distribution with an S3 origin",
+                    "DefaultCacheBehavior": {
+                        "AllowedMethods": [
+                            "HEAD",
+                            "GET"
+                        ],
+                        "CachedMethods": [
+                            "HEAD",
+                            "GET"
+                        ],
+                        "Compress": false,
+                        "DefaultTTL": 86400,
+                        "ForwardedValues": {
+                            "Cookies": {
+                                "Forward": "none"
+                            },
+                            "Headers": [
+                                "Origin"
+                            ],
+                            "QueryString": false
+                        },
+                        "MaxTTL": 31536000,
+                        "MinTTL": 86400,
+                        "TargetOriginId": {
+                            "Fn::Sub": "s3-origin-${S3Bucket}"
+                        },
+                        "ViewerProtocolPolicy": "redirect-to-https"
+                    },
+                    "DefaultRootObject": "index.html",
+                    "Enabled": true,
+                    "HttpVersion": "http1.1",
+                    "IPV6Enabled": false,
+                    "Origins": [
+                        {
+                            "DomainName": {
+                                "Fn::GetAtt": [
+                                    "S3Bucket",
+                                    "DomainName"
+                                ]
+                            },
+                            "Id": {
+                                "Fn::Sub": "s3-origin-${S3Bucket}"
+                            },
+                            "OriginPath": "",
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": {
+                                    "Fn::Sub": "origin-access-identity/cloudfront/${CfOriginAccessIdentity}"
+                                }
+                            }
+                        }
+                    ],
+                    "PriceClass": "PriceClass_All"
+                }
+            },
+            "Type": "AWS::CloudFront::Distribution"
+        },
+        "CfOriginAccessIdentity": {
+            "Metadata": {
+                "Comment": "Access Meme Users S3 bucket content only through CloudFront"
+            },
+            "Properties": {
+                "CloudFrontOriginAccessIdentityConfig": {
+                    "Comment": "Access Meme Users S3 bucket content only through CloudFront"
+                }
+            },
+            "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+        }
+    },
+    "Outputs": {
+        "S3BucketName": {
+            "Description": "Bucket name",
+            "Value": {
+                "Ref": "S3Bucket"
+            }
+        },
+        "CfDistributionId": {
+            "Description": "Id for our cloudfront distribution",
+            "Value": {
+                "Ref": "CfDistribution"
+            }
+        },
+        "CfDistributionDomainName": {
+            "Description": "Domain name for our cloudfront distribution",
+            "Value": {
+                "Fn::GetAtt": [
+                    "CfDistribution",
+                    "DomainName"
+                ]
+            }
+        }
+    }
+}

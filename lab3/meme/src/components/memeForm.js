@@ -85,8 +85,8 @@ export default function MemeForm(props) {
       <Form.Group controlId="selectControl" onChange={handleChange}>
         <Form.Label>Choose position</Form.Label>
         <Form.Control as="select" name="position">
-          <option value="top">Top</option>
           <option value="bottom">Bottom</option>
+          <option value="top">Top</option>
         </Form.Control>
       </Form.Group>
       <Form.Group controlId="colorControl" className="m-0">

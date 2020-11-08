@@ -30,5 +30,21 @@
       "service": "Lambda",
       "dependsOn": []
     }
+  },
+  "api": {
+    "updatememe": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "meme02d0970b",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
   }
 }

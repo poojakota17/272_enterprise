@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/newmeme",
+            "lambdaFunction": "meme02d0970b",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/newmeme"
+        }
+    ],
+    "resourceName": "updatememe",
+    "apiName": "updatememe",
+    "functionArns": [
+        {
+            "lambdaFunction": "meme02d0970b"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-meme-dev-14927-authRole",
+        "unAuthRoleName": "amplify-meme-dev-14927-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "meme02d0970b",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

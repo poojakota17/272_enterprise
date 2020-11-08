@@ -1,3 +1,15 @@
+# Doge Meme Generator
+
+### Serverless meme generator using Lambda Functions, AWS CloudFront, AWS S3,etc with React Framework. 
+
+### Architecture Diagram:
+
+### Implementation
+
+### Snippets from the WebPage:
+
+### Resources:
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

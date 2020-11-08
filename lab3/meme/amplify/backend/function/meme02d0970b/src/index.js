@@ -1,6 +1,7 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
+	STORAGE_MEMES_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 
 exports.handler = async (event) => {

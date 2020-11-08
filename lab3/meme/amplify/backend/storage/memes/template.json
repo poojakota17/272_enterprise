@@ -136,14 +136,14 @@
             },
             "Properties": {
                 "CloudFrontOriginAccessIdentityConfig": {
-                    "Comment": "Access Meme Users S3 bucket content only through CloudFront"
+                    "Comment": "Access S3 bucket content only through CloudFront"
                 }
             },
             "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity"
         }
     },
     "Outputs": {
-        "S3BucketName": {
+        "BucketName": {
             "Description": "Bucket name",
             "Value": {
                 "Ref": "S3Bucket"

@@ -9,6 +9,10 @@
     },
     "env": {
       "Type": "String"
+    },
+    "storagememesBucketName": {
+      "Type": "String",
+      "Default": "storagememesBucketName"
     }
   },
   "Conditions": {
@@ -55,6 +59,9 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "STORAGE_MEMES_BUCKETNAME": {
+              "Ref": "storagememesBucketName"
             }
           }
         },
@@ -69,7 +76,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-meme-dev-14927-deployment",
-          "S3Key": "amplify-builds/meme02d0970b-482b6349553453626261-build.zip"
+          "S3Key": "amplify-builds/meme02d0970b-67683850587442763153-build.zip"
         }
       }
     },
@@ -150,6 +157,48 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:DeleteObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagememesBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

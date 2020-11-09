@@ -47,7 +47,7 @@ async function textOverlay(x, y, text, filename) {
   });
   var data = fs.readFileSync(`/tmp/${filename}`);
   const params = {
-    Bucket: 'REPLACE_ME',
+    Bucket: process.env.STORAGE_MEMES_BUCKETNAME,
     Key: `${filename}`, // File name you want to save as in S3
     Body: data,
   };

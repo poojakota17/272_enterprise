@@ -18,8 +18,8 @@ Amplify Params - DO NOT EDIT */
 
 exports.handler = async (event) => {
     // TODO implement
-    const response = {	exports.handler = (event, context) => {
-        statusCode: 200,	  console.log(`EVENT: ${JSON.stringify(event)}`);
+    const response = {
+        statusCode: 200,	
     //  Uncomment below to enable CORS requests	  return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
       headers: {
           "Access-Control-Allow-Origin": "*"

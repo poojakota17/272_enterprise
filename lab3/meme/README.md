@@ -10,7 +10,8 @@
 ### Snippets from the WebPage:
 
 ### Resources:
- 1) https://www.npmjs.com/package/jimp
+* [npm jimp package](https://www.npmjs.com/package/jimp)
+* [AWS Lambda Function] (https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html)
 
 # Getting Started with Create React App
 

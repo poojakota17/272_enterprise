@@ -81,7 +81,7 @@ app.post('/items', upload.none(), function (req, res) {
     alignmentX = 10;
     alignmentY = 450
   }
-  else if (req.body.positionx === "left" && req.body.positiony === "middle") {
+  else if (req.body.positionx === "left" && req.body.positiony === "center") {
     alignmentX = 10;
     alignmentY = 280;
   }
@@ -97,7 +97,7 @@ app.post('/items', upload.none(), function (req, res) {
   }
 
 
-  else if (req.body.positionx === "right" && req.body.positiony === "middle") {
+  else if (req.body.positionx === "right" && req.body.positiony === "center") {
     alignmentX = 800;
     alignmentY = 280;
   }

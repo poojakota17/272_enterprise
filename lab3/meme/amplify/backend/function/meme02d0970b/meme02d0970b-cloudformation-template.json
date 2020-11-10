@@ -76,7 +76,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-meme-dev-14927-deployment",
-          "S3Key": "amplify-builds/meme02d0970b-7a475a696c3252397253-build.zip"
+          "S3Key": "amplify-builds/meme02d0970b-5a5a5344653055614d79-build.zip"
         }
       }
     },

@@ -23,7 +23,8 @@ exports.handler = async (event) => {
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
-        body: JSON.stringify(event.queryStringParameters),
+        body: JSON.stringify("hello"),
+        //event.queryStringParameters
     };
     return response;
 };

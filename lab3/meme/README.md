@@ -10,6 +10,7 @@
 ### Snippets from the WebPage:
 
 ### Resources:
+ 1) https://www.npmjs.com/package/jimp
 
 # Getting Started with Create React App
 

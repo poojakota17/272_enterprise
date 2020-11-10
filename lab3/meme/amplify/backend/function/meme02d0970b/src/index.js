@@ -1,4 +1,4 @@
-const awsServerlessExpress = require('aws-serverless-express');
+/* const awsServerlessExpress = require('aws-serverless-express');
 const app = require('./app');
 
 const server = awsServerlessExpress.createServer(app);
@@ -6,7 +6,7 @@ const server = awsServerlessExpress.createServer(app);
 exports.handler = (event, context) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
   return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
-};
+}; */
 
 
 /* Amplify Params - DO NOT EDIT	const awsServerlessExpress = require('aws-serverless-express');
@@ -15,7 +15,6 @@ exports.handler = (event, context) => {
 	STORAGE_MEMES_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 
-/*
 exports.handler = async (event) => {
     // TODO implement
     const response = {
@@ -27,4 +26,4 @@ exports.handler = async (event) => {
         body: JSON.stringify(event.queryStringParameters),
     };
     return response;
-};*/
+};

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Amplify, { API } from 'aws-amplify';
+import { API } from 'aws-amplify';
 
-import awsconfig from '../aws-exports';
 
 import bsCustomFileInput from 'bs-custom-file-input';
 import Form from 'react-bootstrap/Form';
@@ -11,9 +10,6 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import MemePreview from './memePreview';
 import MemeUrl from './memeUrl';
-
-Amplify.configure(awsconfig);
-
 
 export default function MemeForm(props) {
   const initialState = {positionx: 'left', positiony: 'bottom', color: '#F9F7F7'};

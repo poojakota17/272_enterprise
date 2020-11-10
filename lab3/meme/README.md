@@ -3,7 +3,7 @@
 ### Serverless meme generator using Lambda Functions, AWS CloudFront, AWS S3,etc with React Framework. 
 
 ### Architecture Diagram:
-<img src="arch.png" />
+<img src="arch1.png" />
 
 ### Implementation
 

@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 
 
 async function textOverlay(x, y, text, filename) {
-  const font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
+  const font = await Jimp.loadFont(Jimp.FONT_SANS_64_BLACK);
   const image = await Jimp.read(`https://d3pxhns8yrguf5.cloudfront.net/${filename}`);
   var filename = `doge${Date.now()}.jpeg`;
   await image.print(font, x, y, text);

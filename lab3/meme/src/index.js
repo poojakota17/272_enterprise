@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container fluid="sm">
+    <Container fluid="sm" id="index">
       <App />
     </ Container>
   </React.StrictMode>,

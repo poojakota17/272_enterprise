@@ -10,34 +10,9 @@
 body {
   background-color: var(--main-bg-color);
 }
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 #meme-header {
@@ -63,35 +38,89 @@ input[type=radio]:checked + label>img {
   box-shadow: 0 0 1px 5px var(--meme-yellow);
 }
 
+.preview-div {
+  text-align: center;
+}
+
 .preview {
   position: relative;
+  height: auto;
+  max-width: 40vw;
 }
 
-.preview-text-top {
+.preview-text {
   position: absolute;
-  bottom: 8px;
-  right: 16px;
+  white-space: initial;
+  font: 2rem;
 }
 
-.preview-text-bottom {
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
-}
-
-.preview-text-top {
-  position: absolute;
+.preview-text-y-top {
   top: 8px;
-  left: 16px;
+}
+
+.preview-text-y-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.preview-text-y-bottom {
+  bottom: 8px;
+}
+
+.preview-text-x-left {
+  left: 8px;
+}
+
+.preview-text-x-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.preview-text-x-right {
+  right: 8px;
 }
 
 .preview-pics {
-  height: 40vh;
-  weight: auto;
+  max-width: 100%;
 }
 
 .pics {
-  height: 20vh;
+  height: 10vh;
   weight: auto;
   box-shadow: 0 8px 6px -6px var(--meme-dark);
+}
+
+.pics-col {
+  display: inline-block;
+    align-content: flex-start;
+}
+
+.pics-row {
+  display: block;
+   overflow-x: auto;
+   white-space: nowrap;
+}
+
+.btn-submit {
+  background-color: var(--meme-pink);
+  color: var(--main-bg-color);
+}
+
+.btn-reset {
+  background-color: var(--meme-blue);
+}
+
+.meme-url {
+  padding: 5px;
+  background-color: var(--meme-yellow);
+}
+
+.meme-url > * {
+display: inline-block;
+}
+
+.meme-url > p {
+  background-color: var(--main-bg-color);
+  margin: 5px;
+  padding: 5px;
 }

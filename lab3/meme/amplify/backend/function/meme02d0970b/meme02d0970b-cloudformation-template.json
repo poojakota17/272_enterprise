@@ -13,6 +13,14 @@
     "storagememesBucketName": {
       "Type": "String",
       "Default": "storagememesBucketName"
+    },
+    "functionmemejimplayerArn": {
+      "Type": "String",
+      "Default": "functionmemejimplayerArn"
+    },
+    "functionmemeawssdklayerArn": {
+      "Type": "String",
+      "Default": "functionmemeawssdklayerArn"
     }
   },
   "Conditions": {
@@ -72,7 +80,11 @@
           ]
         },
         "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:memeawssdklayer-dev:1"
+          }
+        ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-meme-dev-14927-deployment",

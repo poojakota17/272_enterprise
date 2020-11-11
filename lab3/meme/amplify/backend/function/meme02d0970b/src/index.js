@@ -36,7 +36,7 @@ exports.handler = async (event) => {
           return image.print(font, 0,0,{text: text, alignmentX: positionx, alignmentY: positiony})
         })
         .then((image) => {
-          return uploadToS3(image, newFilename, process.env.STORAGE_MEMES_BUCKETNAME);
+          return uploadToS3(image, newFilename, process.env.STORAGE_MEMES_BUCKETNAME, image.getExtension());
         })
         .catch(err => {throw err;})
         .finally(() => {console.log("Uploaded successfully!")})
@@ -52,11 +52,12 @@ exports.handler = async (event) => {
     return response;
 };
 
-async function uploadToS3(image, filename, bucket) {
-  const result = await s3.upload({
+async function uploadToS3(image, filename, bucket, ctype) {
+  const result = await s3.putObject({
     Bucket: bucket,
     Key: filename,
     Body: image,
+    ContentType: ctype
   }).promise();
   return result;
 }

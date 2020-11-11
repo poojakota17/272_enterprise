@@ -124,3 +124,9 @@ display: inline-block;
   margin: 5px;
   padding: 5px;
 }
+
+.spinner-meme {
+  width: 3rem;
+  height: 3rem;
+  
+}

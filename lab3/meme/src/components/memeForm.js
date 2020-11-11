@@ -37,7 +37,7 @@ export default function MemeForm(props) {
   }
 
   function createMeme() {
-    setLink(<Spinner animation="border" />);
+    setLink(<Spinner animation="border" variant="meme" />);
     const apiName = 'updatememe';
     const path = '/newmeme';
     const myInit = {

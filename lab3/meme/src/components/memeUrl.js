@@ -4,7 +4,7 @@ export default function MemeUrl(props) {
   const fontStyle = {color: props.color};
   return (
       <div className="meme-url rounded">
-        <small>Image Link:</small>
+        Image Link:
         <p className="rounded">{props.link}</p>
       </div>);
 }

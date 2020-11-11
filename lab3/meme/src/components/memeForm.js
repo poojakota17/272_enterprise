@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
 import Image from 'react-bootstrap/Image';
 import MemePreview from './memePreview';
 import MemeUrl from './memeUrl';
@@ -36,6 +37,7 @@ export default function MemeForm(props) {
   }
 
   function createMeme() {
+    setLink(<Spinner animation="border" />);
     const apiName = 'updatememe';
     const path = '/newmeme';
     const myInit = {
@@ -45,7 +47,7 @@ export default function MemeForm(props) {
     API.get(apiName, path, myInit)
       .then(response => {
         console.log(response);
-        setLink("hello");
+        setLink(< MemeUrl link={response}/>);
       })
       .catch(error => {
         console.log(error.response);
@@ -152,7 +154,7 @@ export default function MemeForm(props) {
       </Form>
       </Col>
     </Row>
-    <Row className="justify-content-center m-5">{link ? < MemeUrl link={link}/> : ''}</Row>
+    <Row className="justify-content-center m-5">{link}</Row>
     </>
   );
 }

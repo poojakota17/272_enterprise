@@ -11,10 +11,10 @@ import Amplify from 'aws-amplify';
 Amplify.configure({API: {
         endpoints: [
             {
-              "name": "updatememe",
-              "endpoint": "https://6t1ks9p9o6.execute-api.us-west-2.amazonaws.com/dev",
-              "region": "us-west-2"
-              }
+              "name": process.env.REACT_APP_EPNAME,
+              "endpoint": process.env.REACT_APP_ENDPOINT,
+              "region": process.env.REACT_APP_REGION
+            }
         ]
     },});
 

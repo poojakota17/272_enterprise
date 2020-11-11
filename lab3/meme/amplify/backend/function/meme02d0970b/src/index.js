@@ -23,12 +23,15 @@ exports.handler = async (event) => {
 
       const image = await Jimp.read(`${process.env.CF_DOWNLOAD}${filename}`)
         .then((image) => {
-          return image.print(font, 0,0,{text: text, alignmentX: positionx, alignmentY: positiony})
+          console.log("read");
+          return image.print(font, 0,0,{text: text, alignmentX: positionx, alignmentY: positiony}).resize(Jimp.AUTO, 500).quality(90)
         })
         .then((image) => {
+          console.log("write")
           return image.getBufferAsync(Jimp.MIME_JPEG);
         })
         .then((image) => {
+          console.log("burrered")
           return uploadToS3(image, newFilename, process.env.STORAGE_MEMES_BUCKETNAME);
         })
         .catch((err) => {console.log(err);

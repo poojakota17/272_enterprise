@@ -60,17 +60,17 @@ async function uploadToS3(image, filename, bucket) {
 }
 
 function getPositionX (positionx) {
-  if (positionx === 'RIGHT')
+  if (positionx == 'RIGHT')
     return Jimp.HORIZONTAL_ALIGN_RIGHT;
-  else if (positionx === 'CENTER')
+  else if (positionx == 'CENTER')
     return Jimp.HORIZONTAL_ALIGN_CENTER;
   return Jimp.HORIZONTAL_ALIGN_LEFT;
 }
 
 function getPositionY (positiony) {
-  if (positiony === 'BOTTOM')
+  if (positiony == 'BOTTOM')
     return Jimp.VERTICAL_ALIGN_BOTTOM;
-  else if (positiony === 'MIDDLE')
+  else if (positiony == 'MIDDLE')
     return Jimp.VERTICAL_ALIGN_MIDDLE;
   return Jimp.VERTICAL_ALIGN_TOP;
 }

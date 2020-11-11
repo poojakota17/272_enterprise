@@ -13,7 +13,7 @@ import MemePreview from './memePreview';
 import MemeUrl from './memeUrl';
 
 export default function MemeForm(props) {
-  const initialState = {positionx: 'left', positiony: 'bottom', color: '#F9F7F7'};
+  const initialState = {positionx: 'LEFT', positiony: 'BOTTOM', color: '#F9F7F7'};
   const [memeData, setMemeData] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);

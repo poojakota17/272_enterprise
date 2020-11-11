@@ -54,29 +54,29 @@ input[type=radio]:checked + label>img {
   font: 2rem;
 }
 
-.preview-text-y-top {
+.preview-text-y-TOP {
   top: 8px;
 }
 
-.preview-text-y-center {
+.preview-text-y-MIDDLE {
   top: 50%;
   transform: translateY(-50%);
 }
 
-.preview-text-y-bottom {
+.preview-text-y-BOTTOM {
   bottom: 8px;
 }
 
-.preview-text-x-left {
+.preview-text-x-LEFT {
   left: 8px;
 }
 
-.preview-text-x-center {
+.preview-text-x-CENTER {
   left: 50%;
   transform: translateX(-50%);
 }
 
-.preview-text-x-right {
+.preview-text-x-RIGHT {
   right: 8px;
 }
 
@@ -128,5 +128,5 @@ display: inline-block;
 .spinner-meme {
   width: 3rem;
   height: 3rem;
-  
+
 }

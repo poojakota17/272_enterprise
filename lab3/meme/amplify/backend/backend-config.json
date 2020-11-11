@@ -21,6 +21,20 @@
           "attributes": [
             "BucketName"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "memejimplayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "memeawssdklayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
@@ -29,6 +43,16 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": []
+    },
+    "memejimplayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "memeawssdklayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   },
   "api": {

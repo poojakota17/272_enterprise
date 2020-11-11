@@ -106,9 +106,9 @@ export default function MemeForm(props) {
             <Form.Group controlId="selectPositionY" onChange={handleChange}>
               <Form.Label>Vertical Position:</Form.Label>
               <Form.Control as="select" name="positiony">
-                <option value="bottom">Bottom</option>
-                <option value="center">Center</option>
-                <option value="top">Top</option>
+                <option value="BOTTOM">Bottom</option>
+                <option value="MIDDLE">Center</option>
+                <option value="TOP">Top</option>
               </Form.Control>
             </Form.Group>
           </Col>
@@ -116,9 +116,9 @@ export default function MemeForm(props) {
             <Form.Group controlId="selectPositionX" onChange={handleChange}>
               <Form.Label>Horizontal Position:</Form.Label>
               <Form.Control as="select" name="positionx">
-                <option value="left">Left</option>
-                <option value="center">Center</option>
-                <option value="right">Right</option>
+                <option value="LEFT">Left</option>
+                <option value="CENTER">Center</option>
+                <option value="RIGHT">Right</option>
               </Form.Control>
             </Form.Group>
           </Col>

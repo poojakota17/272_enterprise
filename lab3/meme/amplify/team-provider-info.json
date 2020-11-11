@@ -10,6 +10,46 @@
       "StackName": "amplify-meme-dev-14927",
       "StackId": "arn:aws:cloudformation:us-west-2:096360437466:stack/amplify-meme-dev-14927/d2dfd480-1a8c-11eb-a0e4-0a8a148431ae",
       "AmplifyAppId": "d14x37wuqs478u"
+    },
+    "nonCFNdata": {
+      "function": {
+        "memejimplayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "nF78pIkWU1EKSr0CgxKKoCaTMUDHjnz0PLH3rcJqsVo="
+            }
+          }
+        },
+        "memeawssdklayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "ROE3D86qQ1p60bFWqH6RTSNpsuxkVJgu63ELe26wdzA="
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      "function": {
+        "memeawssdklayer": {
+          "deploymentBucketName": "amplify-meme-dev-14927-deployment",
+          "s3Key": "amplify-builds/memeawssdklayer-build.zip"
+        },
+        "memejimplayer": {
+          "deploymentBucketName": "amplify-meme-dev-14927-deployment",
+          "s3Key": "amplify-builds/memejimplayer-build.zip"
+        }
+      }
     }
   }
 }

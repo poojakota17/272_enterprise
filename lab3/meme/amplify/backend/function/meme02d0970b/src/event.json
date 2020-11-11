@@ -1,5 +1,155 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+    "resource": "/newmeme",
+    "path": "/newmeme",
+    "httpMethod": "GET",
+    "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9,ru;q=0.8",
+        "CloudFront-Forwarded-Proto": "https",
+        "CloudFront-Is-Desktop-Viewer": "true",
+        "CloudFront-Is-Mobile-Viewer": "false",
+        "CloudFront-Is-SmartTV-Viewer": "false",
+        "CloudFront-Is-Tablet-Viewer": "false",
+        "CloudFront-Viewer-Country": "US",
+        "Host": "6t1ks9p9o6.execute-api.us-west-2.amazonaws.com",
+        "origin": "http://localhost:3000",
+        "Referer": "http://localhost:3000/",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36",
+        "Via": "2.0 b81216940f6c7e4f7aa83ed7498779cb.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "IIqF3FLbbOtBmZVh6a5sy58qHy5q6DkEkd6WtOAYBKH9jd6yBuehpg==",
+        "X-Amzn-Trace-Id": "Root=1-5faaf1ee-62d84f1e090715be00052e21",
+        "X-Forwarded-For": "73.158.52.229, 70.132.61.134",
+        "X-Forwarded-Port": "443",
+        "X-Forwarded-Proto": "https"
+    },
+    "multiValueHeaders": {
+        "Accept": [
+            "application/json, text/plain, */*"
+        ],
+        "Accept-Encoding": [
+            "gzip, deflate, br"
+        ],
+        "Accept-Language": [
+            "en-US,en;q=0.9,ru;q=0.8"
+        ],
+        "CloudFront-Forwarded-Proto": [
+            "https"
+        ],
+        "CloudFront-Is-Desktop-Viewer": [
+            "true"
+        ],
+        "CloudFront-Is-Mobile-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-SmartTV-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-Tablet-Viewer": [
+            "false"
+        ],
+        "CloudFront-Viewer-Country": [
+            "US"
+        ],
+        "Host": [
+            "6t1ks9p9o6.execute-api.us-west-2.amazonaws.com"
+        ],
+        "origin": [
+            "http://localhost:3000"
+        ],
+        "Referer": [
+            "http://localhost:3000/"
+        ],
+        "sec-fetch-dest": [
+            "empty"
+        ],
+        "sec-fetch-mode": [
+            "cors"
+        ],
+        "sec-fetch-site": [
+            "cross-site"
+        ],
+        "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+        ],
+        "Via": [
+            "2.0 b81216940f6c7e4f7aa83ed7498779cb.cloudfront.net (CloudFront)"
+        ],
+        "X-Amz-Cf-Id": [
+            "IIqF3FLbbOtBmZVh6a5sy58qHy5q6DkEkd6WtOAYBKH9jd6yBuehpg=="
+        ],
+        "X-Amzn-Trace-Id": [
+            "Root=1-5faaf1ee-62d84f1e090715be00052e21"
+        ],
+        "X-Forwarded-For": [
+            "73.158.52.229, 70.132.61.134"
+        ],
+        "X-Forwarded-Port": [
+            "443"
+        ],
+        "X-Forwarded-Proto": [
+            "https"
+        ]
+    },
+    "queryStringParameters": {
+        "color": "#F9F7F7",
+        "pic": "dog",
+        "positionx": "RIGHT",
+        "positiony": "BOTTOM",
+        "text": "asdfasdf"
+    },
+    "multiValueQueryStringParameters": {
+        "color": [
+            "#F9F7F7"
+        ],
+        "pic": [
+            "dog"
+        ],
+        "positionx": [
+            "left"
+        ],
+        "positiony": [
+            "bottom"
+        ],
+        "text": [
+            "asdfasdf"
+        ]
+    },
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+        "resourceId": "tqtz75",
+        "resourcePath": "/newmeme",
+        "httpMethod": "GET",
+        "extendedRequestId": "Vzq9NF61vHcFgZA=",
+        "requestTime": "10/Nov/2020:20:02:54 +0000",
+        "path": "/dev/newmeme",
+        "accountId": "096360437466",
+        "protocol": "HTTP/1.1",
+        "stage": "dev",
+        "domainPrefix": "6t1ks9p9o6",
+        "requestTimeEpoch": 1605038574081,
+        "requestId": "ff11ec9f-0ec9-4aa3-8ba8-0c131ebd4845",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "73.158.52.229",
+            "principalOrgId": null,
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36",
+            "user": null
+        },
+        "domainName": "6t1ks9p9o6.execute-api.us-west-2.amazonaws.com",
+        "apiId": "6t1ks9p9o6"
+    },
+    "body": null,
+    "isBase64Encoded": false
 }

@@ -8,8 +8,8 @@ Check out the meme generator --> [doge meme generator](https://master.d14x37wuqs
 
 
 ### Snippets from the WebPage:
-<img src="memewebpp.png" />
-### Sample meme:
+<img src="memewebappp.png" />
+###  Sample meme:
 <img src="meme.png" />
 
 

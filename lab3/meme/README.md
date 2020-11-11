@@ -9,7 +9,8 @@ Check out the meme generator --> [doge meme generator](https://master.d14x37wuqs
 
 ### Snippets from the WebPage:
 <img src="memewebappp.png" />
-###  Sample meme:
+
+### Sample meme:
 <img src="meme.png" />
 
 

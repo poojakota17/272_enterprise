@@ -13,14 +13,6 @@
     "storagememesBucketName": {
       "Type": "String",
       "Default": "storagememesBucketName"
-    },
-    "functionmemejimplayerArn": {
-      "Type": "String",
-      "Default": "functionmemejimplayerArn"
-    },
-    "functionmemeawssdklayerArn": {
-      "Type": "String",
-      "Default": "functionmemeawssdklayerArn"
     }
   },
   "Conditions": {

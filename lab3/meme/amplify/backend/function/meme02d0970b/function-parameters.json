@@ -12,6 +12,11 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
+      "resourceName": "memejimplayer",
+      "version": 1
+    },
+    {
+      "type": "ProjectLayer",
       "resourceName": "memeawssdklayer",
       "version": 1
     }

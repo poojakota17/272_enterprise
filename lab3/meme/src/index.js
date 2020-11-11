@@ -5,10 +5,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Container from 'react-bootstrap/Container'
-import Amplify, { API }  from 'aws-amplify';
+import Amplify from 'aws-amplify';
 
 
-Amplify.configure(API: {
+Amplify.configure({API: {
         endpoints: [
             {
               "name": "updatememe",
@@ -16,7 +16,7 @@ Amplify.configure(API: {
               "region": "us-west-2"
               }
         ]
-    });
+    },});
 
 ReactDOM.render(
   <React.StrictMode>

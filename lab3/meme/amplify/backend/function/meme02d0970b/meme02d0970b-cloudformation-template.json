@@ -80,14 +80,7 @@
           ]
         },
         "Runtime": "nodejs12.x",
-        "Layers": [
-          {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:memejimplayer-dev:1"
-          },
-          {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:memeawssdklayer-dev:1"
-          }
-        ],
+        "Layers": [],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-meme-dev-14927-deployment",

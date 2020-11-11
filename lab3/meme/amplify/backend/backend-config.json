@@ -38,12 +38,6 @@
         }
       ]
     },
-    "memeGetFilesList": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
-    },
     "memejimplayer": {
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",

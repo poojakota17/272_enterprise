@@ -1,13 +1,18 @@
 # Doge Meme Generator
 
 ### Serverless meme generator using Lambda Functions, AWS CloudFront, AWS S3,etc with React Framework. 
+Check out the meme generator --> [doge meme generator](https://master.d14x37wuqs478u.amplifyapp.com/)
 
 ### Architecture Diagram:
-<img src="arch1.png" />
+<img src="memearch.png" />
 
-### Implementation
 
 ### Snippets from the WebPage:
+<img src="memewebappp.png" />
+
+### Sample meme:
+<img src="meme.png" />
+
 
 ### Resources:
 * [npm jimp package](https://www.npmjs.com/package/jimp)

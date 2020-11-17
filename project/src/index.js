@@ -1,12 +1,22 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {Routes} from './routes';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Amplify from 'aws-amplify';
+import { ProvideAuth } from "./corp-auth.js";
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+    <ProvideAuth>
+      <Routes />
+      </ProvideAuth>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

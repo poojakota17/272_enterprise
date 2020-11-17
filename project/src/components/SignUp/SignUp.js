@@ -19,6 +19,7 @@ const SignUp = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   let { from } = location.state || { from: { pathname: "/" } };
+  console.log(from)
 
   async function signUp() {
       await auth.signup(formValues.email, formValues.password, returnToMain, setFormErrors);
@@ -105,7 +106,7 @@ const SignUp = (props) => {
 
   <div className="submit-button">
     <Button variant="green" type="submit" className="mt-1">
-        Sign In
+        Sign Up
     </Button>
   </div>
 </Form>

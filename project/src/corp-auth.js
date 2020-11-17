@@ -31,6 +31,7 @@ export function ProvideAuth({ children }) {
     const signup = (email, password, toMain, setError) => {
       Auth.signUp(email, password).then(user => {
         setUser(user);
+        console.log(user);
         toMain();
         return user;
       }).catch((err) => {

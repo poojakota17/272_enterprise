@@ -106,7 +106,7 @@ const SignUp = (props) => {
 
   <div className="submit-button">
     <Button variant="green" type="submit" className="mt-1">
-        Sign Up
+        SignUp
     </Button>
   </div>
 </Form>

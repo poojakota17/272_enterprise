@@ -7,7 +7,22 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 import { ProvideAuth } from "./corp-auth.js";
-import awsconfig from './aws-exports';
+//import awsconfig from './aws-exports';
+
+let awsconfig = {
+    Auth: {
+        identityPoolId: process.env.REACT_APP_COGNITO_ID_POOL,
+        // REQUIRED - Amazon Cognito Region
+        region:  process.env.REACT_APP_COGNITO_REGION,
+        // OPTIONAL - Amazon Cognito User Pool ID
+        userPoolId:  process.env.REACT_APP_COGNITO_USER_POOL_ID,
+        // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+        userPoolWebClientId:  process.env.REACT_APP_COGNITO_WEB_CLIENT,
+
+      }
+}
+
+
 Amplify.configure(awsconfig);
 
 ReactDOM.render(

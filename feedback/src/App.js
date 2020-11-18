@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from "react";
+import { Guest } from './views/Guest';
+import { UserPage } from './views/UserPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    (async function() {
+      try {
+        /* Update effect logic to track correct state */
+        //const isUserLogged = await auth.checkAuth()
+        setUser(null);
+      }
+      catch {
+        setUser(null);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return user ? (<UserPage />) : (< Guest />);
 }
 
 export default App;

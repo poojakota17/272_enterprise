@@ -52,6 +52,12 @@
           ]
         }
       ]
+    },
+    "retrieveinfo": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
     }
   },
   "api": {
@@ -72,6 +78,20 @@
           "attributes": [
             "Arn",
             "Name"
+          ]
+        }
+      ]
+    },
+    "orgchartinfo": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "retrieveinfo",
+          "attributes": [
+            "Name",
+            "Arn"
           ]
         }
       ]

@@ -73,7 +73,7 @@ export const PrivateRoute = (props) => {
    }, []);
 
  if(state === 'loading') {
-   return <div>Loading..</div>
+   return <div className="loading-screen"></div>
  }
 
  return (

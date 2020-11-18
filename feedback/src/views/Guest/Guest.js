@@ -4,7 +4,12 @@ import './Guest.css';
 const Guest = props => {
 
   return (
-    <div>Hello Guest</div>
+    <div>
+      <h1>
+        Welcome to Feedback Portal
+      </h1>
+      <p>Pls select the name of recipent and send the feedback</p>
+    </div>
   );
 }
 

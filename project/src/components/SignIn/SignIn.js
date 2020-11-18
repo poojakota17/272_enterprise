@@ -25,6 +25,10 @@ const SignIn = (props) => {
       await auth.login(formValues.email, formValues.password, returnToMain, setFormErrors);
   };
 
+  async function federatedSignIn() {
+    await auth.federated();
+  }
+
   let returnToMain = () => {
     history.replace(from);
   }
@@ -56,7 +60,7 @@ const SignIn = (props) => {
   };
 
   return (<>
-    <Button variant="green" onClick={signIn} className="mt-1">
+    <Button variant="green" onClick={federatedSignIn} className="mt-1">
         okta
     </Button>
     <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>

@@ -55,7 +55,10 @@ const SignIn = (props) => {
     setIsSubmitting(true);
   };
 
-  return (
+  return (<>
+    <Button variant="green" onClick={signIn} className="mt-1">
+        okta
+    </Button>
     <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>
   <Form.Group controlId="formBasicEmail">
     <Form.Label><small>Email*</small></Form.Label>
@@ -89,7 +92,7 @@ const SignIn = (props) => {
     </Button>
   </div>
 </Form>
-  );
+  </>);
 };
 
 export default SignIn;

@@ -120,7 +120,7 @@ app.get('/items', function (req, res) {
                         result8 = JSON.parse(JSON.stringify(result8));
                       result1[0]["Assistant Managers"] = [];
                       for (x in result8) {
-                        console.log(x);
+                        //console.log(x);
                         result1[0]["Assistant Managers"].push(result8[x].first_name + ", " + result8[x].last_name);
                       }
 

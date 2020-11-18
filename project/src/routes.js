@@ -17,7 +17,6 @@ export const Routes = () =>  {
   return (
       <Router >
         <Container fluid className="p-0">
-          <AuthButton />
           <Switch>
             <Route path="/About" component = {About} exact/>
 
@@ -33,7 +32,7 @@ export const Routes = () =>  {
       </Router>
   );
 }
-
+/*
 function AuthButton() {
   let history = useHistory();
   let auth = useAuth();
@@ -52,7 +51,7 @@ function AuthButton() {
     <p>You are not logged in.</p>
   );
 }
-
+*/
 
 
 export const PrivateRoute = (props) => {

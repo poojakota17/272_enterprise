@@ -2,35 +2,26 @@ import React, {  useRef, useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useAuth } from "../../corp-auth.js";
-import {
-  useHistory,
-  useLocation
-} from "react-router-dom";
 
 
 const SignUp = (props) => {
   const formRef = useRef(null);
-  let history = useHistory();
-  let location = useLocation();
   let auth = useAuth();
 
   const [formValues, setFormValues] = useState({email: '', password: ''});
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  let { from } = location.state || { from: { pathname: "/" } };
-  console.log(from)
+  const [message, setMessage] = useState('');
 
   async function signUp() {
       await auth.signup(formValues.email, formValues.password, returnToMain, setFormErrors);
   };
 
   let returnToMain = () => {
-    history.replace(from);
+    setMessage("Success! You can Sign In now")
   }
 
   useEffect(() => {
-    console.log(formErrors)
     if (Object.keys(formErrors).length === 0 && isSubmitting)
         signUp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,10 +94,10 @@ const SignUp = (props) => {
         {formErrors.confirm}
       </Form.Control.Feedback>
   </Form.Group>
-
+  <div className="success-message">{message}</div>
   <div className="submit-button">
     <Button variant="green" type="submit" className="mt-1">
-        SignUp
+        Sign Up
     </Button>
   </div>
 </Form>

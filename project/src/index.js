@@ -38,10 +38,10 @@ let awsconfig = {
       }
 }
 
-if (isLocalhost) {
-  //awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
+//if (isLocalhost) {
+//  awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
 //  awsconfig.Auth.oauth.redirectSignOut = 'http://localhost:3000/';
-}
+//}
 
 https://master.d2t0leoqneuoqr.amplifyapp.com/?error_description=unauthorized_client&state=aEz9MNi5tWFqHMmdoD2ZbjlurhiYsnBC&error=invalid_request
 console.log(awsconfig)

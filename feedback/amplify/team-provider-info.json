@@ -10,6 +10,23 @@
       "StackName": "amplify-feedback-dev-181041",
       "StackId": "arn:aws:cloudformation:us-east-1:328229711407:stack/amplify-feedback-dev-181041/4414e5e0-2943-11eb-be34-1201663355d3",
       "AmplifyAppId": "d2q6atm0r278z3"
+    },
+    "categories": {
+      "auth": {
+        "feedbackf86be0cd": {
+          "userPoolId": "us-east-1_uOxhHwsNK",
+          "userPoolName": "techcorp505256cc_userpool_505256cc-dev",
+          "webClientId": "7r1tst69plm9qr9tpn556mchm",
+          "nativeClientId": "36ftvvgkfaf3sutlfffrj7psdr",
+          "identityPoolId": "us-east-1:504e826a-2600-4c27-8192-0252f6a89474",
+          "identityPoolName": "techcorp505256cc_identitypool_505256cc__dev",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-authRole",
+          "authRoleName": "amplify-techcorp-dev-233612-authRole",
+          "unauthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-unauthRole",
+          "unauthRoleName": "amplify-techcorp-dev-233612-unauthRole"
+        }
+      }
     }
   }
 }

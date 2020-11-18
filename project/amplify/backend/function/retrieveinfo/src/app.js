@@ -44,13 +44,15 @@ app.get('/items', function (req, res) {
       console.log(err)
     else
       console.log("successfull connection");
-    let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no=111939;`
-    let query2 = `Select first_name,last_name, hire_date from employees where emp_no =111939;`
-    let query3 = `select   salaries.salary  from salaries  inner join employees on employees.emp_no=salaries.emp_no where employees.email= 'Yuchang.Weedman@techcorp.com' order by to_date desc limit 1;`
-    let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.email= 'Yuchang.Weedman@techcorp.com' order by to_date desc limit 1 ; `
-    let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp inner join employees on employees.emp_no=current_dept_emp.emp_no where employees.email= 'Yuchang.Weedman@techcorp.com';`
-    let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no in ( Select emp_no from employees where email='Duangkaew.Piveteau@techcorp.com')));`
-    let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles  inner join employees on employees.emp_no=titles.emp_no where employees.email= 'Yuchang.Weedman@techcorp.com';`
+    var email = "Duangkaew.Piveteau@techcorp.com"//req.body.email;
+    let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no inner join employees on  current_dept_emp.emp_no= employees.emp_no where employees.email= '${email}';`
+    let query2 = `Select first_name,last_name, hire_date from employees where email ='${email}';`
+    let query3 = `select   salaries.salary  from salaries  inner join employees on employees.emp_no=salaries.emp_no where employees.email= '${email}' order by to_date desc limit 1;`
+    let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.email= '${email}' order by to_date desc limit 1 ; `
+    let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp inner join employees on employees.emp_no=current_dept_emp.emp_no where employees.email= '${email}';`
+    let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no in ( Select emp_no from employees where email='${email}')));`
+    let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles  inner join employees on employees.emp_no=titles.emp_no where employees.email= '${email}';`
+    let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no in ( Select emp_no from employees where email='Duangkaew.Piveteau@techcorp.com'))));`
     con.query(query1, function (err, result1) {
       if (err)
         console.log(err)
@@ -111,13 +113,23 @@ app.get('/items', function (req, res) {
                       console.log(x);
                       result1[0]["Managers"].push(result6[x].manager_firstname + ", " + result6[x].manager_lastname);
                     }
+                    con.query(query8, function (err, result8) {
+                      if (err)
+                        console.log(err)
+                      else
+                        result8 = JSON.parse(JSON.stringify(result8));
+                      result1[0]["Assistant Managers"] = [];
+                      for (x in result8) {
+                        console.log(x);
+                        result1[0]["Assistant Managers"].push(result8[x].first_name + ", " + result8[x].last_name);
+                      }
 
-                    res.json({ success: 'get call succeed!', url: req.url, body: result1 });
+                      res.json({ success: 'get call succeed!', url: req.url, body: result1 });
+                    })
                   })
                 })
               })
             })
-
           })
         })
 

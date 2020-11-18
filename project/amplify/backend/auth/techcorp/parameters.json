@@ -1,6 +1,6 @@
 {
     "identityPoolName": "techcorp505256cc_identitypool_505256cc",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "techco505256cc",
     "userPoolName": "techcorp505256cc_userpool_505256cc",
     "autoVerifiedAttributes": [

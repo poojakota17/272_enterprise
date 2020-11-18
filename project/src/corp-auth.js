@@ -15,7 +15,8 @@ export function ProvideAuth({ children }) {
   }, []);
 
     const login = (email, password, toMain, setError) => {
-      Auth.signIn(email, password).then(user => {
+      Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result))
+      /*Auth.signIn(email, password).then(user => {
         setUser(user);
         toMain();
         return user;
@@ -25,7 +26,7 @@ export function ProvideAuth({ children }) {
           }
         setError({password: err.message})
         return  err;
-      })
+      })*/
     };
 
     const signup = (email, password, toMain, setError) => {

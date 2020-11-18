@@ -7,6 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 import { ProvideAuth } from "./corp-auth.js";
+const isLocalhost = Boolean(
+  window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
+);
 //import awsconfig from './aws-exports';
 
 let awsconfig = {
@@ -18,10 +27,24 @@ let awsconfig = {
         userPoolId:  process.env.REACT_APP_COGNITO_USER_POOL_ID,
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
         userPoolWebClientId:  process.env.REACT_APP_COGNITO_WEB_CLIENT,
+        oauth: {
+            domain: 'techcorp.auth.us-east-1.amazoncognito.com',
+            scope: ['email', 'openid'],
+            redirectSignIn: 'https://master.d2t0leoqneuoqr.amplifyapp.com/',
+            redirectSignOut: 'https://master.d2t0leoqneuoqr.amplifyapp.com/',
+            responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+        }
 
       }
 }
 
+if (isLocalhost) {
+  //awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
+//  awsconfig.Auth.oauth.redirectSignOut = 'http://localhost:3000/';
+}
+
+https://master.d2t0leoqneuoqr.amplifyapp.com/?error_description=unauthorized_client&state=aEz9MNi5tWFqHMmdoD2ZbjlurhiYsnBC&error=invalid_request
+console.log(awsconfig)
 
 Amplify.configure(awsconfig);
 

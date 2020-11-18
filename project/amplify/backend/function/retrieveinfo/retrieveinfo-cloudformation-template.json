@@ -1,13 +1,14 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Description": "Lambda Function resource stack creation using Amplify CLI",
   "Parameters": {
+    "CloudWatchRule": {
+      "Type": "String",
+      "Default": "NONE",
+      "Description": " Schedule Expression"
+    },
     "env": {
       "Type": "String"
-    },
-    "authtechcorpUserPoolId": {
-      "Type": "String",
-      "Default": "authtechcorpUserPoolId"
     }
   },
   "Conditions": {
@@ -32,12 +33,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries492f601f",
+            "retrieveinfo",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries492f601f",
+                  "retrieveinfo",
                   "-",
                   {
                     "Ref": "env"
@@ -52,9 +53,8 @@
             "ENV": {
               "Ref": "env"
             },
-            "GROUP": "Admin",
-            "USERPOOL": {
-              "Ref": "authtechcorpUserPoolId"
+            "REGION": {
+              "Ref": "AWS::Region"
             }
           }
         },
@@ -64,11 +64,12 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
+        "Layers": [],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-techcorp-dev-233612-deployment",
-          "S3Key": "amplify-builds/AdminQueries492f601f-7630725979644b4c4374-build.zip"
+          "S3Key": "amplify-builds/retrieveinfo-3563506b47534e343931-build.zip"
         }
       }
     },
@@ -78,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries492f601fLambdaRole",
+            "techcorpLambdaRoledc33bcd8",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries492f601fLambdaRole",
+                  "techcorpLambdaRoledc33bcd8",
                   "-",
                   {
                     "Ref": "env"
@@ -147,41 +148,6 @@
                       "Ref": "LambdaFunction"
                     }
                   }
-                ]
-              }
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "cognito-idp:ListUsersInGroup",
-                "cognito-idp:AdminUserGlobalSignOut",
-                "cognito-idp:AdminEnableUser",
-                "cognito-idp:AdminDisableUser",
-                "cognito-idp:AdminRemoveUserFromGroup",
-                "cognito-idp:AdminAddUserToGroup",
-                "cognito-idp:AdminListGroupsForUser",
-                "cognito-idp:AdminGetUser",
-                "cognito-idp:AdminConfirmSignUp",
-                "cognito-idp:ListUsers",
-                "cognito-idp:ListGroups"
-              ],
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:cognito-idp:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":userpool/",
-                    {
-                      "Ref": "authtechcorpUserPoolId"
-                    }
-                  ]
                 ]
               }
             }

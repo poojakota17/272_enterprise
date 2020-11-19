@@ -16,9 +16,9 @@ function App() {
 
 
   useEffect(() => {
-    (async function() {
+  (async function() {
       try {
-        const user = await Auth.currentAuthenticatedUser();
+        const user = await Auth.signIn('m.jack@techcorp.com', 'Abcd@123');
         setUser(user);
       }
       catch {
@@ -27,7 +27,7 @@ function App() {
 
     }
     
-    )();
+    )(); 
     fetchFeedbacks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

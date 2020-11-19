@@ -28,23 +28,20 @@ let awsconfig = {
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
         userPoolWebClientId:  process.env.REACT_APP_COGNITO_WEB_CLIENT,
         oauth: {
-            domain: 'techcorp.auth.us-east-1.amazoncognito.com',
+            domain: process.env.REACT_APP_COGNITO_DOMAIN,
             scope: ['email', 'openid'],
-            redirectSignIn: 'https://master.d2t0leoqneuoqr.amplifyapp.com/',
-            redirectSignOut: 'https://master.d2t0leoqneuoqr.amplifyapp.com/',
-            responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+            redirectSignIn: process.env.REACT_APP_COGNITO_REDIRECT,
+            redirectSignOut: process.env.REACT_APP_COGNITO_REDIRECT,
+            responseType: process.env.REACT_APP_COGNITO_RESPONSE
         }
 
       }
 }
 
-//if (isLocalhost) {
-//  awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
-//  awsconfig.Auth.oauth.redirectSignOut = 'http://localhost:3000/';
-//}
-
-https://master.d2t0leoqneuoqr.amplifyapp.com/?error_description=unauthorized_client&state=aEz9MNi5tWFqHMmdoD2ZbjlurhiYsnBC&error=invalid_request
-console.log(awsconfig)
+if (isLocalhost) {
+  awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
+  awsconfig.Auth.oauth.redirectSignOut = 'http://localhost:3000/';
+}
 
 Amplify.configure(awsconfig);
 

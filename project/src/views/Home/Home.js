@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import { useAuth } from "../../corp-auth.js";
 import { NavBar } from '../../components/NavBar';
+import Button from 'react-bootstrap/Button'
 
 const Home = props => {
     let history = useHistory();
@@ -13,6 +14,7 @@ const Home = props => {
     <div>
               < NavBar />
     <p>
+    
       Welcome!{" "}
       <button
         onClick={() => {

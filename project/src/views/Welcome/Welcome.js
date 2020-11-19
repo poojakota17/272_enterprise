@@ -8,6 +8,7 @@ import Logo from '../../logo_transparent.png';
 
 import { SignIn } from '../../components/SignIn';
 import { SignUp } from '../../components/SignUp';
+import { FederatedAuth } from '../../components/FederatedAuth';
 const Welcome = props => {
 
   return (
@@ -22,6 +23,9 @@ const Welcome = props => {
         </Tab>
         <Tab eventKey="signup" title="Sign Up">
           <SignUp/>
+        </Tab>
+        <Tab eventKey="federated" title="Federated">
+          <FederatedAuth/>
         </Tab>
       </Tabs>
     </Col>

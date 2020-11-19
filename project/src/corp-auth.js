@@ -15,7 +15,7 @@ export function ProvideAuth({ children }) {
   }, []);
 
   const federated = () => {
-    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result))
+    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result)).catch((err) => console.log(err))
   }
 
     const login = (email, password, toMain, setError) => {
@@ -56,7 +56,7 @@ export function ProvideAuth({ children }) {
         return Auth.currentAuthenticatedUser()
       }
 
-const values=useMemo(() => ({user, login, logout, signup, checkAuth}), [user]);
+const values=useMemo(() => ({user, login, logout, signup, checkAuth, federated}), [user]);
 
 
   return (
@@ -79,57 +79,3 @@ export const useUser = () => {
   }
   return context;
 };
-/*
-export function ProvideAuth({ children }) {
-
-
-  const auth = useProvideAuth();
-  return (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  );
-}
-
-export const useAuth = () =>  {
-  return useContext(authContext);
-}
-
-function useProvideAuth() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-
-    // attempt to fetch the info of the user that was already logged in
-    Auth.currentAuthenticatedUser()
-      .then(user => setUser(user))
-      .catch(() => setUser(null));
-  }, []);
-
-  const login = (email, password, toMain, setError) => {
-    Auth.signIn(email, password).then(user => {
-      setUser(user);
-      toMain();
-      return user;
-    }).catch((err) => {
-      if (err.code === 'UserNotFoundException') {
-          err.message = 'Invalid username or password';
-        }
-      setError({password: err.message})
-      return  err;
-    })
-  };
-
-  const logout = cb =>
-  Auth.signOut().then(data => {
-    setUser(null);
-    cb()
-    return data;
-  });
-
-  return {
-    user,
-    login,
-    logout
-  };
-}*/

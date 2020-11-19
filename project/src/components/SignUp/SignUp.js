@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useAuth } from "../../corp-auth.js";
 
-
 const SignUp = (props) => {
   const formRef = useRef(null);
   let auth = useAuth();

@@ -3,112 +3,49 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { Guest } from './views/Guest';
 import { UserPage } from './views/UserPage';
-import { Auth } from 'aws-amplify';
-
-import { API } from 'aws-amplify';
-import { listFeedbacks } from './graphql/queries';
-import { createFeedback as createFeedbackMutation, deleteFeedback as deleteFeedbackMutation } from './graphql/mutations';
+import Amplify, { Auth, Hub } from 'aws-amplify';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [formData, setFormData] = useState({});
-  
 
-
-  useEffect(() => {
-  (async function() {
-      try {
-        const user = await Auth.signIn('m.jack@techcorp.com', 'Abcd@123');
-        setUser(user);
-        console.log("user ", user.attributes.email)
+/*  useEffect(() => {
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          setUser({ user: data });
+          break;
+        case "signOut":
+          setUser({ user: null });
+          break;
+        case "customOAuthState":
+          setUser({ customState: data });
       }
-      catch {
-        setUser(null);
-      }
-
-    }
-
-    )();
-    fetchFeedbacks();
+    });
+    Auth.currentAuthenticatedUser()
+      .then(user => setUser({ user }))
+      .catch(() => console.log("Not signed in"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  async function fetchFeedbacks() {
-    const apiData = await API.graphql({ query: listFeedbacks });
-    console.log("items are: ", apiData)
-    setFeedbacks(apiData.data.listFeedbacks.items);
+
+*/
+
+useEffect(() => {
+  let updateUser = async authState => {
+    try {
+      let user = await Auth.currentAuthenticatedUser()
+      console.log("user", user)
+      setUser(user)
+    } catch {
+      setUser(null)
+    }
   }
-  async function createFeedback() {
-    if (!formData.recipient || !formData.feedback) return;
-    await API.graphql({ query: createFeedbackMutation, variables: { input: formData } });
-    setFeedbacks([ ...feedbacks, formData ]);
-    setFormData({});
-    fetchFeedbacks()
-  }
+  Hub.listen('auth', updateUser) // listen for login/signup events
+  updateUser() // check manually the first time because we won't get a Hub event
+  return () => Hub.remove('auth', updateUser) // cleanup
+}, []);
 
-  async function deleteFeedback({ id }) {
-    const newFeedbackArray = feedbacks.filter(feedback => feedback.id !== id);
-    setFeedbacks(newFeedbackArray);
-    await API.graphql({ query: deleteFeedbackMutation, variables: { input: { id } }});
-  }
-
-  return (
-    <div>
-      <h1>Welcome to feedback portal</h1>
-      <div>
-        
-        <br></br>
-      <input 
-        onChange={e => setFormData({ ...formData, 'recipient': e.target.value, 'sender':"m.jack@techcorp.com"})}
-        placeholder="recipent email"
-      />
-    
-      
-      <input
-        onChange={e => setFormData({ ...formData, 'feedback': e.target.value})}
-
-        placeholder="Write Feedback"
-      />
-      <button onClick={createFeedback}>OK</button> <div style={{marginBottom: 30}}>
-        <br/>
-
-      <h>Sent Items</h>
-        {
-          feedbacks.map(feedback => (
-            <div key={feedback.id || feedback.feedback}>
-              <p>{feedback.recipient}</p>
-              <p>{feedback.feedback}</p>
-              <button onClick={() => deleteFeedback(feedback)}>Delete Feedback</button>
-            </div>
-          ))
-        }
-        <h1>Inbox</h1>
-      </div>
-      </div>
-    </div>
-  );
+  return user ? (<UserPage />) : (<Guest />);
 }
 
 export default App;
-/*
-<input
-        onChange={e => setFormData({ ...formData, 'feedback': e.target.value})}
-        placeholder="Please write the feedback"
-        value={formData.feedback}
-      />
-      <button onClick={createFeedback}>Submit</button>
-      */
-//
-//
-/*
-<select>
-<option value="1" onChange={this.change}>
-  Anonymous
-</option>
-<option value="2" onChange={this.change}>
-  Show your name 
-</option>
-
-</select>
-<p value={this.change}></p>
-*/

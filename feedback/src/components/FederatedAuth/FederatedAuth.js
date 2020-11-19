@@ -10,7 +10,7 @@ const FederatedAuth = (props) => {
   }
 
   async function cognitoSignIn() {
-    await Auth.signIn('m.jack@techcorp.com', 'Abcd@123')
+    await Auth.currentAuthenticatedUser()
   }
 
   return (

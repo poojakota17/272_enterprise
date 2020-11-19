@@ -8,7 +8,7 @@ import Amplify, { Auth, Hub } from 'aws-amplify';
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
+/*  useEffect(() => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
       switch (event) {
         case 'signIn':
@@ -27,6 +27,22 @@ function App() {
       .catch(() => console.log("Not signed in"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+*/
+
+useEffect(() => {
+  let updateUser = async authState => {
+    try {
+      let user = await Auth.currentAuthenticatedUser()
+      setUser(user)
+    } catch {
+      setUser(null)
+    }
+  }
+  Hub.listen('auth', updateUser) // listen for login/signup events
+  updateUser() // check manually the first time because we won't get a Hub event
+  return () => Hub.remove('auth', updateUser) // cleanup
+}, []);
 
   return user ? (<UserPage />) : (<Guest />);
 }

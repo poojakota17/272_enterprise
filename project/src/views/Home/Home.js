@@ -14,7 +14,7 @@ const Home = props => {
     <div>
               < NavBar />
     <p>
-    
+    j
       Welcome!{" "}
       <button
         onClick={() => {

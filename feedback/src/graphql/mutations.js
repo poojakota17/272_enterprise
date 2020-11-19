@@ -13,6 +13,7 @@ export const createFeedback = /* GraphQL */ `
       feedback
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -28,6 +29,7 @@ export const updateFeedback = /* GraphQL */ `
       feedback
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -43,6 +45,7 @@ export const deleteFeedback = /* GraphQL */ `
       feedback
       createdAt
       updatedAt
+      owner
     }
   }
 `;

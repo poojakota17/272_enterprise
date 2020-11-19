@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [feedbacks, setFeedbacks] = useState([]);
   const [formData, setFormData] = useState({});
+  
 
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
       try {
         const user = await Auth.signIn('m.jack@techcorp.com', 'Abcd@123');
         setUser(user);
+        console.log("user ", user.attributes.email)
       }
       catch {
         setUser(null);
@@ -41,6 +43,7 @@ function App() {
     await API.graphql({ query: createFeedbackMutation, variables: { input: formData } });
     setFeedbacks([ ...feedbacks, formData ]);
     setFormData({});
+    fetchFeedbacks()
   }
 
   async function deleteFeedback({ id }) {
@@ -52,35 +55,36 @@ function App() {
   return (
     <div>
       <h1>Welcome to feedback portal</h1>
-      
-      <input
-        onChange={e => setFormData({ ...formData, 'recipient': e.target.value})}
+      <div>
+        
+        <br></br>
+      <input 
+        onChange={e => setFormData({ ...formData, 'recipient': e.target.value, 'sender':"m.jack@techcorp.com"})}
         placeholder="recipent email"
       />
-      <select>
-        <option>
-          Anonymous
-        </option>
-        <option>
-  Show your name {}
-        </option>
-      </select>
+    
+      
       <input
         onChange={e => setFormData({ ...formData, 'feedback': e.target.value})}
+
         placeholder="Write Feedback"
       />
       <button onClick={createFeedback}>OK</button> <div style={{marginBottom: 30}}>
+        <br/>
+
+      <h>Sent Items</h>
         {
           feedbacks.map(feedback => (
             <div key={feedback.id || feedback.feedback}>
-              <h2>{feedback.recipient}</h2>
+              <p>{feedback.recipient}</p>
               <p>{feedback.feedback}</p>
               <button onClick={() => deleteFeedback(feedback)}>Delete Feedback</button>
             </div>
           ))
         }
+        <h1>Inbox</h1>
       </div>
-
+      </div>
     </div>
   );
 }
@@ -94,3 +98,17 @@ export default App;
       />
       <button onClick={createFeedback}>Submit</button>
       */
+//
+//
+/*
+<select>
+<option value="1" onChange={this.change}>
+  Anonymous
+</option>
+<option value="2" onChange={this.change}>
+  Show your name 
+</option>
+
+</select>
+<p value={this.change}></p>
+*/

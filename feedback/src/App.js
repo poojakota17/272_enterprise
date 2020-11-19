@@ -8,11 +8,11 @@ import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import { listFeedbacks } from './graphql/queries';
 import { createFeedback as createFeedbackMutation, deleteFeedback as deleteFeedbackMutation } from './graphql/mutations';
-const initialFormState = { recipient: '', feedback: '' }
+
 function App() {
   const [user, setUser] = useState(null);
   const [feedbacks, setFeedbacks] = useState([]);
-  const [formData, setFormData] = useState(initialFormState);
+  const [formData, setFormData] = useState({});
 
 
   useEffect(() => {
@@ -26,8 +26,8 @@ function App() {
       }
 
     }
-    
-    )(); 
+
+    )();
     fetchFeedbacks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -36,12 +36,12 @@ function App() {
     setFeedbacks(apiData.data.listFeedbacks.items);
   }
   async function createFeedback() {
-    if (!formData.recipent || !formData.feedback) return;
+    if (!formData.recipient || !formData.feedback) return;
     await API.graphql({ query: createFeedbackMutation, variables: { input: formData } });
     setFeedbacks([ ...feedbacks, formData ]);
-    setFormData(initialFormState);
+    setFormData({});
   }
-       
+
   async function deleteFeedback({ id }) {
     const newFeedbackArray = feedbacks.filter(feedback => feedback.id !== id);
     setFeedbacks(newFeedbackArray);
@@ -51,20 +51,18 @@ function App() {
   return (
     <div>Hello User
       <input
-        onChange={e => setFormData({ ...formData, 'recipent': e.target.value})}
+        onChange={e => setFormData({ ...formData, 'recipient': e.target.value})}
         placeholder="recipent email"
-        value={formData.recipient}
       />
       <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+        onChange={e => setFormData({ ...formData, 'feedback': e.target.value})}
         placeholder="Write Feedback"
-        value={formData.feedback}
       />
       <button onClick={createFeedback}>OK</button> <div style={{marginBottom: 30}}>
         {
           feedbacks.map(feedback => (
             <div key={feedback.id || feedback.feedback}>
-              <h2>{feedback.recipent}</h2>
+              <h2>{feedback.recipient}</h2>
               <p>{feedback.feedback}</p>
               <button onClick={() => deleteFeedback(feedback)}>Delete Feedback</button>
             </div>

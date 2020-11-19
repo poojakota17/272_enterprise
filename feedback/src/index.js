@@ -4,6 +4,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Amplify from 'aws-amplify';
+
+let awsconfig = {
+    Auth: {
+        identityPoolId: process.env.REACT_APP_COGNITO_ID_POOL,
+        region:  process.env.REACT_APP_COGNITO_REGION,
+        userPoolId:  process.env.REACT_APP_COGNITO_USER_POOL_ID,
+        userPoolWebClientId:  process.env.REACT_APP_COGNITO_WEB_CLIENT,
+      },
+      aws_appsync_graphqlEndpoint:  process.env.REACT_APP_APPSYNC_GQL_ENDPOINT,
+      aws_appsync_region: process.env.REACT_APP_APPSYNC_REGION,
+      aws_appsync_authenticationType: process.env.REACT_APP_APPSYNC_AUTHTYPE
+}
+
+
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
   <React.StrictMode>

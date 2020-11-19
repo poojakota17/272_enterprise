@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { Guest } from './views/Guest';
 import { UserPage } from './views/UserPage';
+import { Auth } from 'aws-amplify';
 
 import { API } from 'aws-amplify';
 import { listFeedbacks } from './graphql/queries';
@@ -17,9 +18,8 @@ function App() {
   useEffect(() => {
     (async function() {
       try {
-        /* Update effect logic to track correct state */
-        //const isUserLogged = await auth.checkAuth()
-        setUser(null);
+        const user = await Auth.currentAuthenticatedUser();
+        setUser(user);
       }
       catch {
         setUser(null);

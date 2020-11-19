@@ -16,7 +16,8 @@
         "techcorpPreSignup": {}
       },
       "auth": {
-        "techcorp": {}
+        "techcorp": {},
+        "userPoolGroups": {}
       }
     }
   }

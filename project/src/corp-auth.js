@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 const authContext = createContext();
 
 export function ProvideAuth({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("hello");
   useEffect(() => {
 
     // attempt to fetch the info of the user that was already logged in
@@ -13,6 +13,10 @@ export function ProvideAuth({ children }) {
       })
       .catch(() => setUser(null))
   }, []);
+
+  const federated = () => {
+    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result))
+  }
 
     const login = (email, password, toMain, setError) => {
       Auth.signIn(email, password).then(user => {

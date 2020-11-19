@@ -68,7 +68,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-techcorp-dev-233612-deployment",
-          "S3Key": "amplify-builds/AdminQueries492f601f-58317a6d4b4759306369-build.zip"
+          "S3Key": "amplify-builds/AdminQueries492f601f-7630725979644b4c4374-build.zip"
         }
       }
     },

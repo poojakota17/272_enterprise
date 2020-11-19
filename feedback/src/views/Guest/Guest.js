@@ -1,15 +1,21 @@
 import React from 'react';
 import './Guest.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Logo from '../../logo_transparent.png';
+import { FederatedAuth } from '../../components/FederatedAuth';
 
 const Guest = props => {
 
   return (
-    <div>
-      <h1>
-        Welcome to Feedback Portal
-      </h1>
-      <p>Pls select the name of recipent and send the feedback</p>
-    </div>
+    <Row className="welcome_page">
+      <Col xs={"auto"}>
+        <img src={Logo} className="logo" alt="clear logo"/>
+      </Col>
+      <Col xs={4}>
+        <FederatedAuth/>
+      </Col>
+    </Row>
   );
 }
 

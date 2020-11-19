@@ -10,6 +10,7 @@ export const getFeedback = /* GraphQL */ `
       feedback
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -27,6 +28,7 @@ export const listFeedbacks = /* GraphQL */ `
         feedback
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

@@ -4,3 +4,21 @@
   --bright-green: #31A28B;
   --yellow: #E9BE4A;
 }
+
+.welcome_page {
+  background-image: url("./bg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 20vh;
+  justify-content: space-around !important;
+}
+
+.logo {
+  height: 40vh;
+}
+
+.btn-green {
+  background-color: var(--bright-green);
+}

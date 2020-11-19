@@ -1,4 +1,4 @@
-type Feedback @model {
+type Feedback @model @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admins"] }]) {
   id: ID!
   sender: String
   recipient: String

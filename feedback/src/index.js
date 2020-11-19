@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Amplify from 'aws-amplify';
+import Amplify  from 'aws-amplify';
 
 let awsconfig = {
     Auth: {
-        identityPoolId: process.env.REACT_APP_COGNITO_ID_POOL,
-        region:  process.env.REACT_APP_COGNITO_REGION,
-        userPoolId:  process.env.REACT_APP_COGNITO_USER_POOL_ID,
-        userPoolWebClientId:  process.env.REACT_APP_COGNITO_WEB_CLIENT,
+        identityPoolId: "us-east-1:504e826a-2600-4c27-8192-0252f6a89474",
+        region: "us-east-1",
+        userPoolId:  "us-east-1_uOxhHwsNK",
+        userPoolWebClientId:  "7r1tst69plm9qr9tpn556mchm",
       },
-      aws_appsync_graphqlEndpoint:  process.env.REACT_APP_APPSYNC_GQL_ENDPOINT,
-      aws_appsync_region: process.env.REACT_APP_APPSYNC_REGION,
-      aws_appsync_authenticationType: process.env.REACT_APP_APPSYNC_AUTHTYPE
+      aws_appsync_graphqlEndpoint:  "https://3gtltjbjevgxvirpt4levs4r4m.appsync-api.us-east-1.amazonaws.com/graphql",
+      aws_appsync_region: "us-east-1",
+      aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS"
 }
 
 

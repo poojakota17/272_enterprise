@@ -33,6 +33,7 @@ function App() {
   }, []);
   async function fetchFeedbacks() {
     const apiData = await API.graphql({ query: listFeedbacks });
+    console.log("items are: ", apiData)
     setFeedbacks(apiData.data.listFeedbacks.items);
   }
   async function createFeedback() {
@@ -49,11 +50,21 @@ function App() {
   }
 
   return (
-    <div>Hello User
+    <div>
+      <h1>Welcome to feedback portal</h1>
+      
       <input
         onChange={e => setFormData({ ...formData, 'recipient': e.target.value})}
         placeholder="recipent email"
       />
+      <select>
+        <option>
+          Anonymous
+        </option>
+        <option>
+  Show your name {}
+        </option>
+      </select>
       <input
         onChange={e => setFormData({ ...formData, 'feedback': e.target.value})}
         placeholder="Write Feedback"

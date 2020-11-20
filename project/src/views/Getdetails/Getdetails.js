@@ -1,11 +1,11 @@
 //import React from 'react';
 import Amplify from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import awsmobile from '../../aws-exports';
+import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
 import { Dropdown } from 'react-bootstrap';
 
-Amplify.configure(awsmobile);
+Amplify.configure(awsconfig);
 
 var token;
 class Getinfo extends React.Component {

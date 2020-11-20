@@ -1,12 +1,12 @@
 //import React from 'react';
-import Amplify, { API } from 'aws-amplify';
+//import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 import config from '../../aws-exports';
 import awsconfig from '../../aws-exports';
 import { Auth } from 'aws-amplify';
 import { Dropdown } from 'react-bootstrap';
-Amplify.configure(awsconfig);
-API.configure(config);
+//Amplify.configure(awsconfig);
+//API.configure(config);
 var token;
 class Getinfo extends React.Component {
     constructor(props) {
@@ -88,4 +88,3 @@ function Getdetails() {
 }
 
 export default Getdetails;
-

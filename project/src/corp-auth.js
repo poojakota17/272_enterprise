@@ -3,9 +3,8 @@ import { Auth } from 'aws-amplify';
 const authContext = createContext();
 
 export function ProvideAuth({ children }) {
-  const [user, setUser] = useState("hello");
+  const [user, setUser] = useState(null);
   useEffect(() => {
-
     // attempt to fetch the info of the user that was already logged in
     Auth.currentAuthenticatedUser()
       .then((user) => {

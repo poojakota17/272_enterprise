@@ -10,26 +10,27 @@ import {
 import { About } from './views/About';
 import { Home } from './views/Home';
 import { Welcome } from './views/Welcome';
-import { useAuth} from "./corp-auth.js";
+import { useAuth } from "./corp-auth.js";
 import Container from 'react-bootstrap/Container'
+import Getdetails from "./views/Getdetails/Getdetails";
 
-export const Routes = () =>  {
+export const Routes = () => {
   return (
-      <Router >
-        <Container fluid className="p-0">
-          <Switch>
-            <Route path="/About" component = {About} exact/>
-
-            <Route path="/login">
-              <Welcome />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/Home" />
-            </Route>
-            <PrivateRoute path="/Home" component={Home} exact />
-          </Switch>
-        </Container>
-      </Router>
+    <Router >
+      <Container fluid className="p-0">
+        <Switch>
+          <Route path="/About" component={About} exact />
+          <Route path="/Getdetails" component={Getdetails} exact />
+          <Route path="/login">
+            <Welcome />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/Home" />
+          </Route>
+          <PrivateRoute path="/Home" component={Home} exact />
+        </Switch>
+      </Container>
+    </Router>
   );
 }
 /*
@@ -58,31 +59,31 @@ export const PrivateRoute = (props) => {
   let auth = useAuth();
   const [state, setState] = useState('loading');
   const { component: Component, path, ...rest } = props;
-   useEffect(() => {
-     (async function() {
-       try {
-         /* Update effect logic to track correct state */
-         const isUserLogged = await auth.checkAuth()
-         setState(isUserLogged ? 'loggedin' : 'redirect');
-       }
-       catch {
-         setState('redirect');
-       }
-     })();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+  useEffect(() => {
+    (async function () {
+      try {
+        /* Update effect logic to track correct state */
+        const isUserLogged = await auth.checkAuth()
+        setState(isUserLogged ? 'loggedin' : 'redirect');
+      }
+      catch {
+        setState('redirect');
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
- if(state === 'loading') {
-   return <div className="loading-screen"></div>
- }
+  if (state === 'loading') {
+    return <div className="loading-screen"></div>
+  }
 
- return (
-   <Route
-     path={path}
-     {...rest}
-     render={props => ((state === 'loggedin') ?
-       <Component {...props} /> :
-       <Redirect to={{pathname: "/login"}} />) }
-   />
- );
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={props => ((state === 'loggedin') ?
+        <Component {...props} /> :
+        <Redirect to={{ pathname: "/login" }} />)}
+    />
+  );
 }

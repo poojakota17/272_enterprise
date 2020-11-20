@@ -43,8 +43,10 @@ app.get('/items', function (req, res) {
     if (err)
       console.log(err)
     else
-      console.log("successfull connection");
-    var email = "Duangkaew.Piveteau@techcorp.com"//req.body.email;
+      console.log(req)
+    console.log("successfull connection");
+    var email = `${req.apiGateway.event.requestContext.authorizer.claims.email}`;
+    //var email = "Duangkaew.Piveteau@techcorp.com"//req.body.email;
     let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no inner join employees on  current_dept_emp.emp_no= employees.emp_no where employees.email= '${email}';`
     let query2 = `Select first_name,last_name, hire_date from employees where email ='${email}';`
     let query3 = `select   salaries.salary  from salaries  inner join employees on employees.emp_no=salaries.emp_no where employees.email= '${email}' order by to_date desc limit 1;`

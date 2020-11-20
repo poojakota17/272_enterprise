@@ -1,8 +1,7 @@
 //import React from 'react';
 //import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import config from '../../aws-exports';
-import awsconfig from '../../aws-exports';
+import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
 import { Dropdown } from 'react-bootstrap';
 //Amplify.configure(awsconfig);
@@ -33,7 +32,7 @@ class Getinfo extends React.Component {
             redirect: 'follow'
         };
         // make API call with parameters and use promises to get response
-        fetch('https://l5sby4rv06.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
+        fetch(process.env.API_GATEWAY_URL_RETRIEVE_INFO, requestOptions)
             .then(response => response.text())
             .then(response => alert(response))
 
@@ -46,19 +45,22 @@ class Getinfo extends React.Component {
     render() {
 
         return (
-            <div>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
-  </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Dropdown Button
+                    </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Manager</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Senior Manager</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Assisant Manager</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Senior Staff</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Staff</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Technical Engineer</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+
 
         );
     }

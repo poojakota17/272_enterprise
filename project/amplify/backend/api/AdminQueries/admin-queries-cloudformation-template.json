@@ -14,23 +14,23 @@
         },
         
         
-          "authtechcorpUserPoolId": {
+          "authnewtechcorpauthUserPoolId": {
             "Type": "String",
-            "Default": "authtechcorpUserPoolId"
+            "Default": "authnewtechcorpauthUserPoolId"
           },
         
           
           
         
-          "functionAdminQueries492f601fArn": {
+          "functionAdminQueries89cc8590Arn": {
             "Type": "String",
-            "Default": "functionAdminQueries492f601fArn"
+            "Default": "functionAdminQueries89cc8590Arn"
           },
         
           
-          "functionAdminQueries492f601fName": {
+          "functionAdminQueries89cc8590Name": {
             "Type": "String",
-            "Default": "functionAdminQueries492f601fName"
+            "Default": "functionAdminQueries89cc8590Name"
           }
         
           
@@ -176,7 +176,7 @@
                                 ":lambda:path/2015-03-31/functions/",
                                 {
                                     
-                                    "Ref": "functionAdminQueries492f601fArn"
+                                    "Ref": "functionAdminQueries89cc8590Arn"
                                 },
                                 "/invocations"
                               ]
@@ -217,7 +217,7 @@
                                   ":userpool/",
                                   {
                                                   
-                                    "Ref": "authtechcorpUserPoolId"
+                                    "Ref": "authnewtechcorpauthUserPoolId"
                                   }
 
                                 ]
@@ -268,7 +268,7 @@
         "Properties": {
             "FunctionName": 
                 {
-                  "Ref": "functionAdminQueries492f601fName"
+                  "Ref": "functionAdminQueries89cc8590Name"
                 },
                 
                 "Action": "lambda:InvokeFunction",

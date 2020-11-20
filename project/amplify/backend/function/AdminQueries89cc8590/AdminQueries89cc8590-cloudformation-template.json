@@ -5,9 +5,9 @@
     "env": {
       "Type": "String"
     },
-    "authtechcorpUserPoolId": {
+    "authnewtechcorpauthUserPoolId": {
       "Type": "String",
-      "Default": "authtechcorpUserPoolId"
+      "Default": "authnewtechcorpauthUserPoolId"
     }
   },
   "Conditions": {
@@ -32,12 +32,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries492f601f",
+            "AdminQueries89cc8590",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries492f601f",
+                  "AdminQueries89cc8590",
                   "-",
                   {
                     "Ref": "env"
@@ -54,7 +54,7 @@
             },
             "GROUP": "Admin",
             "USERPOOL": {
-              "Ref": "authtechcorpUserPoolId"
+              "Ref": "authnewtechcorpauthUserPoolId"
             }
           }
         },
@@ -67,8 +67,8 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-techcorp-dev-233612-deployment",
-          "S3Key": "amplify-builds/AdminQueries492f601f-7630725979644b4c4374-build.zip"
+          "S3Bucket": "amplify-newtechcorp-dev-225559-deployment",
+          "S3Key": "amplify-builds/AdminQueries89cc8590-42394f614931442f3443-build.zip"
         }
       }
     },
@@ -78,12 +78,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueries492f601fLambdaRole",
+            "AdminQueries89cc8590LambdaRole",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueries492f601fLambdaRole",
+                  "AdminQueries89cc8590LambdaRole",
                   "-",
                   {
                     "Ref": "env"
@@ -179,7 +179,7 @@
                     },
                     ":userpool/",
                     {
-                      "Ref": "authtechcorpUserPoolId"
+                      "Ref": "authnewtechcorpauthUserPoolId"
                     }
                   ]
                 ]

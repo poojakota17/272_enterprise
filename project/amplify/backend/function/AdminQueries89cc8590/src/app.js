@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 // Only perform tasks if the user is in a specific group
 const allowedGroup = process.env.GROUP;
 
-const checkGroup = function (req, res, next) {
+const checkGroup = function(req, res, next) {
   if (req.path == '/signUserOut') {
     return next();
   }
@@ -149,7 +149,6 @@ app.get('/getUser', async (req, res, next) => {
   if (!req.query.username) {
     const err = new Error('username is required');
     err.statusCode = 400;
-    console.log();
     return next(err);
   }
 

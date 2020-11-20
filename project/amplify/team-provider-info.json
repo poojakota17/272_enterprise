@@ -1,23 +1,21 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-techcorp-dev-233612-authRole",
-      "UnauthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-authRole",
+      "AuthRoleName": "amplify-newtechcorp-dev-225559-authRole",
+      "UnauthRoleArn": "arn:aws:iam::328229711407:role/amplify-newtechcorp-dev-225559-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::328229711407:role/amplify-newtechcorp-dev-225559-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-techcorp-dev-233612-deployment",
-      "UnauthRoleName": "amplify-techcorp-dev-233612-unauthRole",
-      "StackName": "amplify-techcorp-dev-233612",
-      "StackId": "arn:aws:cloudformation:us-east-1:328229711407:stack/amplify-techcorp-dev-233612/3d8a91a0-2715-11eb-a586-0e43f2110cc5",
-      "AmplifyAppId": "d2t0leoqneuoqr"
+      "DeploymentBucketName": "amplify-newtechcorp-dev-225559-deployment",
+      "UnauthRoleName": "amplify-newtechcorp-dev-225559-unauthRole",
+      "StackName": "amplify-newtechcorp-dev-225559",
+      "StackId": "arn:aws:cloudformation:us-east-1:328229711407:stack/amplify-newtechcorp-dev-225559/74e02070-2afd-11eb-86c5-12bd192597a3",
+      "AmplifyAppId": "d36s98jndilz0p"
     },
     "categories": {
-      "function": {
-        "techcorpPreSignup": {}
-      },
       "auth": {
-        "techcorp": {},
-        "userPoolGroups": {}
+        "newtechcorpauth": {
+          "hostedUIProviderCreds": "[]"
+        }
       }
     }
   }

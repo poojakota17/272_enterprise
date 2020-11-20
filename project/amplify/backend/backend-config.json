@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "techcorp",
+          "resourceName": "newtechcorpauth",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
@@ -16,48 +16,27 @@
         }
       ]
     },
-    "techcorp": {
+    "newtechcorpauth": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "techcorpPreSignup",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
+      "dependsOn": [],
       "customAuth": false
     }
   },
   "function": {
-    "techcorpPreSignup": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "AdminQueries492f601f": {
+    "AdminQueries89cc8590": {
       "service": "Lambda",
       "providerPlugin": "awscloudformation",
       "build": true,
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "techcorp",
+          "resourceName": "newtechcorpauth",
           "attributes": [
             "UserPoolId"
           ]
         }
       ]
-    },
-    "retrieveinfo": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
     }
   },
   "api": {
@@ -67,31 +46,17 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "techcorp",
+          "resourceName": "newtechcorpauth",
           "attributes": [
             "UserPoolId"
           ]
         },
         {
           "category": "function",
-          "resourceName": "AdminQueries492f601f",
+          "resourceName": "AdminQueries89cc8590",
           "attributes": [
             "Arn",
             "Name"
-          ]
-        }
-      ]
-    },
-    "orgchartinfo": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "retrieveinfo",
-          "attributes": [
-            "Name",
-            "Arn"
           ]
         }
       ]

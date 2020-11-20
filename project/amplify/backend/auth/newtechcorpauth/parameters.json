@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "techcorp505256cc_identitypool_505256cc",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "techco505256cc",
-    "userPoolName": "techcorp505256cc_userpool_505256cc",
+    "identityPoolName": "newtechcorp31bf03e1_identitypool_31bf03e1",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "newtec31bf03e1",
+    "userPoolName": "newtechcorpauth",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "techco505256cc_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "newtec31bf03e1_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "505256cc",
-    "resourceName": "techcorp",
+    "sharedId": "31bf03e1",
+    "resourceName": "newtechcorpauth",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,17 +47,18 @@
     },
     "useDefault": "manual",
     "thirdPartyAuth": false,
-    "usernameAttributes": [
-        "email"
-    ],
     "userPoolGroups": true,
     "adminQueries": true,
-    "triggers": "{\n  \"PreSignup\": [\n    \"custom\"\n  ]\n}",
-    "hostedUI": false,
+    "triggers": "{}",
+    "hostedUI": true,
+    "hostedUIDomainName": "newtechcorpauth",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\"]}",
     "userPoolGroupList": [
-        "User",
+        "Admin",
         "Manager",
-        "Admin"
+        "User"
     ],
     "adminQueryGroup": "Admin",
     "serviceName": "Cognito",
@@ -65,15 +66,5 @@
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "techcorpPreSignup",
-            "triggerProvider": "Cognito",
-            "attributes": [
-                "Arn",
-                "Name"
-            ]
-        }
-    ]
+    "dependsOn": []
 }

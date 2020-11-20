@@ -1,23 +1,23 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authtechcorpUserPoolId": {
+        "authnewtechcorpauthUserPoolId": {
             "Type": "String",
-            "Default": "authtechcorpUserPoolId"
+            "Default": "authnewtechcorpauthUserPoolId"
         },
         
-        "authtechcorpIdentityPoolId": {
+        "authnewtechcorpauthIdentityPoolId": {
             "Type": "String",
-            "Default": "authtechcorpIdentityPoolId"
+            "Default": "authnewtechcorpauthIdentityPoolId"
         },
         
-        "authtechcorpAppClientID": {
+        "authnewtechcorpauthAppClientID": {
             "Type": "String",
-            "Default": "authtechcorpAppClientID"
+            "Default": "authnewtechcorpauthAppClientID"
         },
-        "authtechcorpAppClientIDWeb": {
+        "authnewtechcorpauthAppClientIDWeb": {
             "Type": "String",
-            "Default": "authtechcorpAppClientIDWeb"
+            "Default": "authnewtechcorpauthAppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -41,26 +41,26 @@
     },
     "Resources": {
     
-        "UserGroup": {
+        "AdminGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
-              "GroupName" : "User",
+              "GroupName" : "Admin",
               "Precedence" : 1,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
-                    "UserGroupRole",
+                    "AdminGroupRole",
                     "Arn"
                 ]
               },
               
               "UserPoolId" : {
-                "Ref": "authtechcorpUserPoolId"
+                "Ref": "authnewtechcorpauthUserPoolId"
               } 
             }
         },
         
-        "UserGroupRole": {
+        "AdminGroupRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName":{
@@ -68,9 +68,9 @@
                         "",
                         [
                           {
-                            "Ref": "authtechcorpUserPoolId"
+                            "Ref": "authnewtechcorpauthUserPoolId"
                           },
-                          "-UserGroupRole"
+                          "-AdminGroupRole"
                         ]
                     ]
                 },
@@ -85,7 +85,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authtechcorpIdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authnewtechcorpauthIdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -109,7 +109,7 @@
               },
               
               "UserPoolId" : {
-                "Ref": "authtechcorpUserPoolId"
+                "Ref": "authnewtechcorpauthUserPoolId"
               } 
             }
         },
@@ -122,7 +122,7 @@
                         "",
                         [
                           {
-                            "Ref": "authtechcorpUserPoolId"
+                            "Ref": "authnewtechcorpauthUserPoolId"
                           },
                           "-ManagerGroupRole"
                         ]
@@ -139,7 +139,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authtechcorpIdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authnewtechcorpauthIdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -149,26 +149,26 @@
         },
      
     
-        "AdminGroup": {
+        "UserGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
-              "GroupName" : "Admin",
+              "GroupName" : "User",
               "Precedence" : 3,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
-                    "AdminGroupRole",
+                    "UserGroupRole",
                     "Arn"
                 ]
               },
               
               "UserPoolId" : {
-                "Ref": "authtechcorpUserPoolId"
+                "Ref": "authnewtechcorpauthUserPoolId"
               } 
             }
         },
         
-        "AdminGroupRole": {
+        "UserGroupRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName":{
@@ -176,9 +176,9 @@
                         "",
                         [
                           {
-                            "Ref": "authtechcorpUserPoolId"
+                            "Ref": "authnewtechcorpauthUserPoolId"
                           },
-                          "-AdminGroupRole"
+                          "-UserGroupRole"
                         ]
                     ]
                 },
@@ -193,7 +193,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authtechcorpIdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authnewtechcorpauthIdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -219,7 +219,7 @@
                                 "",
                                 [
                                   
-                                  "techcorp",
+                                  "newtechcorpauth",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -378,16 +378,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authtechcorpIdentityPoolId"
+                    "Ref": "authnewtechcorpauthIdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authtechcorpUserPoolId"
+                    "Ref": "authnewtechcorpauthUserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authtechcorpAppClientIDWeb"
+                    "Ref": "authnewtechcorpauthAppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authtechcorpAppClientID"
+                    "Ref": "authnewtechcorpauthAppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"
@@ -403,10 +403,10 @@
     
     "Outputs": {
       
-        "UserGroupRole": {
+        "AdminGroupRole": {
             "Value": {
                 "Fn::GetAtt": [
-                    "UserGroupRole",
+                    "AdminGroupRole",
                     "Arn"
                 ]
             }
@@ -425,10 +425,10 @@
         },
         
       
-        "AdminGroupRole": {
+        "UserGroupRole": {
             "Value": {
                 "Fn::GetAtt": [
-                    "AdminGroupRole",
+                    "UserGroupRole",
                     "Arn"
                 ]
             }

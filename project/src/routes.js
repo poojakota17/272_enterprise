@@ -20,7 +20,6 @@ export const Routes = () => {
       <Container fluid className="p-0">
         <Switch>
           <Route path="/About" component={About} exact />
-          <Route path="/Getdetails" component={Getdetails} exact />
           <Route path="/login">
             <Welcome />
           </Route>
@@ -28,6 +27,7 @@ export const Routes = () => {
             <Redirect to="/Home" />
           </Route>
           <PrivateRoute path="/Home" component={Home} exact />
+          <PrivateRoute path="/Getdetails" component={Getdetails} exact />
         </Switch>
       </Container>
     </Router>

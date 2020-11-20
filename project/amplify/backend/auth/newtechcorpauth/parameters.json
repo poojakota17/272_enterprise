@@ -49,12 +49,11 @@
     "thirdPartyAuth": false,
     "userPoolGroups": true,
     "adminQueries": true,
-    "triggers": "{}",
+    "triggers": "{\n  \"PreSignup\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": true,
     "hostedUIDomainName": "newtechcorpauth",
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\"]}",
     "userPoolGroupList": [
         "Admin",
         "Manager",
@@ -66,5 +65,16 @@
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": []
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "newtechcorpauthPreSignup",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d36s98jndilz0p.amplifyapp.com/\",\"https://master.d36s98jndilz0p.amplifyapp.com/\"]}"
 }

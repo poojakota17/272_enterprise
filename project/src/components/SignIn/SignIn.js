@@ -15,17 +15,18 @@ const SignIn = (props) => {
   let location = useLocation();
   let auth = useAuth();
 
-  const [formValues, setFormValues] = useState({email: '', password: ''});
+  const [formValues, setFormValues] = useState({username: '', password: ''});
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   let { from } = location.state || { from: { pathname: "/" } };
 
   async function signIn() {
-      await auth.login(formValues.email, formValues.password, returnToMain, setFormErrors);
+      await auth.login(formValues.username, formValues.password, returnToMain, setFormErrors);
   };
 
   let returnToMain = () => {
+    setFormValues({username: '', password: ''})
     history.replace(from);
   }
 
@@ -37,15 +38,18 @@ const SignIn = (props) => {
 
 
     function handleChange(event) {
-    const { type, value } = event.target;
-    setFormValues({ ...formValues, [type]: value });
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
   }
 
   function validate() {
     let errors = {};
-    if (!(/^[a-zA-Z0-9.]+@[tT]ech[cC]orp.com$/.test(formValues.email)))
-      errors.email = 'Wrong email format'
-      console.log(errors)
+    if (!formValues.username)
+      errors.username = 'Add username'
+    if (!formValues.password)
+      errors.password = 'Add password'
+    //if (!(/^[a-zA-Z0-9.]+@[tT]ech[cC]orp.com$/.test(formValues.email)))
+      //errors.email = 'Wrong email format'
     return errors;
   }
 
@@ -57,24 +61,25 @@ const SignIn = (props) => {
 
   return (
     <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label><small>Email*</small></Form.Label>
+  <Form.Group controlId="formUsernameIn">
+    <Form.Label><small>Username*</small></Form.Label>
     <Form.Control
       size="sm"
-      type="email"
-      placeholder="email@techcorp.com"
+      name="username"
+      placeholder="Username"
       onChange={handleChange}
-      isInvalid={!!formErrors.email}
+      isInvalid={!!formErrors.username}
       />
       <Form.Control.Feedback type="invalid" tooltip>
-        Wrong email format
+        Empty username
       </Form.Control.Feedback>
   </Form.Group>
 
-  <Form.Group controlId="formBasicPassword">
+  <Form.Group controlId="formBasicPasswordIn">
     <Form.Label><small>Password*</small></Form.Label>
     <Form.Control
       size="sm"
+      name="password"
       type="password"
       placeholder="Password"
       onChange={handleChange}

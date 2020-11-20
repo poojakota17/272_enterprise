@@ -1,9 +1,10 @@
 //import React from 'react';
 //import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import awsconfig from '../../index.js';
+//import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
 import { Dropdown } from 'react-bootstrap';
+import { useAuth } from "../../corp-auth.js";
 //Amplify.configure(awsconfig);
 //API.configure(config);
 var token;
@@ -68,8 +69,9 @@ class Getinfo extends React.Component {
 
 function Getdetails() {
     const [user, setuser] = useState();
+  //  let auth = useAuth();
+
     useEffect(() => {
-        /* Get the AWS credentials for the current user from Identity Pools.  */
         Auth.currentSession()
             .then(cognitoUser => {
                 // console.log(cognitoUser)

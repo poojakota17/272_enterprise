@@ -4,6 +4,7 @@ const authContext = createContext();
 
 export function ProvideAuth({ children }) {
   const [user, setUser] = useState(null);
+  const [cognitoUser, setCognitoUser] = useState(null);
   useEffect(() => {
     // attempt to fetch the info of the user that was already logged in
     Auth.currentAuthenticatedUser()
@@ -14,15 +15,23 @@ export function ProvideAuth({ children }) {
   }, []);
 
   const federated = () => {
-    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result)).catch((err) => console.log(err))
+    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result)).catch((err) => {console.log(err)})
   }
 
-    const login = (email, password, toMain, setError) => {
-      Auth.signIn(email, password).then(user => {
+  const getSession = () => {
+    Auth.currentSession().then((user) => {
+      console.log(user.idToken)
+      return user
+    setCognitoUser(user)}).catch(err => {console.log(err)})
+  }
+
+    const login = (username, password, toMain, setError) => {
+      Auth.signIn(username, password).then(user => {
         setUser(user);
         toMain();
         return user;
       }).catch((err) => {
+
         if (err.code === 'UserNotFoundException') {
             err.message = 'Invalid username or password';
           }
@@ -31,13 +40,22 @@ export function ProvideAuth({ children }) {
       })
     };
 
-    const signup = (email, password, toMain, setError) => {
-      Auth.signUp(email, password).then(user => {
+    const signup = (username, email, password, toMain, setError) => {
+      console.log(username)
+      console.log(email)
+      console.log(password)
+      Auth.signUp(
+      {  username: username,
+  password: password,
+  attributes: {
+    email: email
+  }}).then(user => {
         setUser(user);
         console.log(user);
         toMain();
         return user;
       }).catch((err) => {
+        console.log(err)
         setError({password: err.message});
         return err;
       })
@@ -55,7 +73,7 @@ export function ProvideAuth({ children }) {
         return Auth.currentAuthenticatedUser()
       }
 
-const values=useMemo(() => ({user, login, logout, signup, checkAuth, federated}), [user]);
+const values=useMemo(() => ({user, login, logout, signup, checkAuth, federated, cognitoUser, getSession}), [user]);
 
 
   return (

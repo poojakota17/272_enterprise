@@ -15,7 +15,11 @@
       "auth": {
         "newtechcorpauth": {
           "hostedUIProviderCreds": "[]"
-        }
+        },
+        "userPoolGroups": {}
+      },
+      "function": {
+        "newtechcorpauthPreSignup": {}
       }
     }
   }

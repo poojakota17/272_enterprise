@@ -13,10 +13,11 @@ const SignUp = (props) => {
   const [message, setMessage] = useState('');
 
   async function signUp() {
-      await auth.signup(formValues.email, formValues.password, returnToMain, setFormErrors);
+      await auth.signup(formValues.username, formValues.email, formValues.password, returnToMain, setFormErrors);
   };
 
   let returnToMain = () => {
+    setFormValues({username: '', password: ''})
     setMessage("Success! You can Sign In now")
   }
 
@@ -36,6 +37,8 @@ const SignUp = (props) => {
     let errors = {};
     if (!(/^[a-zA-Z0-9.]+@[tT]ech[cC]orp.com$/.test(formValues.email)))
       errors.email = 'Wrong email format'
+    if (!formValues.username)
+      errors.username = "Empty"
     if (!formValues.password || formValues.password.length < 8)
       errors.password = 'Password should be at least 8 digits long'
     if (formValues.password !== formValues.confirm)
@@ -51,6 +54,19 @@ const SignUp = (props) => {
 
   return (
     <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>
+    <Form.Group controlId="formSignUpUsername">
+      <Form.Label><small>Username*</small></Form.Label>
+      <Form.Control
+        size="sm"
+        name="username"
+        placeholder="username"
+        onChange={handleChange}
+        isInvalid={!!formErrors.username}
+        />
+        <Form.Control.Feedback type="invalid" tooltip>
+          Empty username
+        </Form.Control.Feedback>
+    </Form.Group>
   <Form.Group controlId="formSignUpEmail">
     <Form.Label><small>Email*</small></Form.Label>
     <Form.Control

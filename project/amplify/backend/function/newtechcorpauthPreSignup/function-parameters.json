@@ -1,0 +1,16 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "newtechcorpauth",
+  "functionName": "newtechcorpauthPreSignup",
+  "resourceName": "newtechcorpauthPreSignup",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/usr/local/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PreSignup",
+  "triggerTemplate": "PreSignup.json.ejs",
+  "roleName": "newtechcorpauthPreSignup",
+  "skipEdit": true,
+  "enableCors": false
+}

@@ -8,7 +8,7 @@ import { listFeedbacks } from '../../graphql/queries';
 import { createFeedback as createFeedbackMutation, deleteFeedback as deleteFeedbackMutation } from '../../graphql/mutations';
 
 
-const UserPage = props => {
+function UserPage() {
 
   const [user, setUser] = useState(null);
   const [feedbacks, setFeedbacks] = useState([]);
@@ -19,7 +19,7 @@ const UserPage = props => {
       try {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
-      console.log("in async function", user)
+      console.log("in async function", user.attributes.email)
       }
       catch {
       setUser(null);
@@ -28,8 +28,8 @@ const UserPage = props => {
       
     
       )();
-      fetchFeedbacks();
-    
+     
+      fetchFeedbacks()
    
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,11 +39,12 @@ const UserPage = props => {
     await Auth.signOut();
   }
 
-  async function fetchFeedbacks() {
-    const apiData = await API.graphql({ query: listFeedbacks });
-    console.log("Items", apiData.data.listFeedbacks.items)
-    setFeedbacks(apiData.data.listFeedbacks.items);
+  async function fetchFeedbacks() {	
+    const apiData = await API.graphql({ query: listFeedbacks });	
+    console.log("items are: ", apiData)	
+    setFeedbacks(apiData.data.listFeedbacks.items);	
   }
+ 
   async function createFeedback() {
     console.log("In createFeedbak()")
     if (!formData.recipient || !formData.feedback) return;

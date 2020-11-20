@@ -1,34 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-techcorp-dev-233612-authRole",
-      "UnauthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-authRole",
+      "AuthRoleName": "amplify-feedback-dev-175933-authRole",
+      "UnauthRoleArn": "arn:aws:iam::328229711407:role/amplify-feedback-dev-175933-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::328229711407:role/amplify-feedback-dev-175933-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-techcorp-dev-233612-deployment",
-      "UnauthRoleName": "amplify-techcorp-dev-233612-unauthRole",
-      "StackName": "amplify-techcorp-dev-233612",
-      "StackId": "arn:aws:cloudformation:us-east-1:328229711407:stack/amplify-techcorp-dev-233612/3d8a91a0-2715-11eb-a586-0e43f2110cc5",
-      "AmplifyAppId": "d2t0leoqneuoqr"
-    },
-    "categories": {
-      "auth": {
-        "feedbackf86be0cd": {
-          "userPoolId": "us-east-1_uOxhHwsNK",
-          "userPoolName": "techcorp505256cc_userpool_505256cc-dev",
-          "webClientId": "7r1tst69plm9qr9tpn556mchm",
-          "nativeClientId": "36ftvvgkfaf3sutlfffrj7psdr",
-          "identityPoolId": "us-east-1:504e826a-2600-4c27-8192-0252f6a89474",
-          "identityPoolName": "techcorp505256cc_identitypool_505256cc__dev",
-          "allowUnauthenticatedIdentities": true,
-          "authRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-authRole",
-          "authRoleName": "amplify-techcorp-dev-233612-authRole",
-          "unauthRoleArn": "arn:aws:iam::328229711407:role/amplify-techcorp-dev-233612-unauthRole",
-          "unauthRoleName": "amplify-techcorp-dev-233612-unauthRole"
-        },
-        "userPoolGroups": {},
-        "techcorp": {}
-      }
+      "DeploymentBucketName": "amplify-feedback-dev-175933-deployment",
+      "UnauthRoleName": "amplify-feedback-dev-175933-unauthRole",
+      "StackName": "amplify-feedback-dev-175933",
+      "StackId": "arn:aws:cloudformation:us-east-1:328229711407:stack/amplify-feedback-dev-175933/0b0914f0-2ad4-11eb-b61a-0e403b617781",
+      "AmplifyAppId": "d2h4ub5jtid74o"
     }
   }
 }

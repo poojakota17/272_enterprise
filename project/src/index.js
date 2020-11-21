@@ -29,7 +29,7 @@ let awsconfig = {
         userPoolWebClientId: process.env.REACT_APP_COGNITO_WEB_CLIENT,
         oauth: {
             domain: process.env.REACT_APP_COGNITO_DOMAIN,
-            scope: ['email', 'openid'],
+            scope: ['email', 'openid', 'profile'],
             redirectSignIn: process.env.REACT_APP_COGNITO_REDIRECT,
             redirectSignOut: process.env.REACT_APP_COGNITO_REDIRECT,
             responseType: process.env.REACT_APP_COGNITO_RESPONSE

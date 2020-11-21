@@ -15,7 +15,7 @@ export function ProvideAuth({ children }) {
   }, []);
 
   const federated = () => {
-    Auth.federatedSignIn({provider: 'okta'}).then((result) => console.log(result)).catch((err) => {console.log(err)})
+    Auth.federatedSignIn({provider: 'oktanew'}).then((result) => console.log(result)).catch((err) => {console.log(err)})
   }
 
   const getSession = () => {
@@ -41,15 +41,12 @@ export function ProvideAuth({ children }) {
     };
 
     const signup = (username, email, password, toMain, setError) => {
-      console.log(username)
-      console.log(email)
-      console.log(password)
       Auth.signUp(
       {  username: username,
-  password: password,
-  attributes: {
-    email: email
-  }}).then(user => {
+        password: password,
+        attributes: {
+          email: email
+        }}).then(user => {
         setUser(user);
         console.log(user);
         toMain();

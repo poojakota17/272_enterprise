@@ -2,7 +2,7 @@
     "paths": [
         {
             "name": "/items",
-            "lambdaFunction": "employeeinfo",
+            "lambdaFunction": "infofetcher",
             "privacy": {
                 "protected": true,
                 "auth": [
@@ -23,23 +23,23 @@
             "policyResourceName": "/items"
         }
     ],
-    "resourceName": "phonetoolapi",
-    "apiName": "phonetoolapi",
+    "resourceName": "phonetool",
+    "apiName": "phonetool",
     "functionArns": [
         {
-            "lambdaFunction": "employeeinfo"
+            "lambdaFunction": "infofetcher"
         }
     ],
     "privacy": {
         "auth": 1,
         "unauth": 1,
-        "authRoleName": "amplify-techcorp-dev-233612-authRole",
-        "unAuthRoleName": "amplify-techcorp-dev-233612-unauthRole"
+        "authRoleName": "amplify-newtechcorp-dev-225559-authRole",
+        "unAuthRoleName": "amplify-newtechcorp-dev-225559-unauthRole"
     },
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "employeeinfo",
+            "resourceName": "infofetcher",
             "attributes": [
                 "Name",
                 "Arn"

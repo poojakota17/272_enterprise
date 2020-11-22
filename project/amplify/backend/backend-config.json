@@ -52,6 +52,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "infofetcher": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "api": {
@@ -72,6 +77,20 @@
           "attributes": [
             "Arn",
             "Name"
+          ]
+        }
+      ]
+    },
+    "phonetool": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "infofetcher",
+          "attributes": [
+            "Name",
+            "Arn"
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
     "identityPoolName": "newtechcorp31bf03e1_identitypool_31bf03e1",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "newtec31bf03e1",
     "userPoolName": "newtechcorpauth",
     "autoVerifiedAttributes": [

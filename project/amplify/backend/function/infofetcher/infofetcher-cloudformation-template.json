@@ -34,13 +34,13 @@
             "FunctionName": {
                 "Fn::If": [
                     "ShouldNotCreateEnvResources",
-                    "employeeinfo",
+                    "infofetcher",
                     {
 
                         "Fn::Join": [
                             "",
                             [
-                                "employeeinfo",
+                                "infofetcher",
                                 "-",
                                 {
                                     "Ref": "env"
@@ -65,13 +65,13 @@
                 "RoleName": {
                     "Fn::If": [
                         "ShouldNotCreateEnvResources",
-                        "techcorpLambdaRolef75155ed",
+                        "newtechcorpLambdaRole26357bf8",
                         {
 
                             "Fn::Join": [
                                 "",
                                 [
-                                    "techcorpLambdaRolef75155ed",
+                                    "newtechcorpLambdaRole26357bf8",
                                     "-",
                                     {
                                         "Ref": "env"

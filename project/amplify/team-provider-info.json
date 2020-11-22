@@ -13,9 +13,7 @@
     },
     "categories": {
       "auth": {
-        "newtechcorpauth": {
-          "hostedUIProviderCreds": "[]"
-        },
+        "newtechcorpauth": {},
         "userPoolGroups": {}
       },
       "function": {

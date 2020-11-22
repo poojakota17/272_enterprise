@@ -10,6 +10,7 @@ import {
 import { About } from './views/About';
 import { Home } from './views/Home';
 import { Welcome } from './views/Welcome';
+import { Admin } from './views/Admin';
 import { useAuth } from "./corp-auth.js";
 import Container from 'react-bootstrap/Container'
 import Getdetails from "./views/Getdetails/Getdetails";
@@ -19,15 +20,16 @@ export const Routes = () => {
     <Router >
       <Container fluid className="p-0">
         <Switch>
-          <Route path="/About" component={About} exact />
+          <Route path="/about" component={About} exact />
           <Route path="/login">
             <Welcome />
           </Route>
           <Route exact path="/">
-            <Redirect to="/Home" />
+            <Redirect to="/home" />
           </Route>
-          <PrivateRoute path="/Home" component={Home} exact />
-          <PrivateRoute path="/Getdetails" component={Getdetails} exact />
+          <PrivateRoute path="/home" component={Home} exact />
+          <PrivateRoute path="/getdetails" component={Getdetails} exact />
+          <AdminRoute path="/admin" component={Admin} exact />
         </Switch>
       </Container>
     </Router>
@@ -84,6 +86,39 @@ export const PrivateRoute = (props) => {
       render={props => ((state === 'loggedin') ?
         <Component {...props} /> :
         <Redirect to={{ pathname: "/login" }} />)}
+    />
+  );
+}
+
+export const AdminRoute = (props) => {
+  let auth = useAuth();
+  const [state, setState] = useState('loading');
+  const { component: Component, path, ...rest } = props;
+  useEffect(() => {
+    (async function () {
+      try {
+        const isUserLogged = await auth.checkAuth()
+        const groups = isUserLogged.signInUserSession.idToken.payload['cognito:groups']
+        setState((isUserLogged && groups.length > 0 && groups[0] == 'Admin') ? 'admin' : 'redirect');
+      }
+      catch {
+        setState('redirect');
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (state === 'loading') {
+    return <div className="loading-screen"></div>
+  }
+
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={props => ((state === 'admin') ?
+        <Component {...props} /> :
+        <Redirect to={{ pathname: "/" }} />)}
     />
   );
 }

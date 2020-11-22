@@ -9,13 +9,14 @@ export function ProvideAuth({ children }) {
     // attempt to fetch the info of the user that was already logged in
     Auth.currentAuthenticatedUser()
       .then((user) => {
+        console.log(user)
         setUser(user)
       })
       .catch(() => setUser(null))
   }, []);
 
   const federated = () => {
-    Auth.federatedSignIn({provider: 'oktanew'}).then((result) => console.log(result)).catch((err) => {console.log(err)})
+    Auth.federatedSignIn({provider: process.env.REACT_APP_AUTH_PROVIDER}).then((result) => console.log(result)).catch((err) => {console.log(err)})
   }
 
   const getSession = () => {

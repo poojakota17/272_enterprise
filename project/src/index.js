@@ -35,7 +35,16 @@ let awsconfig = {
             responseType: process.env.REACT_APP_COGNITO_RESPONSE
         }
 
-    }
+    },
+    API: {
+            endpoints: [
+                {
+                  "name": process.env.REACT_APP_ADMIN_EPNAME,
+                  "endpoint": process.env.REACT_APP_ADMIN_EP,
+                  "region": process.env.REACT_APP_ADMIN_EP_REGION
+                }
+            ]
+      }
 }
 
 if (isLocalhost) {

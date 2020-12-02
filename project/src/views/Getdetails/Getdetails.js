@@ -21,6 +21,8 @@ class Getinfo extends React.Component {
     componentDidMount() {
         // instantiate a headers object
         var myHeaders = new Headers();
+        // add content type header to object
+
         myHeaders.append("Authorization", token);
         myHeaders.append("Content-Type", "application/json");
         // create a JSON object with parameters for API call and store in a variable
@@ -67,7 +69,7 @@ class Getinfo extends React.Component {
 
 function Getdetails() {
     const [user, setuser] = useState();
-    //  let auth = useAuth();
+  //  let auth = useAuth();
 
     useEffect(() => {
         Auth.currentSession()

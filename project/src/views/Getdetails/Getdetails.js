@@ -33,11 +33,11 @@ class Getinfo extends React.Component {
             redirect: 'follow'
         };
         // make API call with parameters and use promises to get response
-        fetch(process.env.API_GATEWAY_URL_RETRIEVE_INFO, requestOptions)
-            .then(response => response.text())
-            .then(response => alert(response))
+        // fetch(process.env.API_GATEWAY_URL_RETRIEVE_INFO, requestOptions)
+        //     .then(response => response.text())
+        //     .then(response => alert(response))
 
-            .catch(error => console.log(error))
+        //     .catch(error => console.log(error))
     }
     // mysubmithandler = (event) => {
     //     event.preventDefault();
@@ -69,7 +69,7 @@ class Getinfo extends React.Component {
 
 function Getdetails() {
     const [user, setuser] = useState();
-  //  let auth = useAuth();
+    //  let auth = useAuth();
 
     useEffect(() => {
         Auth.currentSession()

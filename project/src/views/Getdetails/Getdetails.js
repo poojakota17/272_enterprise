@@ -33,11 +33,11 @@ class Getinfo extends React.Component {
             redirect: 'follow'
         };
         // make API call with parameters and use promises to get response
-        // fetch(process.env.API_GATEWAY_URL_RETRIEVE_INFO, requestOptions)
-        //     .then(response => response.text())
-        //     .then(response => alert(response))
+        fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
+            .then(response => response.text())
+            .then(response => alert(response))
 
-        //     .catch(error => console.log(error))
+            .catch(error => console.log(error))
     }
     // mysubmithandler = (event) => {
     //     event.preventDefault();

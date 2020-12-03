@@ -26,11 +26,11 @@ app.use(function (req, res, next) {
 });
 const mysql = require('mysql');
 const con = mysql.createConnection({
-  host: "database1.csjlgglqgxta.us-east-1.rds.amazonaws.com",
-  user: "admin",
-  port: "3306",
-  password: "pooja1710#",
-  database: "employees"
+  host: process.env.DATABASE_ENDPOINT,
+  user: process.env.USER,
+  port: process.env.PORT,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
 
 /**********************

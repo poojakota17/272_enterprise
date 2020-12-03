@@ -3,50 +3,56 @@
 import React, { useState, useEffect } from 'react';
 //import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Button } from 'react-bootstrap';
 import { useAuth } from "../../corp-auth.js";
-//Amplify.configure(awsconfig);
-//API.configure(config);
-var token;
-class Getinfo extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.callAPI = this.callAPI.bind(this);
-        // this.mysubmithandler = this.mysubmithandler.bind(this);
 
+const Getdetails = props => {
 
-    }
+    const [token, settoken] = useState();
+    console.log(token)
+    useEffect(() => {
+        Auth.currentSession()
+            .then(cognitoUser => {
+                const { idToken: { jwtToken } } = cognitoUser
+                settoken(jwtToken);
+                console.log(cognitoUser)
+                console.log(token)
+            })
+    }, [])
 
-    //callAPI = () => {
-    componentDidMount() {
-        // instantiate a headers object
-        var myHeaders = new Headers();
-        // add content type header to object
-
-        myHeaders.append("Authorization", token);
-        myHeaders.append("Content-Type", "application/json");
-        // create a JSON object with parameters for API call and store in a variable
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-
-            redirect: 'follow'
-        };
-        // make API call with parameters and use promises to get response
+    const [data, setdata] = useState(null);
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+    useEffect(() => {
+        let result = {}
         fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
-            .then(response => response.text())
-            .then(response => alert(response))
 
+            .then(response => response.json())
+            //.then(response => alert(response.text()))
+
+            .then(response => { console.log(response) })
+            .then(response => setdata(response))
             .catch(error => console.log(error))
+        //console.log("hello", JSON.parse(data))
+
     }
-    // mysubmithandler = (event) => {
-    //     event.preventDefault();
-    //     this.callAPI();
-    // }
-    render() {
-
-        return (
-
+    )
+    return (
+        <div>
+            {/* <div>Employee Number : {data.body.emp_no} </div><br></br> */}
+            {/* <div>Department Number : {data.dept_no} </div><br></br>
+            <div>First Name : {data.first_name} </div><br></br>
+            <div>Last Name : {data.last_name} </div><br></br>
+            <div>Hiredate : {data.hire_date} </div><br></br>
+            <div>Salary : {data.salary} </div><br></br>
+            <div>Designation : {data.title} </div><br></br>
+            <div>Tenure : {data.tenure} </div> */}
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Dropdown Button
@@ -62,33 +68,12 @@ class Getinfo extends React.Component {
                 </Dropdown.Menu>
             </Dropdown>
 
-
-        );
-    }
-}
-
-function Getdetails() {
-    const [user, setuser] = useState();
-    //  let auth = useAuth();
-
-    useEffect(() => {
-        Auth.currentSession()
-            .then(cognitoUser => {
-                // console.log(cognitoUser)
-                const { idToken: { payload } } = cognitoUser
-                const { idToken: { jwtToken } } = cognitoUser
-                setuser(payload);
-                console.log(cognitoUser)
-
-                token = jwtToken;
-                console.log(token)
-            })
-    }, [])
-    return (
-        <div>
-            <Getinfo />
         </div>
     )
+
 }
+
+
+
 
 export default Getdetails;

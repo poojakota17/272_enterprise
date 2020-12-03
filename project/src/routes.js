@@ -14,6 +14,7 @@ import { Admin } from './views/Admin';
 import { useAuth } from "./corp-auth.js";
 import Container from 'react-bootstrap/Container'
 import Getdetails from "./views/Getdetails/Getdetails";
+import Manager from "./views/Manager/Manager";
 
 export const Routes = () => {
   return (
@@ -29,6 +30,7 @@ export const Routes = () => {
           </Route>
           <PrivateRoute path="/home" component={Home} exact />
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
+          <PrivateRoute path="/manager" component={Manager} exact />
           <AdminRoute path="/admin" component={Admin} exact />
         </Switch>
       </Container>

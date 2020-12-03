@@ -23,6 +23,7 @@ const Admin = props => {
         },
         headers: {
           'Content-Type' : 'application/json',
+          'Access-Control-Allow-Origin': '*',
           Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
         }
     }
@@ -33,6 +34,8 @@ const Admin = props => {
   let nextToken;
 
   async function listUsers(limit){
+    let token = (await Auth.currentSession()).getAccessToken().getJwtToken();
+    console.log(token);
     let userGroup = process.env.REACT_APP_OKTA_GROUP
     let apiName = process.env.REACT_APP_ADMIN_EPNAME;
     let path = '/listUsersInGroup';
@@ -44,11 +47,12 @@ const Admin = props => {
         },
         headers: {
           'Content-Type' : 'application/json',
-          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+          Authorization: token
         }
     }
     const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
     nextToken = NextToken;
+    console.log(rest)
     return rest;
   }
 

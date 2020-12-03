@@ -12,7 +12,7 @@ const FederatedAuth = (props) => {
   }
 
 
-  return (
+  return props.show ? (
     <Card className="text-center">
       <Card.Body>
         <Card.Title>Welcome</Card.Title>
@@ -22,7 +22,7 @@ const FederatedAuth = (props) => {
         <Button variant="green" onClick={federatedSignIn}>Federated Sign In</Button>
       </Card.Body>
     </Card>
-  );
+  ) : '';
 };
 
 export default FederatedAuth;

@@ -1,6 +1,7 @@
 import React, {  useRef, useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 import { useAuth } from "../../corp-auth.js";
 import {
   useHistory,
@@ -58,42 +59,46 @@ const SignIn = (props) => {
     setFormErrors(validate());
     setIsSubmitting(true);
   };
-
-  return (
-    <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>
-  <Form.Group controlId="formUsernameIn">
-    <Form.Label><small>Username*</small></Form.Label>
-    <Form.Control
-      size="sm"
-      name="username"
-      placeholder="Username"
-      onChange={handleChange}
-      isInvalid={!!formErrors.username}
-      />
-      <Form.Control.Feedback type="invalid" tooltip>
-        Empty username
-      </Form.Control.Feedback>
-  </Form.Group>
-
-  <Form.Group controlId="formBasicPasswordIn">
-    <Form.Label><small>Password*</small></Form.Label>
-    <Form.Control
-      size="sm"
-      name="password"
-      type="password"
-      placeholder="Password"
-      onChange={handleChange}
-      isInvalid={!!formErrors.password}/>
-      <Form.Control.Feedback type="invalid" tooltip>
-        Wrong email or password
-      </Form.Control.Feedback>
-  </Form.Group>
-  <div className="submit-button">
-    <Button variant="green" type="submit" className="mt-1">
-        Sign In
-    </Button>
-  </div>
-</Form>);
+  
+  return (props.show) ? (
+    <Card >
+      <Card.Body>
+        <Card.Title className="text-center">Admin Login</Card.Title>
+        <Form className="auth-form" onSubmit={handleSubmit} ref={formRef} noValidate>
+          <Form.Group controlId="formUsernameIn">
+            <Form.Label><small>Username*</small></Form.Label>
+            <Form.Control
+              size="sm"
+              name="username"
+              placeholder="Username"
+              onChange={handleChange}
+              isInvalid={!!formErrors.username}
+            />
+            <Form.Control.Feedback type="invalid" tooltip>
+              Empty username
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="formBasicPasswordIn">
+            <Form.Label><small>Password*</small></Form.Label>
+            <Form.Control
+              size="sm"
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+              isInvalid={!!formErrors.password}/>
+            <Form.Control.Feedback type="invalid" tooltip>
+              Wrong email or password
+            </Form.Control.Feedback>
+          </Form.Group>
+          <div className="submit-button">
+            <Button variant="green" type="submit" className="mt-1">
+                Sign In
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>) : '';
 };
 
 export default SignIn;

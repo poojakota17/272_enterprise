@@ -1,35 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import './Welcome.css';
 import Logo from '../../logo_transparent.png';
+import { ReactComponent as AdminButton} from '../../components/Assets/admin.svg';
 
 import { SignIn } from '../../components/SignIn';
 import { SignUp } from '../../components/SignUp';
 import { FederatedAuth } from '../../components/FederatedAuth';
 const Welcome = props => {
-
+  const [userLogin, setUserLogin] = useState(true);
   return (
-    <Row className="welcome_page">
-    <Col xs={"auto"}>
-    <img src={Logo} className="logo" alt="clear logo"/>
-    </Col>
-    <Col xs={4}>
-      <Tabs defaultActiveKey="signin" transition={false} className="nav-fill rounded" id="uncontrolled-tab-example">
-        <Tab eventKey="signin" title="Sign In">
-          <SignIn/>
-        </Tab>
-        <Tab eventKey="signup" title="Sign Up">
-          <SignUp/>
-        </Tab>
-        <Tab eventKey="federated" title="Federated">
-          <FederatedAuth/>
-        </Tab>
-      </Tabs>
-    </Col>
-    </Row>
+    <>
+      <Row className="welcome_page">
+        <Col xs={"auto"}>
+        <img src={Logo} className="logo" alt="clear logo"/>
+        </Col>
+        <Col xs={4} className="pt-4">
+              <SignIn show={!userLogin}/>
+              <FederatedAuth show={userLogin}/>
+        </Col>
+      </Row>
+      <Button variant="admin" onClick={() => setUserLogin(!userLogin)}><AdminButton /></Button>
+    </>
   );
 }
 

@@ -20,16 +20,16 @@ export const Routes = () => {
     <Router >
       <Container fluid className="p-0">
         <Switch>
-          <Route path="/about" component={About} exact />
+          <Route path="/about" component={About}  />
           <Route path="/login">
             <Welcome />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
-          <PrivateRoute path="/home" component={Home} exact />
-          <PrivateRoute path="/getdetails" component={Getdetails} exact />
-          <AdminRoute path="/admin" component={Admin} exact />
+          <PrivateRoute path="/home" component={Home}  />
+          <PrivateRoute path="/getdetails" component={Getdetails}  />
+          <AdminRoute path="/admin" component={Admin} />
         </Switch>
       </Container>
     </Router>

@@ -11,6 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+:root {
+  --logo-color: rgb(14,56,64);
+  --blue: #6492AD;
+  --bright-green: #31A28B;
+  --yellow: #E9BE4A;
+}
 
 .loading-screen{
   background-image: url("./views/Welcome/bg.jpg");

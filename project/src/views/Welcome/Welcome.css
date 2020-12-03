@@ -1,9 +1,3 @@
-:root {
-  --logo-color: rgb(14,56,64);
-  --blue: #6492AD;
-  --bright-green: #31A28B;
-  --yellow: #E9BE4A;
-}
 
 .welcome_page {
   background-image: url("./bg.jpg");
@@ -23,10 +17,6 @@
   border-color: #dee2e6 #dee2e6 #fff;
 }
 
-.nav-link, .nav-tabs > a:hover {
-  background-color: var(--logo-color);
-  color: white;
-}
 
 .btn-green {
   background-color: var(--bright-green);
@@ -55,4 +45,10 @@
   font-weight: bold;
   font-size: .8rem;
   margin-bottom: 1rem;
+}
+
+.btn-admin {
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }

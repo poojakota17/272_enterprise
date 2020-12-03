@@ -1,6 +1,23 @@
-.NavBar {
-  background-color: black;
-  font-size: 20px;
+.navbar-corp {
+  background-color: var(--bright-green);
+}
+
+.navlogo {
+  height: 2rem;
+  padding-left: 1rem;
+}
+
+.nav-link:hover {
+  background-color: var(--logo-color);
   color: white;
-  height: 70px;
+  border-radius: 4px;
+}
+
+.nav-link {
+  color: white;
+}
+
+.btn-navbutton {
+  background-color: var(--yellow);
+  color: white;
 }

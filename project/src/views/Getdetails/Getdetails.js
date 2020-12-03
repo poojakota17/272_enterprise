@@ -30,45 +30,48 @@ const Getdetails = props => {
         redirect: 'follow'
     };
     useEffect(() => {
-        let result = {}
+
         fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
 
-            .then(response => response.json())
-            //.then(response => alert(response.text()))
+            //.then(response => response.json())
+            .then(response => response.text())
+            //.then(response => alert(response))
+            .then(response => {
+                console.log(JSON.parse(response))
+                setdata(JSON.parse(response))
+                console.log("hello", data)
+            })
 
-            .then(response => { console.log(response) })
-            .then(response => setdata(response))
-            .catch(error => console.log(error))
-        //console.log("hello", JSON.parse(data))
-
-    }
-    )
+            .catch(error => console.log(error));
+    })
     return (
         <div>
-            {/* <div>Employee Number : {data.body.emp_no} </div><br></br> */}
-            {/* <div>Department Number : {data.dept_no} </div><br></br>
-            <div>First Name : {data.first_name} </div><br></br>
-            <div>Last Name : {data.last_name} </div><br></br>
-            <div>Hiredate : {data.hire_date} </div><br></br>
-            <div>Salary : {data.salary} </div><br></br>
-            <div>Designation : {data.title} </div><br></br>
-            <div>Tenure : {data.tenure} </div> */}
+
+            {/* <div>Employee Number : {data["emp_no"]} </div><br></br>
+            <div>Department Number : {data["dept_no"]} </div><br></br>
+            <div>First Name : {data["first_name"]} </div><br></br>
+            <div>Last Name : {data["last_name"]} </div><br></br>
+            <div>Hiredate : {data["hire_date"]} </div><br></br>
+            <div>Salary : {data["salary"]} </div><br></br>
+            <div>Designation : {data["title"]} </div><br></br>
+            <div>Tenure : {data["tenure"]} </div> */}
+
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Dropdown Button
                     </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Manager</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Senior Manager</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Assisant Manager</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Senior Staff</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Staff</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Technical Engineer</Dropdown.Item>
+                    <Dropdown.Item eventKey="Manager">Manager</Dropdown.Item>
+                    <Dropdown.Item eventKey="Senior Manager">Senior Manager</Dropdown.Item>
+                    <Dropdown.Item eventKey="Assistant Manager">Assisant Manager</Dropdown.Item>
+                    <Dropdown.Item eventKey="Senior Staff">Senior Staff</Dropdown.Item>
+                    <Dropdown.Item eventKey="Staff">Staff</Dropdown.Item>
+                    <Dropdown.Item eventKey="Technical Engineer">Technical Engineer</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-
         </div>
+
     )
 
 }

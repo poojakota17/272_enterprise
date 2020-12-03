@@ -118,7 +118,7 @@ app.get('/items', function (req, res) {
                       result1[0]["Assistant Managers"].push(result8[x].first_name + ", " + result8[x].last_name);
                     }
 
-                    res.json({ success: 'get call succeed!', url: req.url, body: result1 });
+                    res.json(result1[0]);
                   })
                 })
               })
@@ -133,8 +133,10 @@ app.get('/items', function (req, res) {
 
 });
 
-app.get('/items/*', function (req, res) {
+app.get('/items/getdetails', function (req, res) {
   // Add your code here
+  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
+  let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
   res.json({ success: 'get call succeed!', url: req.url });
 });
 

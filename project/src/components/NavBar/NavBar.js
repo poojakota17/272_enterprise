@@ -28,6 +28,7 @@ const NavBar = () => {
       <Nav className="ml-auto">
         <Nav.Link href="/About" >About</Nav.Link>
         <Nav.Link href="/Getdetails" >MyProfile</Nav.Link>
+        <Nav.Link href="/Manager" >Manager</Nav.Link>
         <Nav.Link href="/Admin" >Admin</Nav.Link>
         <Button variant="navbutton" onClick={handleClick} href="/">Log Out</Button>
       </Nav>

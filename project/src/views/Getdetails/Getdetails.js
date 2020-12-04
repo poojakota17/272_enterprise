@@ -1,15 +1,17 @@
 //import React from 'react';
-//import Amplify, { API } from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 //import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
-import { Dropdown, Button } from 'react-bootstrap';
-import { useAuth } from "../../corp-auth.js";
+import { Dropdown, Button, Row, Col } from 'react-bootstrap';
+import awsmobile from '../../aws-exports';
+//import { useAuth } from "../../corp-auth.js";
+//Auth.configure(awsmobile)
 
 const Getdetails = props => {
 
-    const [token, settoken] = useState();
-    console.log(token)
+    const [token, settoken] = useState(null);
+    const [data, setdata] = useState(null);
     useEffect(() => {
         Auth.currentSession()
             .then(cognitoUser => {
@@ -18,65 +20,101 @@ const Getdetails = props => {
                 console.log(cognitoUser)
                 console.log(token)
             })
-    }, [])
+            .then(cognitoUser => {
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", token);
+                myHeaders.append("Content-Type", "application/json");
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
+                fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
+                    .then(response => response.text())
+                    // .then(response => alert(response))
+                    .then(response => {
+                        console.log(JSON.parse(response))
+                        setdata(JSON.parse(response))
+                        console.log("hello", data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            })
+    }, [token])
 
-    const [data, setdata] = useState(null);
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", token);
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
+    const [value, setValue] = useState(null);
+    const [teamdata, setteamdata] = useState(null)
+    const handleSelect = (e) => {
+        console.log(e);
+        setValue(e)
+    }
     useEffect(() => {
-
-        fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
-
-            //.then(response => response.json())
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", token);
+        myHeaders.append("Content-Type", "application/json");
+        fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', {
+            method: 'POST',
+            body: JSON.stringify({ "type": value }),
+            headers: myHeaders,
+            redirect: 'follow'
+        })
             .then(response => response.text())
             //.then(response => alert(response))
             .then(response => {
                 console.log(JSON.parse(response))
-                setdata(JSON.parse(response))
-                console.log("hello", data)
+                var result = JSON.parse(response).map((element, index) => renderRow(index, element))
+                setteamdata(result)
+                console.log("helloteamdata", teamdata)
             })
-
             .catch(error => console.log(error));
-    })
-    return (
-        <div>
+    }, [value])
 
-            {/* <div>Employee Number : {data["emp_no"]} </div><br></br>
-            <div>Department Number : {data["dept_no"]} </div><br></br>
-            <div>First Name : {data["first_name"]} </div><br></br>
-            <div>Last Name : {data["last_name"]} </div><br></br>
-            <div>Hiredate : {data["hire_date"]} </div><br></br>
-            <div>Salary : {data["salary"]} </div><br></br>
-            <div>Designation : {data["title"]} </div><br></br>
-            <div>Tenure : {data["tenure"]} </div> */}
+    function renderRow(index, element) {
+        return (
+            <Col >
+                <Row>{element}</Row>
+            </Col>
+
+        )
+    }
+
+    return (
+        <div align="center">
+
+            {data !== null &&
+                <Col>
+                    <h1 align="center">Hello, {data["first_name"]} {data["last_name"]} </h1>
+                    <Row>Employee Number : {data["emp_no"]} </Row>
+                    <Row>Department Number : {data["dept_no"]} </Row>
+                    <Row>Hiredate : {data["hire_date"]} </Row>
+                    <Row>Salary : {data["salary"]} </Row>
+                    <Row>Designation : {data["title"]} </Row>
+                    <Row>Tenure : {data["tenure"]} </Row>
+                </Col>
+            }
+
 
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Dropdown Button
+                    View my department employees
                     </Dropdown.Toggle>
-
                 <Dropdown.Menu>
-                    <Dropdown.Item eventKey="Manager">Manager</Dropdown.Item>
-                    <Dropdown.Item eventKey="Senior Manager">Senior Manager</Dropdown.Item>
-                    <Dropdown.Item eventKey="Assistant Manager">Assisant Manager</Dropdown.Item>
-                    <Dropdown.Item eventKey="Senior Staff">Senior Staff</Dropdown.Item>
-                    <Dropdown.Item eventKey="Staff">Staff</Dropdown.Item>
-                    <Dropdown.Item eventKey="Technical Engineer">Technical Engineer</Dropdown.Item>
+                    <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
+                    <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
+                    <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
+                    <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
+                    <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
+                    <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-        </div>
+            {teamdata !== null &&
+                <div> {teamdata}</div>
+            }
+        </div >
 
     )
 
 }
-
-
-
 
 export default Getdetails;

@@ -26,10 +26,10 @@ const NavBar = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">
-        <Nav.Link href="/About" >About</Nav.Link>
-        <Nav.Link href="/Getdetails" >MyProfile</Nav.Link>
-        <Nav.Link href="/Manager" >Manager</Nav.Link>
-        <Nav.Link href="/Admin" >Admin</Nav.Link>
+        <Nav.Link href="/about" >About</Nav.Link>
+        <Nav.Link href="/getdetails" >MyProfile</Nav.Link>
+        <Nav.Link href="/manager" >Manager</Nav.Link>
+        <Nav.Link href="/admin" >Admin</Nav.Link>
         <Button variant="navbutton" onClick={handleClick} href="/">Log Out</Button>
       </Nav>
       </Navbar.Collapse>

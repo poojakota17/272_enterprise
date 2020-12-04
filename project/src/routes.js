@@ -30,34 +30,13 @@ export const Routes = () => {
           </Route>
           <PrivateRoute path="/home" component={Home} exact />
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
-          <PrivateRoute path="/manager" component={Manager} exact />
-          <AdminRoute path="/admin" component={Admin} exact />
+          <GroupRoute path="/admin" component={Admin} group="Admin" exact />
+          <GroupRoute path="/manager" component={Manager} group="Manager" exact />
         </Switch>
       </Container>
     </Router>
   );
 }
-/*
-function AuthButton() {
-  let history = useHistory();
-  let auth = useAuth();
-  return auth.user ? (
-    <p>
-      Welcome!{}
-      <button
-        onClick={() => {
-          auth.logout(() => history.push("/"));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
-  ) : (
-    <p>You are not logged in.</p>
-  );
-}
-*/
-
 
 export const PrivateRoute = (props) => {
   let auth = useAuth();
@@ -92,7 +71,7 @@ export const PrivateRoute = (props) => {
   );
 }
 
-export const AdminRoute = (props) => {
+export const GroupRoute = (props) => {
   let auth = useAuth();
   const [state, setState] = useState('loading');
   const { component: Component, path, ...rest } = props;
@@ -101,7 +80,7 @@ export const AdminRoute = (props) => {
       try {
         const isUserLogged = await auth.checkAuth()
         const groups = isUserLogged.signInUserSession.idToken.payload['cognito:groups']
-        setState((isUserLogged && groups.length > 0 && groups[0] == 'Admin') ? 'admin' : 'redirect');
+        setState((isUserLogged && groups.length > 0 && groups.includes(props.group)) ? 'allowed' : 'redirect');
       }
       catch {
         setState('redirect');
@@ -118,7 +97,7 @@ export const AdminRoute = (props) => {
     <Route
       path={path}
       {...rest}
-      render={props => ((state === 'admin') ?
+      render={props => ((state === 'allowed') ?
         <Component {...props} /> :
         <Redirect to={{ pathname: "/" }} />)}
     />

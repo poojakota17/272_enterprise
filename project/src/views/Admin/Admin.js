@@ -48,18 +48,33 @@ const Admin = props => {
         headers: {
           'Content-Type' : 'application/json',
           Authorization: token
-        }
+        },
     }
     const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
     nextToken = NextToken;
     console.log(rest)
     return rest;
   }
-
+  async function enableUser() {
+    let apiName = 'AdminQueries';
+    let path = '/confirmUserSignUp';
+    let myInit = {
+        body: {
+          "username" : "oktanew_00u13gtj1mD77c7225d6",
+        },
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        }
+    }
+    console.log("hello")
+    return await API.post(apiName, path, myInit);
+  }
 
   return (
     <div>
       <Button onClick={() => {listUsers(10)}}>Show users</Button>
+      <Button onClick={() => {enableUser()}}>Enable user</Button>
     </div>
   )
 }

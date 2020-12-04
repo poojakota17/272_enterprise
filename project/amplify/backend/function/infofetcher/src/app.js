@@ -133,11 +133,10 @@ app.get('/items', function (req, res) {
 
 });
 
-app.get('/items/getdetails', function (req, res) {
+app.get('/items/retrieve', function (req, res) {
   // Add your code here
-  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
-  let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
-  res.json({ success: 'get call succeed!', url: req.url });
+
+  res.json({ success: 'get call succeed with items/getdetails!', url: req.url });
 });
 
 /****************************
@@ -146,11 +145,51 @@ app.get('/items/getdetails', function (req, res) {
 
 app.post('/items', function (req, res) {
   // Add your code here
-  res.json({ success: 'post call succeed!', url: req.url, body: req.body })
+  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
+  let query8 = `Select first_name as firstname, last_name as lastname  from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
+  var result1;
+  if (req.body.type === 'Manager') {
+    con.query(query6, function (err, result6) {
+      if (err)
+        console.log(err)
+      else {
+        result6 = JSON.parse(JSON.stringify(result6));
+
+        result1 = [];
+        for (x in result6) {
+          //console.log(x);
+          result1.push(result6[x].manager_firstname + " " + result6[x].manager_lastname);
+
+        }
+        console.log(result1)
+        res.json(result1)
+      }
+    })
+  } else {
+    con.query(query8, function (err, result8) {
+      if (err)
+        console.log(err)
+      else {
+        result8 = JSON.parse(JSON.stringify(result8));
+
+        result2 = [];
+        for (x in result8) {
+          //console.log(x);
+          result2.push(result8[x].firstname + " " + result8[x].lastname);
+
+        }
+        console.log(result2)
+        res.json(result2)
+      }
+    })
+
+  }
+  //res.json(result1)
 });
 
 app.post('/items/*', function (req, res) {
   // Add your code here
+
   res.json({ success: 'post call succeed!', url: req.url, body: req.body })
 });
 

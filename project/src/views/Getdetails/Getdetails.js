@@ -48,9 +48,14 @@ const Getdetails = props => {
     const [empno, setempno] = useState(null)
     const [redirect, setredirect] = useState(false)
     const [teamdata, setteamdata] = useState(null)
+    const [deptno, setdeptno] = useState(null)
     const handleSelect = (e) => {
         console.log(e);
         setValue(e)
+    }
+    const handleSelectdept = (e) => {
+        setdeptno(e)
+        console.log(deptno)
     }
     const handleClick = (e) => {
         console.log(e.target.attributes.key.value);
@@ -65,6 +70,7 @@ const Getdetails = props => {
             method: 'POST',
             body: JSON.stringify({
                 "type": value,
+                "deptno": deptno,
                 "emp_no": "XXXX"
             }),
             headers: myHeaders,
@@ -79,7 +85,7 @@ const Getdetails = props => {
                 console.log("helloteamdata", teamdata)
             })
             .catch(error => console.log(error));
-    }, [value])
+    }, [deptno])
 
     function renderRow(index, element) {
         return (
@@ -118,7 +124,7 @@ const Getdetails = props => {
                 <Redirect to={{
                     pathname: '/Getothersdetails',
                     state: { data: empno }
-                  }} />
+                }} />
             }
             <NavBar />
 
@@ -162,24 +168,49 @@ const Getdetails = props => {
 
                         <br></br>
                     </Container>
-                    {/* </Row> */}
 
 
 
 
-                    <Dropdown>
-                        <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                            View my department employees
+
+                    <Row>
+                        <Col>
+                            <Dropdown>
+                                <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
+                                    Choose Position
                     </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
-                            <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
-                            <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
-                            <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
-                            <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
-                            <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
+                                    <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
+                                    <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
+                                    <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
+                                    <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
+                                    <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
+                                </Dropdown.Menu>
+
+                            </Dropdown>
+                        </Col>
+
+                        <Col>
+                            <Dropdown>
+                                <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic1">
+                                    Choose Department
+                    </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>Customer Service</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>Development</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>Finance</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>Human Resources</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>Marketing</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>Production</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>Quality Management</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>Research</Dropdown.Item>
+                                    <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>Sales</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Col>
+                    </Row>
+
                 </div>
             }
             {teamdata !== null &&
@@ -187,7 +218,7 @@ const Getdetails = props => {
                     <br></br>
                     <Row className="font"> {value}'s : </Row>
                     {teamdata !== null && teamdata.length === 0 &&
-                        <Row className="font"> There are no {value} in {data["dept_name"]} department </Row>}
+                        <Row className="font"> There are no {value} in this department </Row>}
                     <Row>{teamdata}</Row>
 
 

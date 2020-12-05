@@ -33,7 +33,7 @@ export const Routes = () => {
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
           <PrivateRoute path="/getothersdetails" component={Getothersdetails} exact />
           <GroupRoute path="/admin" component={Admin} group="Admin" exact />
-          <GroupRoute path="/manager" component={Manager} group="Manager" exact />
+          <PrivateRoute path="/manager" component={Manager} group="Manager" exact />
         </Switch>
       </Container>
     </Router>

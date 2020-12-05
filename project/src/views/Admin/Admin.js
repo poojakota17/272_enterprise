@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   useHistory
 } from "react-router-dom";
 import { useAuth } from "../../corp-auth.js";
 import { NavBar } from '../../components/NavBar';
+import { ShowUsers } from '../../components/ShowUsers';
 import { Auth, API } from 'aws-amplify';
 
 import Button from 'react-bootstrap/Button'
@@ -11,19 +12,24 @@ import Button from 'react-bootstrap/Button'
 const Admin = props => {
   let history = useHistory();
   let auth = useAuth();
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    listUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
-  async function addToGroup(username, group) {
+  async function addToGroup(username) {
     let apiName = 'AdminQueries';
     let path = '/addUserToGroup';
     let myInit = {
         body: {
           "username" : username,
-          "groupname": group
+          "groupname": "Manager"
         },
         headers: {
           'Content-Type' : 'application/json',
-          'Access-Control-Allow-Origin': '*',
           Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
         }
     }
@@ -52,30 +58,32 @@ const Admin = props => {
     }
     const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
     nextToken = NextToken;
-    console.log(rest)
+    setUsers(rest.Users);
+    console.log(rest.Users)
     return rest;
   }
-  async function enableUser() {
+
+  async function enableUser(userId) {
     let apiName = 'AdminQueries';
     let path = '/confirmUserSignUp';
     let myInit = {
         body: {
-          "username" : "oktanew_00u13gtj1mD77c7225d6",
+          "username" : userId,
         },
         headers: {
           'Content-Type' : 'application/json',
           Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
         }
     }
-    console.log("hello")
     return await API.post(apiName, path, myInit);
   }
-
+console.log(users)
   return (
     <>
     < NavBar />
+      <ShowUsers users={users} updateUser={addToGroup}/>
       <Button onClick={() => {listUsers(10)}}>Show users</Button>
-      <Button onClick={() => {enableUser()}}>Enable user</Button>
+      <Button onClick={() => {addToGroup()}}>Enable user</Button>
     </>
   )
 }

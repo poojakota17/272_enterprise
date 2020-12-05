@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 import { ProvideAuth } from "./corp-auth.js";
+import awsconfig from './aws-exports';
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -16,8 +17,8 @@ const isLocalhost = Boolean(
         /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
 );
-//import awsconfig from './aws-exports';
 
+/*
 let awsconfig = {
     Auth: {
         identityPoolId: process.env.REACT_APP_COGNITO_ID_POOL,
@@ -45,11 +46,11 @@ let awsconfig = {
                 }
             ]
       }
-}
+}*/
 
 if (isLocalhost) {
-    awsconfig.Auth.oauth.redirectSignIn = 'http://localhost:3000/';
-    awsconfig.Auth.oauth.redirectSignOut = 'http://localhost:3000/';
+    awsconfig.oauth.redirectSignIn = 'http://localhost:3000/';
+    awsconfig.oauth.redirectSignOut = 'http://localhost:3000/';
 }
 
 Amplify.configure(awsconfig);

@@ -72,10 +72,11 @@ const Admin = props => {
   }
 
   return (
-    <div>
+    <>
+    < NavBar />
       <Button onClick={() => {listUsers(10)}}>Show users</Button>
       <Button onClick={() => {enableUser()}}>Enable user</Button>
-    </div>
+    </>
   )
 }
 

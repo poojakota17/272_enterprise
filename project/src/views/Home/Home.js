@@ -19,13 +19,6 @@ const Home = props => {
 
         Welcome!{" "}
 
-        <button
-          onClick={() => {
-            auth.logout(() => history.push("/"));
-          }}
-        >
-          Sign out
-      </button>
       </p>
       Here will be our app
     </div>

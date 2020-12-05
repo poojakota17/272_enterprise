@@ -76,7 +76,7 @@ const Manager = props => {
             redirect: 'follow'
         })
             .then(response => response.text())
-            .then(response => alert(response))
+            .then(response => alert("Successfully Posted"))
             .catch(error => console.log(error));
     }
 

@@ -149,8 +149,8 @@ app.post('/items', function (req, res) {
   if (emp_no === null || emp_no === undefined) {
     emp_no = '10001'
   }
-  let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}' ));`
-  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
+  let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no='${req.body.deptno}'  );`
+  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no='${req.body.deptno}' ));`
   var result1;
   if (req.body.type === 'Manager') {
     con.query(query6, function (err, result6) {

@@ -3,10 +3,11 @@ import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 //import awsconfig from '../../index.js';
 import { Auth } from 'aws-amplify';
-import { Dropdown, Button, Row, Col } from 'react-bootstrap';
+import { Dropdown, Button, Row, Col, Container, Nav, ListGroup } from 'react-bootstrap';
 import awsmobile from '../../aws-exports';
-//import { useAuth } from "../../corp-auth.js";
-//Auth.configure(awsmobile)
+import './Getdetails.css';
+import { NavBar } from '../../components/NavBar';
+
 
 const Getdetails = props => {
 
@@ -44,10 +45,17 @@ const Getdetails = props => {
     }, [token])
 
     const [value, setValue] = useState(null);
+    const [empno, setempno] = useState(null)
     const [teamdata, setteamdata] = useState(null)
     const handleSelect = (e) => {
         console.log(e);
         setValue(e)
+    }
+    const handleClick = (e) => {
+        console.log(e.target.attributes.key.value);
+        //console.log(evtkey)
+        setempno(e)
+        //console.log(empno)
     }
     useEffect(() => {
         var myHeaders = new Headers();
@@ -72,45 +80,111 @@ const Getdetails = props => {
 
     function renderRow(index, element) {
         return (
-            <Col >
-                <Row>{element}</Row>
-            </Col>
+            <Col md="5" >
+                <ListGroup defaultActiveKey="#Getdetails">
+                    <ListGroup.Item Key={element["emp_no"]} active action variant="info" onClick={handleClick} href="./Getdetails">
+
+                        {element["first_name"]} {element["last_name"]}<br></br>
+                        Employee No : {element["emp_no"]}
+
+                    </ListGroup.Item>
+                </ListGroup>
+
+            </Col >
 
         )
     }
+    if (data !== null) {
+        var jobhistory = data["Job History"].map((element, index) => renderjobhistory(index, element));
+        function renderjobhistory(index, element) {
+            return (
+                <Col>
+                    Position :{element["title"]} <br></br>
+                     From : {element["from_date"].substring(0, 10)}<br></br>
+                     To : {element["to_date"].substring(0, 10)}
+
+                </Col>
+
+            )
+        }
+    }
 
     return (
-        <div align="center">
 
+        <div >
+            <NavBar />
             {data !== null &&
-                <Col>
-                    <h1 align="center">Hello, {data["first_name"]} {data["last_name"]} </h1>
-                    <Row>Employee Number : {data["emp_no"]} </Row>
-                    <Row>Department Number : {data["dept_no"]} </Row>
-                    <Row>Hiredate : {data["hire_date"]} </Row>
-                    <Row>Salary : {data["salary"]} </Row>
-                    <Row>Designation : {data["title"]} </Row>
-                    <Row>Tenure : {data["tenure"]} </Row>
-                </Col>
-            }
+                <div>
+                    <h1 font-color="black">Hello, {data["first_name"]} {data["last_name"]} </h1><br></br>
+                    <br></br>
+                    {/* <Row className="font"> */}
+                    <Container className="font" md="fluid">
+                        <Row md="auto">
+                            <Col>Employee Number : {data["emp_no"]} </Col>
+                            <Col>Department Number : {data["dept_no"]} </Col><br></br>
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <Col>Department : {data["dept_name"]}</Col>
+                            <Col>Tenure : {data["tenure"]} </Col>
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <Col>Position : {data["title"]} </Col>
+                            <Col>Hiredate : {data["hire_date"].substring(0, 10)}</Col>
+
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <Col>
+                                Job History  :
+                            </Col>
+                            <Col></Col>
+                            <br></br>
+                        </Row>
+                        <Row>
+
+                            {jobhistory}
+                            <Col>Salary : ${data["salary"]} </Col>
 
 
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    View my department employees
+                        </Row>
+
+
+                        <br></br>
+                    </Container>
+                    {/* </Row> */}
+
+
+
+
+                    <Dropdown>
+                        <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
+                            View my department employees
                     </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
-                    <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
-                    <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
-                    <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
-                    <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
-                    <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            {teamdata !== null &&
-                <div> {teamdata}</div>
+                        <Dropdown.Menu>
+                            <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
+                            <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
+                            <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
+                            <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
+                            <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
+                            <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
             }
+            {teamdata !== null &&
+                <Container md="fluid">
+                    <br></br>
+                    <Row className="font"> {value}'s : </Row>
+                    {teamdata !== null && teamdata.length === 0 &&
+                        <Row className="font"> There are no {value} in {data["dept_name"]} department </Row>}
+                    <Row>{teamdata}</Row>
+
+
+                </Container>
+            }
+
         </div >
 
     )

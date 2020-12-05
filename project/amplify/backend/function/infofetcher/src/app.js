@@ -107,19 +107,10 @@ app.get('/items', function (req, res) {
                     console.log(x);
                     result1[0]["Managers"].push(result6[x].manager_firstname + ", " + result6[x].manager_lastname);
                   }
-                  con.query(query8, function (err, result8) {
-                    if (err)
-                      console.log(err)
-                    else
-                      result8 = JSON.parse(JSON.stringify(result8));
-                    result1[0]["Assistant Managers"] = [];
-                    for (x in result8) {
-                      //console.log(x);
-                      result1[0]["Assistant Managers"].push(result8[x].first_name + ", " + result8[x].last_name);
-                    }
 
-                    res.json(result1[0]);
-                  })
+
+                  res.json(result1[0]);
+
                 })
               })
             })
@@ -145,8 +136,8 @@ app.get('/items/retrieve', function (req, res) {
 
 app.post('/items', function (req, res) {
   // Add your code here
-  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
-  let query8 = `Select first_name as firstname, last_name as lastname  from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
+  let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
+  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
   var result1;
   if (req.body.type === 'Manager') {
     con.query(query6, function (err, result6) {
@@ -158,7 +149,7 @@ app.post('/items', function (req, res) {
         result1 = [];
         for (x in result6) {
           //console.log(x);
-          result1.push(result6[x].manager_firstname + " " + result6[x].manager_lastname);
+          result1.push(result6[x]);
 
         }
         console.log(result1)
@@ -175,7 +166,7 @@ app.post('/items', function (req, res) {
         result2 = [];
         for (x in result8) {
           //console.log(x);
-          result2.push(result8[x].firstname + " " + result8[x].lastname);
+          result2.push(result8[x]);
 
         }
         console.log(result2)

@@ -14,6 +14,7 @@ import { Admin } from './views/Admin';
 import { useAuth } from "./corp-auth.js";
 import Container from 'react-bootstrap/Container'
 import Getdetails from "./views/Getdetails/Getdetails";
+import Getothersdetails from "./views/Getothersdetails/Getothersdetails"
 import Manager from "./views/Manager/Manager";
 
 export const Routes = () => {
@@ -21,7 +22,7 @@ export const Routes = () => {
     <Router >
       <Container fluid className="p-0">
         <Switch>
-          <Route path="/about" component={About}  />
+          <Route path="/about" component={About} />
           <Route path="/login">
             <Welcome />
           </Route>
@@ -30,6 +31,7 @@ export const Routes = () => {
           </Route>
           <PrivateRoute path="/home" component={Home} exact />
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
+          <PrivateRoute path="/getothersdetails" component={Getothersdetails} exact />
           <GroupRoute path="/admin" component={Admin} group="Admin" exact />
           <GroupRoute path="/manager" component={Manager} group="Manager" exact />
         </Switch>

@@ -39,14 +39,19 @@ const con = mysql.createConnection({
 
 app.get('/items', function (req, res) {
   // Add your code here
-  let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no='10001';`
-  let query2 = `Select first_name,last_name, hire_date from employees where emp_no='10001';`
-  let query3 = `select   salaries.salary  from salaries  inner join employees on employees.emp_no=salaries.emp_no where employees.emp_no='10001' order by to_date desc limit 1;`
-  let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.emp_no='10001' order by to_date desc limit 1 ; `
-  let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp  where emp_no='10001';`
-  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
-  let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles   where emp_no='10001';`
-  let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
+  var emp_no = req.apiGateway.event.requestContext.authorizer.claims.name;
+
+  if (emp_no === null || emp_no === undefined) {
+    emp_no = '10001'
+  }
+  let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no='${emp_no}';`
+  let query2 = `Select first_name,last_name, hire_date from employees where emp_no='${emp_no}';`
+  let query3 = `select   salaries.salary  from salaries  inner join employees on employees.emp_no=salaries.emp_no where employees.emp_no='${emp_no}' order by to_date desc limit 1;`
+  let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.emp_no='${emp_no}' order by to_date desc limit 1 ; `
+  let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp  where emp_no='${emp_no}';`
+  let query6 = `Select first_name as manager_firstname, last_name as manager_lastname from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}' ));`
+  let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles   where emp_no='${emp_no}';`
+  //let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
   con.query(query1, function (err, result1) {
     if (err)
       console.log(err)
@@ -136,8 +141,16 @@ app.get('/items/retrieve', function (req, res) {
 
 app.post('/items', function (req, res) {
   // Add your code here
-  let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='10001' ));`
-  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='10001')));`
+  var emp_no = req.apiGateway.event.requestContext.authorizer.claims.name;
+  if (req.body.emp_no !== "XXXX") {
+    emp_no = req.body.emp_no
+  }
+
+  if (emp_no === null || emp_no === undefined) {
+    emp_no = '10001'
+  }
+  let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}' ));`
+  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
   var result1;
   if (req.body.type === 'Manager') {
     con.query(query6, function (err, result6) {
@@ -204,7 +217,71 @@ app.put('/items/*', function (req, res) {
 
 app.delete('/items', function (req, res) {
   // Add your code here
-  res.json({ success: 'delete call succeed!', url: req.url });
+  var emp_no = req.body.emp_no;
+  let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no='${emp_no}';`
+  let query2 = `Select first_name,last_name, hire_date from employees where emp_no='${emp_no}';`
+  let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.emp_no='${emp_no}' order by to_date desc limit 1 ; `
+  let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp  where emp_no='${emp_no}';`
+  let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles   where emp_no='${emp_no}';`
+
+  //let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
+  con.query(query1, function (err, result1) {
+    if (err)
+      console.log(err)
+    else {
+      console.log(result1)
+      con.query(query2, function (err, result2) {
+        if (err)
+          console.log(err)
+        else
+          console.log(result2)
+        result1 = JSON.parse(JSON.stringify(result1));
+        result2 = JSON.parse(JSON.stringify(result2));
+        for (const [key, value] of Object.entries(result2[0])) {
+          result1[0][key] = value;
+        }
+
+        con.query(query4, function (err, result4) {
+          if (err)
+            console.log(err)
+          else
+            result4 = JSON.parse(JSON.stringify(result4));
+          for (const [key, value] of Object.entries(result4[0])) {
+            result1[0][key] = value;
+          }
+          con.query(query5, function (err, result5) {
+            if (err)
+              console.log(err)
+            else
+              result5 = JSON.parse(JSON.stringify(result5));
+            for (const [key, value] of Object.entries(result5[0])) {
+              result1[0][key] = value;
+            }
+            con.query(query7, function (err, result7) {
+              if (err)
+                console.log(err)
+              else
+                result7 = JSON.parse(JSON.stringify(result7));
+
+              result1[0]["Job History"] = [];
+
+              result1[0]["Job History"] = result7;
+
+
+
+
+              res.json(result1[0]);
+
+
+            })
+          })
+        })
+      })
+
+
+    }
+  })
+  //res.json({ success: 'delete call succeed!', url: req.url });
 });
 
 app.delete('/items/*', function (req, res) {

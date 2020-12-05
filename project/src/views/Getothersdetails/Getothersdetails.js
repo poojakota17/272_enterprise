@@ -1,15 +1,10 @@
-//import React from 'react';
-import Amplify, { API } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { Dropdown, Button, Row, Col, Container, Nav, ListGroup } from 'react-bootstrap';
-import awsmobile from '../../aws-exports';
-import './Getdetails.css';
-import { NavBar } from '../../components/NavBar';
-import '../Getothersdetails'
+import { NavBar } from '../../components/NavBar'
 import { Redirect } from "react-router-dom";
 
-const Getdetails = props => {
+const Getothersdetails = props => {
 
     const [token, settoken] = useState(null);
     const [data, setdata] = useState(null);
@@ -26,13 +21,13 @@ const Getdetails = props => {
                 myHeaders.append("Authorization", token);
                 myHeaders.append("Content-Type", "application/json");
                 var requestOptions = {
-                    method: 'GET',
+                    method: 'DELETE',
                     headers: myHeaders,
-                    redirect: 'follow'
+                    redirect: 'follow',
+                    body: JSON.stringify({ "emp_no": props.location.state.data }),
                 };
                 fetch('https://ypqntn5a8c.execute-api.us-east-1.amazonaws.com/dev/items', requestOptions)
                     .then(response => response.text())
-                    // .then(response => alert(response))
                     .then(response => {
                         console.log(JSON.parse(response))
                         setdata(JSON.parse(response))
@@ -42,7 +37,7 @@ const Getdetails = props => {
                         console.log(error)
                     });
             })
-    }, [token])
+    }, [token, props.location.state.data])
 
     const [value, setValue] = useState(null);
     const [empno, setempno] = useState(null)
@@ -65,18 +60,16 @@ const Getdetails = props => {
             method: 'POST',
             body: JSON.stringify({
                 "type": value,
-                "emp_no": "XXXX"
+                "emp_no": props.location.state.data
             }),
             headers: myHeaders,
             redirect: 'follow'
         })
             .then(response => response.text())
-            //.then(response => alert(response))
             .then(response => {
                 console.log(JSON.parse(response))
                 var result = JSON.parse(response).map((element, index) => renderRow(index, element))
                 setteamdata(result)
-                console.log("helloteamdata", teamdata)
             })
             .catch(error => console.log(error));
     }, [value])
@@ -113,7 +106,7 @@ const Getdetails = props => {
     }
 
     return (
-        <div >
+        <div>
             { redirect &&
                 <Redirect to={{
                     pathname: '/Getothersdetails',
@@ -121,12 +114,10 @@ const Getdetails = props => {
                   }} />
             }
             <NavBar />
-
             {data !== null &&
                 <div>
-                    <h1 font-color="black">Hello, {data["first_name"]} {data["last_name"]} </h1><br></br>
+                    <h1 font-color="black">Details for: {data["first_name"]} {data["last_name"]} </h1><br></br>
                     <br></br>
-                    {/* <Row className="font"> */}
                     <Container className="font" md="fluid">
                         <Row md="auto">
                             <Col>Employee Number : {data["emp_no"]} </Col>
@@ -141,7 +132,6 @@ const Getdetails = props => {
                         <Row>
                             <Col>Position : {data["title"]} </Col>
                             <Col>Hiredate : {data["hire_date"].substring(0, 10)}</Col>
-
                         </Row>
                         <br></br>
                         <Row>
@@ -152,24 +142,14 @@ const Getdetails = props => {
                             <br></br>
                         </Row>
                         <Row>
-
-                            {jobhistory}
-                            <Col>Salary : ${data["salary"]} </Col>
-
-
+                            {jobhistory} 
                         </Row>
-
-
                         <br></br>
                     </Container>
-                    {/* </Row> */}
-
-
-
 
                     <Dropdown>
                         <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                            View my department employees
+                            View Colleagues
                     </Dropdown.Toggle>
                         <Dropdown.Menu>
                             <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
@@ -189,15 +169,9 @@ const Getdetails = props => {
                     {teamdata !== null && teamdata.length === 0 &&
                         <Row className="font"> There are no {value} in {data["dept_name"]} department </Row>}
                     <Row>{teamdata}</Row>
-
-
                 </Container>
             }
-
-        </div >
-
+        </div>
     )
-
 }
-
-export default Getdetails;
+export default Getothersdetails;

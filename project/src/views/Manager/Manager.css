@@ -1,0 +1,13 @@
+.logo {
+    height: 6rem;
+    width:4rem;
+    justify-content: center;
+    
+  }
+  .font{
+      color:black
+  }
+  card{
+      background-color: burlywood ;
+      align-items:right ;
+  }

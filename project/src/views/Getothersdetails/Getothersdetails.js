@@ -158,8 +158,8 @@ const Getothersdetails = props => {
                         <Col>
                             <Dropdown>
                                 <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                                    Choose Designation
-                    </Dropdown.Toggle>
+                                    Choose Position
+                                </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
                                     <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
@@ -176,7 +176,7 @@ const Getothersdetails = props => {
                             <Dropdown>
                                 <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic1">
                                     Choose Department
-                    </Dropdown.Toggle>
+                                </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>Customer Service</Dropdown.Item>
                                     <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>Development</Dropdown.Item>

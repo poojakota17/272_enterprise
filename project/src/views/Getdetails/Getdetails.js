@@ -177,7 +177,7 @@ const Getdetails = props => {
                         <Col>
                             <Dropdown>
                                 <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                                    Choose Designation
+                                    Choose Position
                     </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>

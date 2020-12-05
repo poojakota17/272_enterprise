@@ -171,46 +171,47 @@ const Getdetails = props => {
 
 
 
+                    <Container>
+                        <Row className="search">To search for employees, please choose their position and department</Row>
 
-
-                    <Row>
-                        <Col>
-                            <Dropdown>
-                                <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                                    Choose Position
+                        <Row>
+                            <Col>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
+                                        Choose Position
                     </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
-                                    <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
-                                    <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
-                                    <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
-                                    <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
-                                    <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
-                                </Dropdown.Menu>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
+                                    </Dropdown.Menu>
 
-                            </Dropdown>
-                        </Col>
+                                </Dropdown>
+                            </Col>
 
-                        <Col>
-                            <Dropdown>
-                                <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic1">
-                                    Choose Department
+                            <Col>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic1">
+                                        Choose Department
                     </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>Customer Service</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>Development</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>Finance</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>Human Resources</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>Marketing</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>Production</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>Quality Management</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>Research</Dropdown.Item>
-                                    <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>Sales</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Col>
-                    </Row>
-
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>Customer Service</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>Development</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>Finance</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>Human Resources</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>Marketing</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>Production</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>Quality Management</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>Research</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>Sales</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
             }
             {teamdata !== null &&

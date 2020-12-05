@@ -30,6 +30,7 @@ export const Routes = () => {
             <Redirect to="/home" />
           </Route>
           <PrivateRoute path="/home" component={Home} exact />
+          <PrivateRoute path="/feedback" component={Home} exact />
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
           <PrivateRoute path="/getothersdetails" component={Getothersdetails} exact />
           <GroupRoute path="/admin" component={Admin} group="Admin" exact />

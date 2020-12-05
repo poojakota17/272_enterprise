@@ -30,6 +30,7 @@ const NavBar = () => {
         <Nav.Link href="/getdetails" >MyProfile</Nav.Link>
         <Nav.Link href="/manager" >Manager</Nav.Link>
         <Nav.Link href="/admin" ><AdminButton/></Nav.Link>
+        <Nav.Link href="/feedback" >Feedback-Portal</Nav.Link>
         <Button variant="navbutton" onClick={handleClick} href="/">Log Out</Button>
       </Nav>
       </Navbar.Collapse>

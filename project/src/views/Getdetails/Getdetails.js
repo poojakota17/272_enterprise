@@ -34,6 +34,7 @@ const Getdetails = props => {
                     .then(response => response.text())
                     // .then(response => alert(response))
                     .then(response => {
+
                         console.log(JSON.parse(response))
                         setdata(JSON.parse(response))
                         console.log("hello", data)

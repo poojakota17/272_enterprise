@@ -25,7 +25,7 @@ function SingleUser(props) {
   const [emNum, setEmNum] = useState('');
 
   const person = props.user;
-console.log(person)
+//console.log(person)
   useEffect(() => {
     setUserId(person.Username);
     var found = false;

@@ -34,7 +34,7 @@ export const Routes = () => {
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
           <PrivateRoute path="/getothersdetails" component={Getothersdetails} exact />
           <GroupRoute path="/admin" component={Admin} group="Admin" exact />
-          <PrivateRoute path="/manager" component={Manager} group="Manager" exact />
+          <GroupRoute path="/manager" component={Manager} group="Manager" exact />
         </Switch>
       </Container>
     </Router>
@@ -44,12 +44,14 @@ export const Routes = () => {
 export const PrivateRoute = (props) => {
   let auth = useAuth();
   const [state, setState] = useState('loading');
+  const [user, setUser] = useState(null);
   const { component: Component, path, ...rest } = props;
   useEffect(() => {
     (async function () {
       try {
         /* Update effect logic to track correct state */
         const isUserLogged = await auth.checkAuth()
+        setUser(isUserLogged);
         setState(isUserLogged ? 'loggedin' : 'redirect');
       }
       catch {
@@ -68,7 +70,7 @@ export const PrivateRoute = (props) => {
       path={path}
       {...rest}
       render={props => ((state === 'loggedin') ?
-        <Component {...props} /> :
+        <Component {...props} currentUser={user}/> :
         <Redirect to={{ pathname: "/login" }} />)}
     />
   );
@@ -77,11 +79,13 @@ export const PrivateRoute = (props) => {
 export const GroupRoute = (props) => {
   let auth = useAuth();
   const [state, setState] = useState('loading');
+  const [user, setUser] = useState(null);
   const { component: Component, path, ...rest } = props;
   useEffect(() => {
     (async function () {
       try {
         const isUserLogged = await auth.checkAuth()
+        setUser(isUserLogged)
         const groups = isUserLogged.signInUserSession.idToken.payload['cognito:groups']
         setState((isUserLogged && groups.length > 0 && groups.includes(props.group)) ? 'allowed' : 'redirect');
       }
@@ -101,7 +105,7 @@ export const GroupRoute = (props) => {
       path={path}
       {...rest}
       render={props => ((state === 'allowed') ?
-        <Component {...props} /> :
+        <Component {...props} currentUser={user}/> :
         <Redirect to={{ pathname: "/" }} />)}
     />
   );

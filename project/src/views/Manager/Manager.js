@@ -80,7 +80,7 @@ const Manager = props => {
     return (
         <div >
 
-            <NavBar />
+            <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
 
 
             <br />

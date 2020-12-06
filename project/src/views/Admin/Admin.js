@@ -11,14 +11,30 @@ import Button from 'react-bootstrap/Button'
 
 const Admin = props => {
   let history = useHistory();
-  let auth = useAuth();
+  console.log(props.currentUser)
   const [users, setUsers] = useState(null);
+  const [token, setToken] = useState(props.currentUser.signInUserSession.accessToken.jwtToken)
 
   useEffect(() => {
     listUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  async function addToGroup() {
+  let apiName = 'AdminQueries';
+  let path = '/addUserToGroup';
+  let myInit = {
+      body: {
+        "username" : "richard",
+        "groupname": "Editors"
+      },
+      headers: {
+        'Content-Type' : 'application/json',
+        Authorization: token
+      }
+  }
+  return await API.post(apiName, path, myInit);
+}
 
   async function addToGroup(username) {
     let apiName = 'AdminQueries';
@@ -30,7 +46,7 @@ const Admin = props => {
         },
         headers: {
           'Content-Type' : 'application/json',
-          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+          Authorization: token
         }
     }
     return await API.post(apiName, path, myInit);
@@ -40,8 +56,6 @@ const Admin = props => {
   let nextToken;
 
   async function listUsers(limit){
-    let token = (await Auth.currentSession()).getAccessToken().getJwtToken();
-    console.log(token);
     let userGroup = process.env.REACT_APP_OKTA_GROUP
     let apiName = process.env.REACT_APP_ADMIN_EPNAME;
     let path = '/listUsersInGroup';
@@ -72,7 +86,7 @@ const Admin = props => {
         },
         headers: {
           'Content-Type' : 'application/json',
-          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+          Authorization: token
         }
     }
     return await API.post(apiName, path, myInit);
@@ -80,10 +94,8 @@ const Admin = props => {
 console.log(users)
   return (
     <>
-    < NavBar />
+      < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
       <ShowUsers users={users} updateUser={addToGroup}/>
-      <Button onClick={() => {listUsers(10)}}>Show users</Button>
-      <Button onClick={() => {addToGroup()}}>Enable user</Button>
     </>
   )
 }

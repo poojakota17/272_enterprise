@@ -126,7 +126,7 @@ const Getdetails = props => {
                     state: { data: empno }
                 }} />
             }
-            <NavBar />
+            <NavBar  groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
 
             {data !== null &&
                 <div>

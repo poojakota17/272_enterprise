@@ -5,6 +5,7 @@ import { NavBar } from '../../components/NavBar'
 import { Redirect } from "react-router-dom";
 
 const Getothersdetails = props => {
+  console.log(props)
 
     const [token, settoken] = useState(null);
     const [data, setdata] = useState(null);
@@ -119,7 +120,7 @@ const Getothersdetails = props => {
                     state: { data: empno }
                 }} />
             }
-            <NavBar />
+          < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
             {data !== null &&
                 <div>
                     <h1 font-color="black">Details for: {data["first_name"]} {data["last_name"]} </h1><br></br>

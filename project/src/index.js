@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 import { ProvideAuth } from "./corp-auth.js";
 import awsconfig from './aws-exports';
+console.log("awsconfig",awsconfig)
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.

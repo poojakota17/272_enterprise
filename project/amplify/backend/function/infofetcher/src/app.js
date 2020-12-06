@@ -191,7 +191,7 @@ app.post('/items', function (req, res) {
   //res.json(result1)
 });
 
-app.post('/items/*', function (req, res) {
+app.post('/items/manager', function (req, res) {
   // Add your code here
 
   res.json({ success: 'post call succeed!', url: req.url, body: req.body })

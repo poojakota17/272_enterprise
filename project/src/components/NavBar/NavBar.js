@@ -31,6 +31,7 @@ const NavBar = (props) => {
       <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">
         <Nav.Link href="/getdetails" >MyProfile</Nav.Link>
+        <Nav.Link href="/feedback" >Feedback-Portal</Nav.Link>
         {managerLink}
         {adminLink}
         <Button variant="navbutton" onClick={handleClick} href="/">Log Out</Button>

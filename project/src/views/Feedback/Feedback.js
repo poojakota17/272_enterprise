@@ -28,10 +28,10 @@ function Feedback(props) {
     async function fetchFeedbacks() {
         const apiData = await API.graphql({ query: listFeedbacks });
         //console.log("props in feedback",props)
-        //console.log("apidata", apiData)
+        console.log("apidata", apiData)
         setFormData({ ...formData, sender: props.currentUser.signInUserSession.idToken.payload.email });
         console.log("formdata.sender",formData.sender) 
-        const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient === formData.recipient);
+        const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient === formData.sender);
          console.log("inbox res ", inboxres);
         setReceivedFeedbacks(inboxres);
         const sentres = apiData.data.listFeedbacks.items.filter(item => item.sender === formData.sender);

@@ -1,39 +1,66 @@
 import React, {useEffect, useState} from 'react';
-import {
-  useHistory
-} from "react-router-dom";
-import { useAuth } from "../../corp-auth.js";
 import { NavBar } from '../../components/NavBar';
 import { ShowUsers } from '../../components/ShowUsers';
-import { Auth, API } from 'aws-amplify';
+import { API } from 'aws-amplify';
 
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Admin = props => {
-  let history = useHistory();
-  console.log(props.currentUser)
+  const [employees, setEmployees] = useState(null);
+  const [managers, setManagers] = useState(null);
   const [users, setUsers] = useState(null);
-  const [token, setToken] = useState(props.currentUser.signInUserSession.accessToken.jwtToken)
+  const [update, setUpdate] = useState(false);
+  const token = props.currentUser.signInUserSession.accessToken.jwtToken;
 
   useEffect(() => {
-    listUsers();
+    listUsers(process.env.REACT_APP_OKTA_GROUP, setEmployees);
+    listUsers('Manager', setManagers);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
 
-  async function addToGroup() {
-  let apiName = 'AdminQueries';
-  let path = '/addUserToGroup';
-  let myInit = {
-      body: {
-        "username" : "richard",
-        "groupname": "Editors"
+  useEffect(() => {
+    if (employees && managers) {
+      console.log("count users")
+      setUsers(arrayDiffByKey('Username',employees, managers));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [managers, employees]);
+  console.log("users", users)
+
+  async function userInfo(username, setData) {
+    console.log(username)
+    let apiName = 'AdminQueries';
+    let path = '/getUser';
+    let myInit = {
+      queryStringParameters: {
+        "username" : username
       },
       headers: {
         'Content-Type' : 'application/json',
         Authorization: token
       }
   }
-  return await API.post(apiName, path, myInit);
+  return await API.get(apiName, path, myInit);
+}
+
+  async function removeFromGroup(username) {
+  let apiName = 'AdminQueries';
+  let path = '/removeUserFromGroup';
+  let myInit = {
+      body: {
+        "username" : username,
+        "groupname": "Manager"
+      },
+      headers: {
+        'Content-Type' : 'application/json',
+        Authorization: token
+      }
+  }
+  await API.post(apiName, path, myInit);
+  setUpdate(!update);
 }
 
   async function addToGroup(username) {
@@ -49,19 +76,19 @@ const Admin = props => {
           Authorization: token
         }
     }
-    return await API.post(apiName, path, myInit);
+    await API.post(apiName, path, myInit)
+    setUpdate(!update);
   }
 
 
   let nextToken;
 
-  async function listUsers(limit){
-    let userGroup = process.env.REACT_APP_OKTA_GROUP
+  async function listUsers(group, setData, limit){
     let apiName = process.env.REACT_APP_ADMIN_EPNAME;
     let path = '/listUsersInGroup';
     let myInit = {
         queryStringParameters: {
-          "groupname": userGroup,
+          "groupname": group,
           "limit": limit,
           "token": nextToken
         },
@@ -72,33 +99,36 @@ const Admin = props => {
     }
     const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
     nextToken = NextToken;
-    setUsers(rest.Users);
+    setData(rest.Users);
     console.log(rest.Users)
     return rest;
   }
 
-  async function enableUser(userId) {
-    let apiName = 'AdminQueries';
-    let path = '/confirmUserSignUp';
-    let myInit = {
-        body: {
-          "username" : userId,
-        },
-        headers: {
-          'Content-Type' : 'application/json',
-          Authorization: token
-        }
-    }
-    return await API.post(apiName, path, myInit);
-  }
-console.log(users)
   return (
     <>
       < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
-      <ShowUsers users={users} updateUser={addToGroup}/>
+      <div className="m-4">
+        <h1 className="m-4">Managers</h1>
+        <ShowUsers users={managers} upgrade={null} downgrade={removeFromGroup} getInfo={userInfo} />
+      </div>
+
+      <div className="m-4">
+        <h1 className="mx-4 mt-4">Users</h1>
+        <ShowUsers users={users} upgrade={addToGroup} downgrade={null} getInfo={userInfo} />
+      </div>
     </>
   )
 }
 
+function arrayDiffByKey(key, ...arrays) {
+  return [].concat(...arrays.map( (arr, i) => {
+      const others = arrays.slice(0);
+      others.splice(i, 1);
+      const unique = [...new Set([].concat(...others))];
+      return arr.filter( x =>
+          !unique.some(y => x[key] === y[key])
+      );
+  }));
+}
 
 export default Admin;

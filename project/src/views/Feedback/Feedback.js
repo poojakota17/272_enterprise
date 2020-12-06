@@ -76,12 +76,12 @@ function Feedback() {
         
         console.log("apidata", apiData)
         console.log("fname, lname",name.fname, name.lname)
-     setFormData({ ...formData, sender: data["first_name"].toLowerCase() +"."+ data["last_name"].toLowerCase()+"@techcorp.com"});
-     console.log("fnamemmme",data["first_name"])
+   setFormData({ ...formData, sender: data["first_name"].toLowerCase() +"."+ data["last_name"].toLowerCase()+"@techcorp.com"});
+    console.log("fnamemmme",data["first_name"])
       console.log("formdata.sender",formData.sender)
       console.log("Done fetching!");
 
-      const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient ===formData.sender);
+      const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient === formData.recipient);
       console.log("inbox res ", inboxres);
       setReceivedFeedbacks(inboxres);
       const sentres = apiData.data.listFeedbacks.items.filter(item => item.sender === formData.sender);
@@ -109,13 +109,16 @@ function Feedback() {
         <div>
              <NavBar/>
              <div>
-             
+             <p>Please click on "Compose" to create the feedback</p>
                 <Button variant="primary" onClick={handleShow}>
                
                     Compose &nbsp;
                 </Button>
+                <Button variant="primary" onClick={fetchFeedbacks}>
+                            fetch
+                         </Button>
                 
-             <p>Please click on "Compose" to create the feedback</p>
+             
                 <Modal show={show} onHide={handleClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Please write a feedback</Modal.Title>

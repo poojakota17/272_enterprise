@@ -4,6 +4,7 @@ import { Modal, Container, Row, Card, Alert, Col, Collapse, Form, Navbar, Nav, T
 import Button from 'react-bootstrap/Button';
 import './Feedback.css';
 import { listFeedbacks } from '../../graphql/queries';
+import { FaTwitter } from "react-icons/fa";
 import { NavBar } from '../../components/NavBar';
 import { FiTwitch, FiTrash, FiEdit2 } from "react-icons/fi";
 import { createFeedback as createFeedbackMutation, updateFeedback as updateFeedbackMutation, deleteFeedback as deleteFeedbackMutation } from '../../graphql/mutations';
@@ -29,13 +30,13 @@ function Feedback(props) {
         //console.log("props in feedback",props)
         //console.log("apidata", apiData)
         setFormData({ ...formData, sender: props.currentUser.signInUserSession.idToken.payload.email });
-        //console.log("formdata.sender",formData.sender) 
+        console.log("formdata.sender",formData.sender) 
         const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient === formData.recipient);
-        // console.log("inbox res ", inboxres);
+         console.log("inbox res ", inboxres);
         setReceivedFeedbacks(inboxres);
         const sentres = apiData.data.listFeedbacks.items.filter(item => item.sender === formData.sender);
         setSentFeedbacks(sentres);
-        // console.log("sent res", sentres);
+         console.log("sent res", sentres);
     }
 
     async function createFeedback() {
@@ -65,6 +66,8 @@ function Feedback(props) {
                 <Button variant="primary" onClick={handleShow}>
                     Create &nbsp; <FiEdit2 />
                 </Button>
+                <br/>
+                <Button variant="primary" onClick={fetchFeedbacks}> Reload </Button>
                 <Modal show={show} onHide={handleClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Please write a feedback</Modal.Title>
@@ -120,6 +123,7 @@ function Feedback(props) {
                                                             <p><b>Recipent </b> :&nbsp; {feedback.recipient}</p>
                                                             <p><b>Feedback  </b> :&nbsp; {feedback.feedback}</p>
                                                             <p><b>Recieved time  </b> :&nbsp;  {feedback.createdAt}</p>
+                                                            <p><a href="https://twitter.com/"><FaTwitter/></a></p>
                                                         </div>
                                                     ))
                                                 }
@@ -142,6 +146,7 @@ function Feedback(props) {
                                                                     <p><b>Sent To</b>: {feedback.recipient}</p>
                                                                     <p><b>Feedback</b>: {feedback.feedback}</p>
                                                                     <p><b>Sent Time</b>: {feedback.createdAt}</p>
+                                                                    <p><a href="https://twitter.com/"><FaTwitter/></a></p>
                                                                     <Button variant="primary" onClick={() => deleteFeedback(feedback)}> <FiTrash /> </Button>
                                                                 </div>
                                                             </div>
@@ -157,6 +162,7 @@ function Feedback(props) {
                         </Col>
                     </Row>
                 </Tab.Container>
+                
             </div>
         </div>
 

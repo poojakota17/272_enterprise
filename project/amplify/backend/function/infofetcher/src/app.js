@@ -201,112 +201,104 @@ app.post('/items/manage', function (req, res) {
       for (x in result) {
         //console.log(x);
         result1.push(result[x]);
-        //console.log("result1", result1)
 
       }
       //console.log(result1)
-      res.json({ "success": "call succeed", body: result1 })
+      res.json(result1)
     }
-  })
-});
+    app.put('/items', function (req, res) {
+      // Add your code here
+      res.json({ success: 'put call succeed!', url: req.url, body: req.body })
+    });
 
-/****************************
-* Example put method *
-****************************/
+    app.put('/items/*', function (req, res) {
+      // Add your code here
+      res.json({ success: 'put call succeed!', url: req.url, body: req.body })
+    });
 
-app.put('/items', function (req, res) {
-  // Add your code here
-  res.json({ success: 'put call succeed!', url: req.url, body: req.body })
-});
+    /****************************
+    * Example delete method *
+    ****************************/
 
-app.put('/items/*', function (req, res) {
-  // Add your code here
-  res.json({ success: 'put call succeed!', url: req.url, body: req.body })
-});
+    app.delete('/items', function (req, res) {
+      // Add your code here
+      var emp_no = req.body.emp_no;
+      let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no='${emp_no}';`
+      let query2 = `Select first_name,last_name, hire_date from employees where emp_no='${emp_no}';`
+      let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.emp_no='${emp_no}' order by to_date desc limit 1 ; `
+      let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp  where emp_no='${emp_no}';`
+      let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles   where emp_no='${emp_no}';`
 
-/****************************
-* Example delete method *
-****************************/
-
-app.delete('/items', function (req, res) {
-  // Add your code here
-  var emp_no = req.body.emp_no;
-  let query1 = `Select  current_dept_emp.emp_no,  current_dept_emp.dept_no,  departments.dept_name from current_dept_emp inner join departments on current_dept_emp.dept_no = departments.dept_no where emp_no='${emp_no}';`
-  let query2 = `Select first_name,last_name, hire_date from employees where emp_no='${emp_no}';`
-  let query4 = `select titles.title  from titles  inner join employees on employees.emp_no=titles.emp_no where employees.emp_no='${emp_no}' order by to_date desc limit 1 ; `
-  let query5 = `Select if(to_date ='9999-01-01',concat(timestampdiff(year,from_date,curdate()),"years ",timestampdiff(month,from_date,curdate())%12,"months ") , concat(timestampdiff(year,from_date, to_date),"years ",timestampdiff(month,from_date,to_date)%12,"months "))as tenure  from current_dept_emp  where emp_no='${emp_no}';`
-  let query7 = `select titles.title, titles.from_date,if( titles.to_date='9999-01-01',curdate(), titles.to_date) as to_date from titles   where emp_no='${emp_no}';`
-
-  //let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
-  con.query(query1, function (err, result1) {
-    if (err)
-      console.log(err)
-    else {
-      console.log(result1)
-      con.query(query2, function (err, result2) {
+      //let query8 = `Select first_name , last_name  from employees where emp_no in ( Select emp_no from titles where title ='Assistant Engineer' and emp_no in (Select emp_no from current_dept_emp where dept_no in( select dept_no from current_dept_emp where emp_no='${emp_no}')));`
+      con.query(query1, function (err, result1) {
         if (err)
           console.log(err)
-        else
-          console.log(result2)
-        result1 = JSON.parse(JSON.stringify(result1));
-        result2 = JSON.parse(JSON.stringify(result2));
-        for (const [key, value] of Object.entries(result2[0])) {
-          result1[0][key] = value;
-        }
-
-        con.query(query4, function (err, result4) {
-          if (err)
-            console.log(err)
-          else
-            result4 = JSON.parse(JSON.stringify(result4));
-          for (const [key, value] of Object.entries(result4[0])) {
-            result1[0][key] = value;
-          }
-          con.query(query5, function (err, result5) {
+        else {
+          console.log(result1)
+          con.query(query2, function (err, result2) {
             if (err)
               console.log(err)
             else
-              result5 = JSON.parse(JSON.stringify(result5));
-            for (const [key, value] of Object.entries(result5[0])) {
+              console.log(result2)
+            result1 = JSON.parse(JSON.stringify(result1));
+            result2 = JSON.parse(JSON.stringify(result2));
+            for (const [key, value] of Object.entries(result2[0])) {
               result1[0][key] = value;
             }
-            con.query(query7, function (err, result7) {
+
+            con.query(query4, function (err, result4) {
               if (err)
                 console.log(err)
               else
-                result7 = JSON.parse(JSON.stringify(result7));
+                result4 = JSON.parse(JSON.stringify(result4));
+              for (const [key, value] of Object.entries(result4[0])) {
+                result1[0][key] = value;
+              }
+              con.query(query5, function (err, result5) {
+                if (err)
+                  console.log(err)
+                else
+                  result5 = JSON.parse(JSON.stringify(result5));
+                for (const [key, value] of Object.entries(result5[0])) {
+                  result1[0][key] = value;
+                }
+                con.query(query7, function (err, result7) {
+                  if (err)
+                    console.log(err)
+                  else
+                    result7 = JSON.parse(JSON.stringify(result7));
 
-              result1[0]["Job History"] = [];
+                  result1[0]["Job History"] = [];
 
-              result1[0]["Job History"] = result7;
-
-
+                  result1[0]["Job History"] = result7;
 
 
-              res.json(result1[0]);
 
 
+                  res.json(result1[0]);
+
+
+                })
+              })
             })
           })
-        })
+
+
+        }
       })
+      //res.json({ success: 'delete call succeed!', url: req.url });
+    });
 
+    app.delete('/items/*', function (req, res) {
+      // Add your code here
+      res.json({ success: 'delete call succeed!', url: req.url });
+    });
 
-    }
-  })
-  //res.json({ success: 'delete call succeed!', url: req.url });
-});
+    app.listen(3000, function () {
+      console.log("App started")
+    });
 
-app.delete('/items/*', function (req, res) {
-  // Add your code here
-  res.json({ success: 'delete call succeed!', url: req.url });
-});
-
-app.listen(3000, function () {
-  console.log("App started")
-});
-
-// Export the app object. When executing the application local this does nothing. However,
-// to port it to AWS Lambda we will create a wrapper around that will load the app from
-// this file
-module.exports = app
+    // Export the app object. When executing the application local this does nothing. However,
+    // to port it to AWS Lambda we will create a wrapper around that will load the app from
+    // this file
+    module.exports = app

@@ -5,8 +5,12 @@
     
   }
   .font{
-      color:black
+      color:black;
+      font-weight: bold;
   }
+ .text{
+     font-weight: bold;
+ }
   card{
       background-color: burlywood ;
       align-items:right ;

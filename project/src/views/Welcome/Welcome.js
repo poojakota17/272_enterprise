@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +7,6 @@ import Logo from '../../logo_transparent.png';
 import { ReactComponent as AdminButton} from '../../components/Assets/admin.svg';
 
 import { SignIn } from '../../components/SignIn';
-import { SignUp } from '../../components/SignUp';
 import { FederatedAuth } from '../../components/FederatedAuth';
 const Welcome = props => {
   const [userLogin, setUserLogin] = useState(true);

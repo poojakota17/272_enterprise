@@ -201,19 +201,13 @@ app.post('/items/manage', function (req, res) {
       for (x in result) {
         //console.log(x);
         result1.push(result[x]);
-        //console.log("result1", result1)
 
       }
       //console.log(result1)
-      res.json({ "success": "call succeed", body: result1 })
+      res.json(result1)
     }
   })
 });
-
-/****************************
-* Example put method *
-****************************/
-
 app.put('/items', function (req, res) {
   // Add your code here
   res.json({ success: 'put call succeed!', url: req.url, body: req.body })

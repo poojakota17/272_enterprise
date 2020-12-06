@@ -76,10 +76,19 @@ function Feedback() {
         
         console.log("apidata", apiData)
         console.log("fname, lname",name.fname, name.lname)
-       // setFormData({ ...formData, sender: data["first_name"].toLowerCase() +"."+ data["last_name"]}+"techcorp.com");
-        //console.log("fnamemmme",data["first_name"])
+     setFormData({ ...formData, sender: data["first_name"].toLowerCase() +"."+ data["last_name"].toLowerCase()+"@techcorp.com"});
+     console.log("fnamemmme",data["first_name"])
       console.log("formdata.sender",formData.sender)
       console.log("Done fetching!");
+
+      const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient ===formData.sender);
+      console.log("inbox res ", inboxres);
+      setReceivedFeedbacks(inboxres);
+      const sentres = apiData.data.listFeedbacks.items.filter(item => item.sender === formData.sender);
+      setSentFeedbacks(sentres);
+      console.log("sent res", sentres);
+
+
     }
   
     async function createFeedback() {
@@ -87,21 +96,19 @@ function Feedback() {
         //getEmail();
         console.log("in create feedback")
         console.log(name.fname);
-        formData.recipient = name.fname.toLowerCase() + "." + name.lname.toLowerCase() + "@techcorp.com";
-        console.log("Recipient is " + formData.recipient);
+       // formData.recipient = name.fname.toLowerCase() + "." + name.lname.toLowerCase() + "@techcorp.com";
+        //console.log("Recipient is " + formData.recipient);
         await API.graphql({ query: createFeedbackMutation, variables: { input: formData } });
         setFeedbacks([...feedbacks, formData]);
         setFormData(initialFormState);
         console.log("DOne creating!")
+        fetchFeedbacks()
     }
 
     return (
         <div>
              <NavBar/>
-             
-             
              <div>
-             
              
                 <Button variant="primary" onClick={handleShow}>
                
@@ -143,7 +150,73 @@ function Feedback() {
                         <Button variant="primary" onClick={createFeedback}>Ok</Button>
                     </Modal.Footer>
                 </Modal>
-                
+                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                <Row>
+                    <Col sm={1}>
+                        <Nav variant="pills" className="flex-column ">
+                            <Nav.Item>
+                                <Nav.Link eventKey="first" >Inbox</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="second" >Sent Box</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Col>
+                    <Col sm={11}>
+                        <Tab.Content>
+                            <Tab.Pane eventKey="first">
+                                <h1>INBOX </h1>
+                                <Container>
+                                
+                                <div >
+                                        <div className="col container" style={{ marginBottom: 30 }}>
+                                            {
+                                                receivedFeedbacks.map(feedback => (
+                                                    <div  className="paper" key={feedback.id || feedback.recipient}>
+                                                        <p><b>Sender  </b> :&nbsp; {feedback.sender}</p>
+                                                        <p><b>Recipent </b> :&nbsp; {feedback.recipient}</p>
+                                                        <p><b>Feedback  </b> :&nbsp; {feedback.feedback}</p>
+                                                        
+                                                        <p><b>Recieved time  </b> :&nbsp;  {feedback.createdAt}</p>
+                                                        
+                                                        
+                                                    </div>
+                                                ))
+                                            }
+                                            <br />
+                                        </div>
+                                        <br />
+                                    </div>
+                                </Container>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="second">
+                                <div>
+                                    <div >
+                                        <h1>Sent Feedbacks</h1>
+                                        <Container>
+                                        <div  style={{ marginBottom: 30 }}>
+                                                {
+                                                    sentFeedbacks.map(feedback => (
+                                                        <div className="paper" key={feedback.id || feedback.recipient}>
+                                                            <div >   
+                                                                    <p><b>Sent To</b>: {feedback.recipient}</p>                  
+                                                                    <p><b>Feedback</b>: {feedback.feedback}</p>
+                                                                    <p><b>Sent Time</b>: {feedback.createdAt}</p>
+                                                                               
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                }
+                                                
+                                            </div>
+                                            </Container>
+                                    </div>
+                                </div>
+                            </Tab.Pane>
+                        </Tab.Content>
+                    </Col>
+                </Row>
+            </Tab.Container>
             
             
             </div>

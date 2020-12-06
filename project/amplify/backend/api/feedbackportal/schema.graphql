@@ -1,0 +1,7 @@
+type Feedback @model @auth(rules: [{ allow: owner, operations: [create, delete, update] }]){
+  id: ID!
+  sender: String
+  recipient: String
+  feedback: String
+ 
+}

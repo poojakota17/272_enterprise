@@ -16,7 +16,7 @@ import Container from 'react-bootstrap/Container'
 import Getdetails from "./views/Getdetails/Getdetails";
 import Getothersdetails from "./views/Getothersdetails/Getothersdetails"
 import Manager from "./views/Manager/Manager";
-
+import Feedback from "./views/Feedback/Feedback";
 export const Routes = () => {
   return (
     <Router >
@@ -30,7 +30,7 @@ export const Routes = () => {
             <Redirect to="/home" />
           </Route>
           <PrivateRoute path="/home" component={Home} exact />
-          <PrivateRoute path="/feedback" component={Home} exact />
+          <PrivateRoute path="/feedback" component={Feedback} exact />
           <PrivateRoute path="/getdetails" component={Getdetails} exact />
           <PrivateRoute path="/getothersdetails" component={Getothersdetails} exact />
           <GroupRoute path="/admin" component={Admin} group="Admin" exact />

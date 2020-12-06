@@ -101,22 +101,11 @@ app.get('/items', function (req, res) {
 
                 result1[0]["Job History"] = result7;
 
-                con.query(query6, function (err, result6) {
-                  if (err)
-                    console.log(err)
-                  else
-                    result6 = JSON.parse(JSON.stringify(result6));
-
-                  result1[0]["Managers"] = [];
-                  for (x in result6) {
-                    console.log(x);
-                    result1[0]["Managers"].push(result6[x].manager_firstname + ", " + result6[x].manager_lastname);
-                  }
 
 
-                  res.json(result1[0]);
+                res.json(result1[0]);
 
-                })
+
               })
             })
           })
@@ -150,7 +139,7 @@ app.post('/items', function (req, res) {
     emp_no = '10001'
   }
   let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no='${req.body.deptno}'  );`
-  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no='${req.body.deptno}' ));`
+  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no='${req.body.deptno}' )) limit 30;`
   var result1;
   if (req.body.type === 'Manager') {
     con.query(query6, function (err, result6) {
@@ -191,10 +180,34 @@ app.post('/items', function (req, res) {
   //res.json(result1)
 });
 
-app.post('/items/manager', function (req, res) {
+app.post('/items/manage', function (req, res) {
   // Add your code here
+  var emp_no = req.apiGateway.event.requestContext.authorizer.claims.name;
+  if (emp_no === null || emp_no === undefined) {
+    emp_no = '110567'
+  }
+  let position = req.body.position;
+  let query = `Select employees.emp_no,employees.first_name,employees.last_name,sal.salary ,title.title from employees inner join (Select salary  ,emp_no from salaries where  to_date='9999-01-01' group by emp_no) AS sal  on employees.emp_no=sal.emp_no inner join (Select title, emp_no from titles where  to_date='9999-01-01' and title = '${position}' group by emp_no ) as title  on title.emp_no =sal.emp_no inner join current_dept_emp on current_dept_emp.emp_no= title.emp_no where current_dept_emp.dept_no in( Select dept_no from current_dept_emp where emp_no = '${emp_no}') limit 20;`
+  console.log("query", query)
+  con.query(query, function (err, result) {
+    if (err)
+      console.log(err)
+    else {
+      //console.log(" hello before result working")
+      //console.log("result", result)
+      result = JSON.parse(JSON.stringify(result));
 
-  res.json({ success: 'post call succeed!', url: req.url, body: req.body })
+      result1 = [];
+      for (x in result) {
+        //console.log(x);
+        result1.push(result[x]);
+        //console.log("result1", result1)
+
+      }
+      //console.log(result1)
+      res.json({ "success": "call succeed", body: result1 })
+    }
+  })
 });
 
 /****************************

@@ -139,7 +139,7 @@ app.post('/items', function (req, res) {
     emp_no = '10001'
   }
   let query6 = `Select emp_no  ,first_name , last_name  from employees where emp_no in ( Select emp_no from dept_manager where dept_no='${req.body.deptno}'  );`
-  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no='${req.body.deptno}' )) limit 30;`
+  let query8 = `Select first_name , last_name ,emp_no   from employees where emp_no in ( Select emp_no from titles where title ='${req.body.type}' and emp_no in (Select emp_no from current_dept_emp where dept_no='${req.body.deptno}' )) limit 100;`
   var result1;
   if (req.body.type === 'Manager') {
     con.query(query6, function (err, result6) {
@@ -187,7 +187,7 @@ app.post('/items/manage', function (req, res) {
     emp_no = '110567'
   }
   let position = req.body.position;
-  let query = `Select employees.emp_no,employees.first_name,employees.last_name,sal.salary ,title.title from employees inner join (Select salary  ,emp_no from salaries where  to_date='9999-01-01' group by emp_no) AS sal  on employees.emp_no=sal.emp_no inner join (Select title, emp_no from titles where  to_date='9999-01-01' and title = '${position}' group by emp_no ) as title  on title.emp_no =sal.emp_no inner join current_dept_emp on current_dept_emp.emp_no= title.emp_no where current_dept_emp.dept_no in( Select dept_no from current_dept_emp where emp_no = '${emp_no}') limit 20;`
+  let query = `Select employees.emp_no,employees.first_name,employees.last_name,sal.salary ,title.title from employees inner join (Select salary  ,emp_no from salaries where  to_date='9999-01-01' group by emp_no) AS sal  on employees.emp_no=sal.emp_no inner join (Select title, emp_no from titles where  to_date='9999-01-01' and title = '${position}' group by emp_no ) as title  on title.emp_no =sal.emp_no inner join current_dept_emp on current_dept_emp.emp_no= title.emp_no where current_dept_emp.dept_no in( Select dept_no from current_dept_emp where emp_no = '${emp_no}') limit 100;`
   console.log("query", query)
   con.query(query, function (err, result) {
     if (err)

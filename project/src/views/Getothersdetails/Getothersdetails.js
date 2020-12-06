@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import './Getothersdetails.css';
 
 const Getothersdetails = props => {
-  console.log(props)
+    console.log(props)
 
     const [token, settoken] = useState(null);
     const [data, setdata] = useState(null);
@@ -121,7 +121,7 @@ const Getothersdetails = props => {
                     state: { data: empno }
                 }} />
             }
-          < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
+            < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
             {data !== null &&
                 <div>
                     <h1 font-color="black">Details for: {data["first_name"]} {data["last_name"]} </h1><br></br>
@@ -181,15 +181,15 @@ const Getothersdetails = props => {
                                         Choose Department
                                 </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>Customer Service</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>Development</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>Finance</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>Human Resources</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>Marketing</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>Production</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>Quality Management</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>Research</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>Sales</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>d001 : Marketing</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>d002 : Finance </Dropdown.Item>
+                                        <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>d003 : Human Resources </Dropdown.Item>
+                                        <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>d004 : Production</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>d005 : Development</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>d006 : Quality Management</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>d007 : Sales</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>d008 : Research</Dropdown.Item>
+                                        <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>d009 : Customer Service</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>
@@ -200,7 +200,7 @@ const Getothersdetails = props => {
             {teamdata !== null &&
                 <Container md="fluid">
                     <br></br>
-                    <Row className="font"> {value}'s  : </Row>
+                    <Row className="font"> {value}'s in {deptno}  : </Row>
                     {teamdata !== null && teamdata.length === 0 &&
                         <Row className="font"> There are no {value} in this department </Row>}
                     <Row>{teamdata}</Row>

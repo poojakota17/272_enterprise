@@ -146,8 +146,8 @@ const Manager = props => {
                         </Dropdown>
                     </Col>
                     <Col></Col>
-                    <Col>
-                        <Card style={{ width: '24rem' }}>
+                    <Col >
+                        <Card border="primary" style={{ width: '22rem' }}>
                             <Card.Img variant="top" src={Logo} className="logo" />
                             <Card.Body >
                                 <Card.Text className="font">

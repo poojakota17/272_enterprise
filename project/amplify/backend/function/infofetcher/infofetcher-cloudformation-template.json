@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-newtechcorp-dev-225559-deployment",
-          "S3Key": "amplify-builds/infofetcher-46316e4635774230674b-build.zip"
+          "S3Key": "amplify-builds/infofetcher-356c4e75756945753276-build.zip"
         }
       }
     },

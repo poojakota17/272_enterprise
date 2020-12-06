@@ -210,7 +210,65 @@ app.post('/items/manage', function (req, res) {
 });
 app.put('/items', function (req, res) {
   // Add your code here
-  res.json({ success: 'put call succeed!', url: req.url, body: req.body })
+  const date = new Date();
+  const mysqlDate = date.toISOString().split("T")[0];
+  empno = req.body.empno;
+  position = req.body.position;
+  salary = req.body.salary;
+
+  let query1 = `update titles set to_date ='${mysqlDate}' where emp_no='${empno}' and to_date ='9999-01-01';`
+  let query2 = `Insert into titles (emp_no,title,from_date,to_date ) values ('${empno}' ,'${position}','${mysqlDate}','9999-01-01'); `
+  let query3 = `update salaries set salary ='${salary}' where emp_no='${empno}' and to_date ='9999-01-01';`
+  if (salary === '0' && position !== 'abcd') {
+    con.query(query1, function (err, resposne1) {
+      if (err)
+        console.log(err)
+      else {
+        console.log(resposne1)
+        con.query(query2, function (err, res2) {
+          if (err)
+            console.log(err)
+          else {
+            console.log(res2)
+            res.json("Successfully Updated")
+          }
+        })
+      }
+
+    })
+  } else if (salary !== '0' && position === 'abcd') {
+    con.query(query3, function (err, resposne1) {
+      if (err)
+        console.log(err)
+      else {
+        console.log(resposne1)
+        res.json("Successfully Updated")
+      }
+    })
+  } else {
+    con.query(query1, function (err, resposne1) {
+      if (err)
+        console.log(err)
+      else {
+        console.log(resposne1)
+        con.query(query2, function (err, res2) {
+          if (err)
+            console.log(err)
+          else {
+            console.log(res2)
+            con.query(query3, function (err, resposne3) {
+              if (err)
+                console.log(err)
+              else {
+                console.log(resposne3)
+                res.json("Successfully Updated")
+              }
+            })
+          }
+        })
+      }
+    })
+  }
 });
 
 app.put('/items/*', function (req, res) {

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { Dropdown, Button, Row, Col, Container, Nav, ListGroup, Form, Card, Modal } from 'react-bootstrap';
 import { NavBar } from '../../components/NavBar';
+import { Modals } from '../../components/Modals';
 import { Redirect } from "react-router-dom";
 import Logo from './twitter.png';
 import './Manager.css'
-//import { render } from '../../../amplify/backend/function/infofetcher/src/app';
+
 
 
 var token;
@@ -18,8 +19,9 @@ const Manager = props => {
     const [tweet, settweet] = useState('');
     const [empno, setempno] = useState(null);
     const [show, setShow] = useState(false);
+    const [text, settext] = useState('')
+    const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
-    //const handleShow = () => setShow(true);
 
     useEffect(() => {
         Auth.currentSession()
@@ -80,34 +82,10 @@ const Manager = props => {
         setempno(e.target.attributes.key.value)
         console.log(e.target.innerText)
         setShow(true)
-        handlemodal();
+        settext(e.target.innerText)
+        handleShow();
     }
-    const handlemodal = () => {
 
-        return (
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    I will not close if you click outside me. Don't even try to press
-                    escape key.
-            </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-              </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer>
-            </Modal>
-            //s</>
-        )
-    }
     // setredirect(true)
 
     const handleSelect = (e) => {
@@ -145,7 +123,7 @@ const Manager = props => {
         <Container>
 
             <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-
+            <Modals show={show} close={handleClose} empno={empno} text={text} token={token} />
 
             <br />
             <Container>
@@ -192,14 +170,6 @@ const Manager = props => {
                     </Container>
                 }
             </Container>
-
-            {/* { setShow === true &&
-                <div>
-                    <handleClick />
-
-                </div>
-            } */}
-
         </Container>
 
     )

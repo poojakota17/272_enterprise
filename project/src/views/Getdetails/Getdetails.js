@@ -168,6 +168,7 @@ const Getdetails = props => {
 
 
                         <br></br>
+                        
                     </Container>
 
 

@@ -59,6 +59,7 @@ function Feedback(props) {
             <NavBar />
             <div>
                 <div className="title">
+                    <h1>Welcome to Feedback Portal</h1>
                     <p>Please click on "Create" to write the feedback to fellow peers</p>
                 </div>
                 <Button variant="primary" onClick={handleShow}>

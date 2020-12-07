@@ -149,9 +149,9 @@ logged_out_greeting="Hi! This is Georgi Facello from TechCorp">
                 }} />
             }
             < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-            {data !== null &&          
+            {data !== null &&
                 <div>
-                    <h1 font-color="black">Details1 for: {data["first_name"]} {data["last_name"]} </h1><br></br>
+                    <h1 font-color="black">Details for: {data["first_name"]} {data["last_name"]} </h1><br></br>
                     <br></br>
                     <Container className="font" md="fluid">
                         <Row md="auto">

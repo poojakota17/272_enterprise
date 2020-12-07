@@ -14,7 +14,7 @@ const Welcome = props => {
     <>
       <Row className="welcome_page">
         <Col xs={"auto"}>
-        <img src={Logo} className="logo" alt="clear logo"/>
+        <img src={Logo} className="welcome_logo" alt="clear logo"/>
         </Col>
         <Col xs={4} className="pt-4">
               <SignIn show={!userLogin}/>

@@ -25,15 +25,10 @@ const Admin = props => {
       console.log("count users")
       setUsers(arrayDiffByKey('Username',employees, managers));
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [managers, employees]);
-  console.log("users", users)
-  console.log("managers", managers);
-  console.log("emplo", employees)
 
   async function userInfo(username, setData) {
-    console.log(username)
     let apiName = 'AdminQueries';
     let path = '/getUser';
     let myInit = {
@@ -49,20 +44,20 @@ const Admin = props => {
 }
 
   async function removeFromGroup(username) {
-  let apiName = 'AdminQueries';
-  let path = '/removeUserFromGroup';
-  let myInit = {
-      body: {
-        "username" : username,
-        "groupname": "Manager"
-      },
-      headers: {
-        'Content-Type' : 'application/json',
-        Authorization: token
-      }
-  }
-  await API.post(apiName, path, myInit);
-  setUpdate(!update);
+    let apiName = 'AdminQueries';
+    let path = '/removeUserFromGroup';
+    let myInit = {
+        body: {
+          "username" : username,
+          "groupname": "Manager"
+        },
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: token
+        }
+    }
+    await API.post(apiName, path, myInit);
+    setUpdate(!update);
 }
 
   async function addToGroup(username) {
@@ -81,7 +76,6 @@ const Admin = props => {
     await API.post(apiName, path, myInit)
     setUpdate(!update);
   }
-
 
   let nextToken;
 
@@ -102,7 +96,6 @@ const Admin = props => {
     const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
     nextToken = NextToken;
     setData(rest.Users);
-    console.log(rest.Users)
     return rest;
   }
 
@@ -113,7 +106,6 @@ const Admin = props => {
         <h1 className="m-4">Managers</h1>
         <ShowUsers users={managers} upgrade={null} downgrade={removeFromGroup} getInfo={userInfo} />
       </div>
-
       <div className="m-4">
         <h1 className="mx-4 mt-4">Users</h1>
         <ShowUsers users={users} upgrade={addToGroup} downgrade={null} getInfo={userInfo} />

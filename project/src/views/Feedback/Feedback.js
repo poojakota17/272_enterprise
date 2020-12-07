@@ -30,7 +30,7 @@ function Feedback(props) {
         //console.log("props in feedback",props)
         console.log("apidata", apiData)
         setFormData({ ...formData, sender: props.currentUser.signInUserSession.idToken.payload.email });
-        console.log("formdata.sender",formData.sender) 
+        console.log("formdata.sender",formData.sender)
         const inboxres = apiData.data.listFeedbacks.items.filter(item => item.recipient === formData.sender);
          console.log("inbox res ", inboxres);
         setReceivedFeedbacks(inboxres);
@@ -56,9 +56,9 @@ function Feedback(props) {
     }
 
     return (
-        <div>
-            <NavBar />
-            <div className="background">
+        <>
+            <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
+            <Container fluid className="background">
                 <div className="title">
                     <h1>Welcome to Feedback Portal</h1>
                     <p>Please click on "Create" to write the feedback to fellow peers</p>
@@ -162,11 +162,9 @@ function Feedback(props) {
                         </Col>
                     </Row>
                 </Tab.Container>
-                
-            </div>
-        </div>
+            </Container>
+        </>
 
     );
 }
 export default Feedback;
-

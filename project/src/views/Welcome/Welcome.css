@@ -22,15 +22,13 @@
   background-color: var(--bright-green);
 }
 
-
-
 .submit-button {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.logo {
+.welcome_logo {
   height: 40vh;
 }
 

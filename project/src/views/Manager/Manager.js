@@ -114,7 +114,7 @@ const Manager = props => {
     }
 
 
-    const departments = ['Senior Engineer', 'Assisant Engineer', 'Senior Staff', 'Staff', 'Technical Engineer']
+    const roles = ['Senior Engineer', 'Assisant Engineer', 'Senior Staff', 'Staff', 'Technical Engineer']
         .map((dep, index) => <Dropdown.Item eventKey={dep} key={index} onSelect={handleSelect}>{dep}</Dropdown.Item>)
 
 
@@ -131,24 +131,24 @@ const Manager = props => {
                       Choose Position
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                  {departments}
+                  {roles}
                   </Dropdown.Menu>
               </Dropdown>
-              <Row>{data}</Row>
+              <Row>{data !== null && data}</Row>
             </Col>
             <Col sm={4}>
-                        <Card border="primary" style={{ width: '22rem' }}>
-                            <Card.Img variant="top" src={Logo} className="logo" />
-                            <Card.Body >
-                                <Card.Text className="font">
-                                    Share your new product features to organization's twitter handle!!!!!
-                          </Card.Text>
-                                <Form.Group>
-                                    <Form.Control as="textarea" rows={3} type="text" onChange={myChangeHandler} placeholder="Post to twitter" />
-                                </Form.Group>
-                                <Button type="submit" onClick={handlebutton} variant="primary" >Tweet</Button>
-                            </Card.Body>
-                        </Card>
+              <Card border="primary" style={{ width: '22rem' }}>
+                  <Card.Img variant="top" src={Logo} className="logo" />
+                  <Card.Body >
+                      <Card.Text className="font">
+                          Share your new product features to organization's twitter handle!!!!!
+                      </Card.Text>
+                      <Form.Group>
+                          <Form.Control as="textarea" rows={3} type="text" onChange={myChangeHandler} placeholder="Post to twitter" />
+                      </Form.Group>
+                      <Button type="submit" onClick={handlebutton} variant="primary" >Tweet</Button>
+                  </Card.Body>
+              </Card>
             </Col>
           </Row>
         </Container>

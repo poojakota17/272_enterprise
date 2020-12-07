@@ -8,11 +8,16 @@ import './Getdetails.css';
 import { NavBar } from '../../components/NavBar';
 import '../Getothersdetails'
 import { Redirect } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner'
 
 const Getdetails = props => {
 
     const [token, settoken] = useState(null);
     const [data, setdata] = useState(null);
+
+    let firstName = (props.userAttr) ? props.userAttr["given_name"] : 'Friend';
+    let lastName = (props.userAttr) ? props.userAttr["family_name"] : '';
+
     useEffect(() => {
         Auth.currentSession()
             .then(cognitoUser => {
@@ -119,6 +124,14 @@ const Getdetails = props => {
         }
     }
 
+    const roles = ['Manager', 'Senior Engineer', 'Assisant Engineer', 'Senior Staff', 'Staff', 'Technical Engineer']
+        .map((dep, index) => <Dropdown.Item eventKey={dep} key={index} onSelect={handleSelect}>{dep}</Dropdown.Item>)
+
+    const departments = [{num: "d001", name: "Marketing"}, {num: "d002", name: "Finance"},{num: "d003", name: "Human Resources"},
+        {num: "d004", name: "Production"},{num: "d005", name: "Development"},{num: "d006", name: "Quality Management"},
+        {num: "d007", name: "Sales"},{num: "d008", name: "Research"},{num: "d009", name: "Customer Service"}]
+        .map((dep, index) => <Dropdown.Item eventKey={dep.num} key={index} onSelect={handleSelectdept}>{dep.num} : {dep.name}</Dropdown.Item>)
+
     return (
         <div >
             { redirect &&
@@ -128,7 +141,10 @@ const Getdetails = props => {
                 }} />
             }
             <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-            <h1 className="display-4">Hello, {props.userAttr["given_name"]} {props.userAttr["family_name"]} </h1>
+            <Container className="font" md="fluid">
+                <h1 className="display-4 mt-4">Hello, {firstName} {lastName} </h1>
+            </Container>
+            {data === null && <Container className="font" md="fluid"><Spinner animation="border"  /></Container>}
             {data !== null &&
                 <div>
                     <br></br>
@@ -170,8 +186,6 @@ const Getdetails = props => {
 
                     </Container>
 
-
-
                     <Container>
                         <Row className="search">To search for employees, please choose their position and department</Row>
 
@@ -182,12 +196,7 @@ const Getdetails = props => {
                                         Choose Position
                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item eventKey="Manager" onSelect={handleSelect}>Manager</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
+                                      {roles}
                                     </Dropdown.Menu>
 
                                 </Dropdown>
@@ -199,17 +208,7 @@ const Getdetails = props => {
                                         Choose Department
                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-
-                                        <Dropdown.Item eventKey="d001" onSelect={handleSelectdept}>d001 : Marketing</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d002" onSelect={handleSelectdept}>d002 : Finance </Dropdown.Item>
-                                        <Dropdown.Item eventKey="d003" onSelect={handleSelectdept}>d003 : Human Resources </Dropdown.Item>
-                                        <Dropdown.Item eventKey="d004" onSelect={handleSelectdept}>d004 : Production</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d005" onSelect={handleSelectdept}>d005 : Development</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d006" onSelect={handleSelectdept}>d006 : Quality Management</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d007" onSelect={handleSelectdept}>d007 : Sales</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d008" onSelect={handleSelectdept}>d008 : Research</Dropdown.Item>
-                                        <Dropdown.Item eventKey="d009" onSelect={handleSelectdept}>d009 : Customer Service</Dropdown.Item>
-
+                                      {departments}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>

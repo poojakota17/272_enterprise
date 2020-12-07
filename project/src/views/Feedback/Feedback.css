@@ -14,5 +14,6 @@
     font: 0.5cm Arial, sans-serif;
 }
 .background{
-    background-color:rgb(236, 236, 195)
+    background-color:rgb(236, 236, 195);
+    height: 100vh;
 }

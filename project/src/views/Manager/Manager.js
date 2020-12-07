@@ -57,9 +57,10 @@ const Manager = props => {
                     });
             })
     }, [dept])
+
     function renderRow(index, element) {
         return (
-            <Col md="5" >
+            <Col sm={6}>
                 <ListGroup >
                     <ListGroup.Item Key={element["emp_no"]} active action variant="info" onClick={handleClick} >
 
@@ -69,13 +70,10 @@ const Manager = props => {
 
                     </ListGroup.Item>
                 </ListGroup>
-
             </Col >
 
         )
     }
-
-
 
     const handleClick = (e) => {
         console.log(e.target.attributes.key.value);
@@ -116,37 +114,29 @@ const Manager = props => {
     }
 
 
-
+    const departments = ['Senior Engineer', 'Assisant Engineer', 'Senior Staff', 'Staff', 'Technical Engineer']
+        .map((dep, index) => <Dropdown.Item eventKey={dep} key={index} onSelect={handleSelect}>{dep}</Dropdown.Item>)
 
 
     return (
+      <>
+        <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
+        <Modals show={show} close={handleClose} empno={empno} text={text} token={token} />
         <Container>
-
-            <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-            <Modals show={show} close={handleClose} empno={empno} text={text} token={token} />
-
-            <br />
-            <Container>
-                <Row>
-                    <Col>
-                        <a className="font">Manage Department Employees</a>
-                        <br />
-                        <Dropdown>
-                            <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
-                                Choose Position
-                    </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item eventKey="Senior Engineer" onSelect={handleSelect}>Senior Engineer</Dropdown.Item>
-                                <Dropdown.Item eventKey="Assistant Engineer" onSelect={handleSelect}>Assisant Engineer</Dropdown.Item>
-                                <Dropdown.Item eventKey="Senior Staff" onSelect={handleSelect}>Senior Staff</Dropdown.Item>
-                                <Dropdown.Item eventKey="Staff" onSelect={handleSelect}>Staff</Dropdown.Item>
-                                <Dropdown.Item eventKey="Technical Engineer" onSelect={handleSelect}>Technical Engineer</Dropdown.Item>
-                            </Dropdown.Menu>
-
-                        </Dropdown>
-                    </Col>
-                    <Col></Col>
-                    <Col >
+          <Row className="mt-4">
+            <Col sm={8}>
+              <h2>Manage Department Employees</h2>
+              <Dropdown className="my-4">
+                  <Dropdown.Toggle className="font" variant="warning" id="dropdown-basic">
+                      Choose Position
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                  {departments}
+                  </Dropdown.Menu>
+              </Dropdown>
+              <Row>{data}</Row>
+            </Col>
+            <Col sm={4}>
                         <Card border="primary" style={{ width: '22rem' }}>
                             <Card.Img variant="top" src={Logo} className="logo" />
                             <Card.Body >
@@ -159,19 +149,10 @@ const Manager = props => {
                                 <Button type="submit" onClick={handlebutton} variant="primary" >Tweet</Button>
                             </Card.Body>
                         </Card>
-                    </Col>
-                </Row>
-                {data !== null &&
-                    <Container md="fluid">
-                        <Row></Row>
-                        <Row>
-                            {data}
-                        </Row>
-                    </Container>
-                }
-            </Container>
+            </Col>
+          </Row>
         </Container>
-
+      </>
     )
 
 }

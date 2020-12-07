@@ -112,6 +112,33 @@ const Getothersdetails = props => {
             )
         }
     }
+    /*
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v9.0'
+        });
+      };
+
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+      attribution=setup_tool
+      page_id="101038381875294"
+theme_color="#0A7CFF"
+logged_in_greeting="Hi! This is Georgi Facello from TechCorp"
+logged_out_greeting="Hi! This is Georgi Facello from TechCorp">
+    </div>
+    */
 
     return (
         <div>
@@ -122,32 +149,7 @@ const Getothersdetails = props => {
                 }} />
             }
             < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-            {data !== null &&
-              <div id="fb-root"></div>
-              <script>
-                window.fbAsyncInit = function() {
-                  FB.init({
-                    xfbml            : true,
-                    version          : 'v9.0'
-                  });
-                };
-
-                (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-                fjs.parentNode.insertBefore(js, fjs);
-              }(document, 'script', 'facebook-jssdk'));</script>
-
-              <!-- Your Chat Plugin code -->
-              <div class="fb-customerchat"
-                attribution=setup_tool
-                page_id="101038381875294"
-          theme_color="#0A7CFF"
-          logged_in_greeting="Hi! This is Georgi Facello from TechCorp"
-          logged_out_greeting="Hi! This is Georgi Facello from TechCorp">
-              </div>                
+            {data !== null &&          
                 <div>
                     <h1 font-color="black">Details1 for: {data["first_name"]} {data["last_name"]} </h1><br></br>
                     <br></br>

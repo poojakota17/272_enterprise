@@ -58,7 +58,7 @@ function Feedback(props) {
     return (
         <div>
             <NavBar />
-            <div>
+            <div className="background">
                 <div className="title">
                     <h1>Welcome to Feedback Portal</h1>
                     <p>Please click on "Create" to write the feedback to fellow peers</p>
@@ -67,7 +67,7 @@ function Feedback(props) {
                     Create &nbsp; <FiEdit2 />
                 </Button>
                 <br/>
-                <Button variant="primary" onClick={fetchFeedbacks}> Reload </Button>
+                <Button variant="primary" onClick={fetchFeedbacks}>  Reload &nbsp; &nbsp; &nbsp; </Button>
                 <Modal show={show} onHide={handleClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Please write a feedback</Modal.Title>

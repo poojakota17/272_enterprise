@@ -128,10 +128,9 @@ const Getdetails = props => {
                 }} />
             }
             <NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']} />
-
+            <h1 className="display-4">Hello, {props.userAttr["given_name"]} {props.userAttr["family_name"]} </h1>
             {data !== null &&
                 <div>
-                    <h1 font-color="black">Hello, {data["first_name"]} {data["last_name"]} </h1><br></br>
                     <br></br>
                     {/* <Row className="font"> */}
                     <Container className="font" md="fluid">
@@ -168,7 +167,7 @@ const Getdetails = props => {
 
 
                         <br></br>
-                        
+
                     </Container>
 
 

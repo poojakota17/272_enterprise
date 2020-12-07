@@ -5,23 +5,22 @@ import {
 import { useAuth } from "../../corp-auth.js";
 import { NavBar } from '../../components/NavBar';
 
-import Button from 'react-bootstrap/Button'
+import { Button, Row, Col, Container } from 'react-bootstrap';
 
 const Home = props => {
   let history = useHistory();
   let auth = useAuth();
-
+console.log(props.userAttr["given_name"])
   return (
-    <div>
+    <>
       < NavBar groups={props.currentUser.signInUserSession.idToken.payload['cognito:groups']}/>
-
-      <p>
-
-        Welcome!{" "}
-
-      </p>
+      <Container>
+      <Row className="mt-4">
+        <h1 className="display-4">Hello, {props.userAttr["given_name"]} {props.userAttr["family_name"]} </h1>
+      </Row>
       Here will be our app
-    </div>
+      </Container>
+    </>
   )
 }
 

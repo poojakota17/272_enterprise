@@ -27,7 +27,7 @@ const NavBar = (props) => {
     auth.logout(() => history.push("/"))
   }
   return (
-    <Navbar variant="corp" collapseOnSelect expand="md" sticky="top">
+    <Navbar variant="corp" collapseOnSelect expand="sm" sticky="top">
       <Navbar.Brand href="/Home">
         <img src={Logo} className="navlogo" alt="clear logo"/>
       </Navbar.Brand>

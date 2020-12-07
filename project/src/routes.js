@@ -70,7 +70,7 @@ export const PrivateRoute = (props) => {
       path={path}
       {...rest}
       render={props => ((state === 'loggedin') ?
-        <Component {...props} currentUser={user}/> :
+        <Component {...props} currentUser={user} userAttr={user.attributes}/> :
         <Redirect to={{ pathname: "/login" }} />)}
     />
   );
@@ -105,7 +105,7 @@ export const GroupRoute = (props) => {
       path={path}
       {...rest}
       render={props => ((state === 'allowed') ?
-        <Component {...props} currentUser={user}/> :
+        <Component {...props} currentUser={user} userAttr={user.attributes}/> :
         <Redirect to={{ pathname: "/" }} />)}
     />
   );

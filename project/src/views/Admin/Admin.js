@@ -29,6 +29,8 @@ const Admin = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [managers, employees]);
   console.log("users", users)
+  console.log("managers", managers);
+  console.log("emplo", employees)
 
   async function userInfo(username, setData) {
     console.log(username)
@@ -120,15 +122,11 @@ const Admin = props => {
   )
 }
 
-function arrayDiffByKey(key, ...arrays) {
-  return [].concat(...arrays.map( (arr, i) => {
-      const others = arrays.slice(0);
-      others.splice(i, 1);
-      const unique = [...new Set([].concat(...others))];
-      return arr.filter( x =>
-          !unique.some(y => x[key] === y[key])
-      );
-  }));
+function arrayDiffByKey(key, arrayMain, arraySmall) {
+  let mySet = new Set();
+  arraySmall.forEach((e) => mySet.add(e[key]));
+  let result = arrayMain.filter(e => !mySet.has(e[key]))
+  return result
 }
 
 export default Admin;

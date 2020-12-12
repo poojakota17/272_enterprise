@@ -1,4 +1,4 @@
-## CMPE 272 Enterprise Software Platform - Project 
+## CMPE 272 Enterprise Software Platform - Term Project  (Fall '20)
 ## Prof. Andrew Bond 
 # Human Capital Management Platform
 
@@ -44,7 +44,8 @@ This project is an example of **ERP software**. This solution can be used in any
 * **Twitter Service**.
 * **ReactJs, and React bootstrap** for frontend. **NodeJs** for backend.
 
-Thank you.
+
+**Thank you.**
 
 
 

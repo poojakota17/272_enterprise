@@ -28,6 +28,8 @@ This project is an example of **ERP software**. This solution can be used in any
 
 # Architecture Diagram
 
+<img src="project.png" />
+
 # Technologies Used
 * **AWS Cognito** for user authentication, authorization and role based access.
 * **IAM roles and policies**, for secured gateway to RDS database.

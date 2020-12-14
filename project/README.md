@@ -2,8 +2,8 @@
 ## Prof. Andrew Bond 
 # Human Capital Management Platform
 
-**Website: [Click here](https://master.d36s98jndilz0p.amplifyapp.com/login)**
-**Project Demo: [Video Link](https://youtu.be/PtN4JOuoovY)**
+* **Website: [Click here](https://master.d36s98jndilz0p.amplifyapp.com/login)**
+* **Project Demo: [Video Link](https://youtu.be/PtN4JOuoovY)**
 
 ### Team: Modular Monolith
 ### Team members:

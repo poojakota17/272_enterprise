@@ -3,6 +3,7 @@
 # Human Capital Management Platform
 
 **Website: [Click here](https://master.d36s98jndilz0p.amplifyapp.com/login)**
+**Project Demo: [Video Link](https://youtu.be/PtN4JOuoovY)**
 
 ### Team: Modular Monolith
 ### Team members:
@@ -28,7 +29,7 @@ This project is an example of **ERP software**. This solution can be used in any
 
 # Architecture Diagram
 
-<img src="project.png" />
+<img src="arch1.png" />
 
 # Technologies Used
 * **AWS Cognito** for user authentication, authorization and role based access.
@@ -43,6 +44,8 @@ This project is an example of **ERP software**. This solution can be used in any
 * **Appsync**, for creating DynamoDB schema (using Amplify cli)
 * **Twitter Service**.
 * **ReactJs, and React bootstrap** for frontend. **NodeJs** for backend.
+
+
 
 
 **Thank you.**
